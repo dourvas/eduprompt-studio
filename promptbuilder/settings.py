@@ -116,4 +116,4 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Gemini API Key - τώρα χρησιμοποιεί environment variable
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyBmbx5DATTsumJgEfUXUOfQHbRFjfCcm0o')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'your-api-key-here')
