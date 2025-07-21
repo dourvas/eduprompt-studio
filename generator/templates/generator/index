@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>AI Prompt Generator for Educators</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daisyui@latest"></script>
+  <script>
+    tailwind.config = {
+      daisyui: {
+        themes: ["dark"]
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-8 mb-8 rounded-xl shadow-lg">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-lg px-6 py-10 sm:px-12 sm:py-12 max-w-5xl mx-auto">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-6">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-center sm:text-left">
+              EduPrompt Studio
+            </h1>
+          </div>
+          <p class="text-lg sm:text-xl font-medium text-center mb-2">
+            Design better lessons with AI – in seconds
+          </p>
+          <p class="text-sm sm:text-base text-center opacity-90">
+            Craft research-based, classroom-ready prompts effortlessly
+          </p>
+        </div>
+      </div>
+
+      <!-- Help Button -->
+      <div class="mb-6 text-center">
+        <a href="/help/" class="btn btn-outline btn-info">
+          📚 User Guide & Help
+        </a>
+        <p class="text-sm text-gray-500 mt-2">
+          New to EduPrompt Studio? Check out our comprehensive guide!
+        </p>
+      </div>
+
+      <form id="promptForm">
+        
+        <!-- ROLE -->
+        <div class="mb-6">
+          <label for="role" class="block text-lg font-semibold mb-3 text-gray-700">
+            🤖 What's your teaching role?
+          </label>
+          <select id="role" name="role" class="select select-bordered w-full">
+            <option value="">Select a role</option>
+            <option>Elementary school teacher</option>
+            <option>Middle school teacher</option>
+            <option>High school teacher</option>
+            <option>Math teacher</option>
+            <option>Science teacher</option>
+            <option>Special education teacher</option>
+          </select>
+        </div>
+
+        <!-- SUBJECT -->
+        <div class="mb-6">
+          <label for="subject" class="block text-lg font-semibold mb-3 text-gray-700">
+            📖 What subject content and learning objectives?
+          </label>
+          <input id="subject" name="subject" type="text"
+            placeholder="e.g., Fractions - understanding equivalence and operations"
+            class="input input-bordered w-full"
+            required />
+        </div>
+
+        <!-- TASK -->
+        <div class="mb-6">
+          <label for="task" class="block text-lg font-semibold mb-3 text-gray-700">
+            🎯 What learning experience do you want to create?
+          </label>
+          <select id="task" name="task" class="select select-bordered w-full">
+            <option value="">Select a task</option>
+            <option>Create a complete lesson plan with objectives</option>
+            <option>Generate practice exercises with answers</option>
+            <option>Design a quiz or assessment</option>
+            <option>Create critical thinking questions</option>
+            <option>Design problem-solving scenarios</option>
+          </select>
+        </div>
+
+        <!-- CONTEXT -->
+        <div class="mb-6">
+          <label for="context" class="block text-lg font-semibold mb-3 text-gray-700">
+            🎓 Who is this for? What's the context?
+          </label>
+          <select id="context" name="context" class="select select-bordered w-full" required>
+            <option value="">Select context</option>
+            <option>Primary students (ages 6-11)</option>
+            <option>Lower secondary (ages 12-14)</option>
+            <option>Upper secondary (ages 15-18)</option>
+            <option>Mixed-ability classroom</option>
+            <option>Students with learning difficulties</option>
+          </select>
+        </div>
+
+        <!-- METHODOLOGY -->
+        <div class="mb-6">
+          <label for="methodology" class="block text-lg font-semibold mb-3 text-gray-700">
+            🧠 What teaching approach supports your learning goals?
+          </label>
+          <select id="methodology" name="methodology" class="select select-bordered w-full">
+            <option value="">Select methodology</option>
+            <option>Teacher explains, AI provides examples and practice (Direct Instruction)</option>
+            <option>Students explore with AI as research assistant (Inquiry-based Learning)</option>
+            <option>Students solve problems with AI hints and scaffolding (Problem-based Learning)</option>
+            <option>Students work in groups with AI facilitation (Collaborative Learning)</option>
+          </select>
+        </div>
+
+        <!-- TONE -->
+        <div class="mb-6">
+          <label for="tone" class="block text-lg font-semibold mb-3 text-gray-700">
+            🎭 What tone should the AI adopt?
+          </label>
+          <select id="tone" name="tone" class="select select-bordered w-full">
+            <option value="">Select tone</option>
+            <option>Encouraging and supportive</option>
+            <option>Academic and precise</option>
+            <option>Friendly and conversational</option>
+            <option>Patient and gentle</option>
+          </select>
+        </div>
+
+        <!-- ENHANCEMENT OPTIONS -->
+        <div class="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+          <h4 class="font-semibold text-yellow-800 mb-3">🎓 Prompt Enhancement Options:</h4>
+          <div class="space-y-2">
+            <label class="flex items-center">
+              <input type="radio" name="enhancement" value="enhanced" class="mr-2" checked>
+              <span class="text-sm">
+                <strong>Generate with learning theory enhancements</strong> (recommended)
+                <br><em class="text-gray-600">Includes TPACK integration, UDL principles, and Bloom's taxonomy</em>
+              </span>
+            </label>
+            <label class="flex items-center">
+              <input type="radio" name="enhancement" value="basic" class="mr-2">
+              <span class="text-sm">
+                <strong>Generate exact prompt as specified</strong>
+                <br><em class="text-gray-600">No additional theoretical enhancements</em>
+              </span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- SUBMIT BUTTON -->
+        <div class="text-center">
+          <button type="button" id="generateBtn" onclick="generateWithGemini()" 
+                  class="btn btn-primary text-white px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+            🚀 Generate Prompt
+          </button>
+        </div>
+        
+        <!-- LOADING INDICATOR -->
+        <div id="loadingIndicator" class="text-center mt-8 hidden">
+          <div class="flex flex-col items-center justify-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+            <p class="text-gray-600 font-medium">Generating your prompt… Please wait.</p>
+            <p class="text-sm text-gray-500 mt-1">This may take up to 15 seconds</p>
+          </div>
+        </div>
+        
+        <!-- PROMPT OUTPUT -->
+        <div id="promptContainer" class="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg shadow-md border border-green-200" style="display: none;">
+          <h2 class="text-xl font-semibold mb-4 text-green-800">✨ Your Generated Prompt:</h2>
+          <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+            <textarea id="outputPrompt" class="w-full h-48 p-3 text-gray-800 font-mono text-sm border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          </div>
+          <div class="mt-4 flex items-center justify-center gap-4">
+            <button type="button" onclick="copyToClipboard()" class="btn btn-sm btn-outline btn-success">
+              📋 Copy to Clipboard
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Generate prompt function
+    async function generateWithGemini() {
+      const loadingIndicator = document.getElementById("loadingIndicator");
+      const promptContainer = document.getElementById("promptContainer");
+      const generateBtn = document.getElementById("generateBtn");
+      
+      loadingIndicator.classList.remove("hidden");
+      promptContainer.style.display = "none";
+      generateBtn.disabled = true;
+
+      // Get form values
+      const role = document.getElementById("role").value;
+      const subject = document.getElementById("subject").value;
+      const task = document.getElementById("task").value;
+      const context = document.getElementById("context").value;
+      const methodology = document.getElementById("methodology").value;
+      const tone = document.getElementById("tone").value;
+
+      // Create user input for Gemini
+      const userInput = `
+Create a clear, professional AI prompt using these components:
+- Role: ${role}
+- Subject: ${subject}
+- Task: ${task}
+- Context: ${context}
+- Methodology: ${methodology}
+- Tone: ${tone}
+
+Make it ready to copy-paste into any AI chatbot.
+      `;
+
+      try {
+        const response = await fetch("/generate/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken(),
+          },
+          credentials: "same-origin", 
+          body: JSON.stringify({ 
+            prompt: userInput,
+            enhancement: document.querySelector('input[name="enhancement"]:checked')?.value || 'enhanced',
+            role: role,
+            task: task,
+            context: context,
+            methodology: methodology,
+            subject: subject,
+            tone: tone
+          })
+        });
+
+        const data = await response.json();
+        const outputDiv = document.getElementById("outputPrompt");
+
+        if (data.response) {
+          outputDiv.textContent = data.response;
+          promptContainer.style.display = "block";
+        } else {
+          outputDiv.textContent = "❌ Sorry, no prompt was generated.";
+          promptContainer.style.display = "block";
+        }
+        
+      } catch (error) {
+        console.error("❌ Error:", error);
+        const outputDiv = document.getElementById("outputPrompt");
+        outputDiv.textContent = "❌ Error: " + error.message;
+        promptContainer.style.display = "block";
+      } finally {
+        loadingIndicator.classList.add("hidden");
+        generateBtn.disabled = false;
+      }
+    }
+
+    // Copy to clipboard function
+    function copyToClipboard() {
+      const promptText = document.getElementById('outputPrompt').textContent;
+      navigator.clipboard.writeText(promptText).then(() => {
+        alert('Prompt copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+        alert('Failed to copy. Please copy manually.');
+      });
+    }
+
+    // CSRF token function
+    function getCSRFToken() {
+      const name = "csrftoken";
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const trimmed = cookie.trim();
+        if (trimmed.startsWith(name + '=')) {
+          return decodeURIComponent(trimmed.substring(name.length + 1));
+        }
+      }
+      return '';
+    }
+  </script>
+</body>
+</html>

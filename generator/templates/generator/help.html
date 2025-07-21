@@ -1,0 +1,640 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduPrompt Studio - User Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daisyui@latest"></script>
+  <script>
+    tailwind.config = {
+      daisyui: {
+        themes: ["dark"]
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="bg-white rounded-2xl shadow-xl mb-8">
+      <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-lg px-6 py-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <img src="/static/eduPromptStudio_logo.png" alt="EduPrompt Studio Logo"
+                 class="h-12 w-12 object-contain rounded-md shadow-md bg-white p-1" />
+            <div>
+              <h1 class="text-3xl font-bold">User Guide</h1>
+              <p class="text-blue-100">Everything you need to know about EduPrompt Studio</p>
+            </div>
+          </div>
+          <a href="/" class="btn btn-outline border-white text-white hover:bg-white hover:text-blue-600">
+            ← Back to App
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">📋 Table of Contents</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#getting-started" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+          <div class="font-semibold text-blue-800">🚀 Getting Started</div>
+          <div class="text-sm text-blue-600">Quick start guide</div>
+        </a>
+        <a href="#interface" class="block p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+          <div class="font-semibold text-green-800">🖥️ Interface Guide</div>
+          <div class="text-sm text-green-600">Understanding the form</div>
+        </a>
+        <a href="#templates" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+          <div class="font-semibold text-purple-800">📚 Templates</div>
+          <div class="text-sm text-purple-600">Ready-made options</div>
+        </a>
+        <a href="#enhancements" class="block p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition-colors">
+          <div class="font-semibold text-yellow-800">⚡ Enhancements</div>
+          <div class="text-sm text-yellow-600">Theory-based improvements</div>
+        </a>
+        <a href="#best-practices" class="block p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
+          <div class="font-semibold text-red-800">🎯 Best Practices</div>
+          <div class="text-sm text-red-600">Tips for success</div>
+        </a>
+        <a href="#examples" class="block p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors">
+          <div class="font-semibold text-indigo-800">💡 Examples</div>
+          <div class="text-sm text-indigo-600">Real use cases</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      
+      <!-- Introduction -->
+      <section class="mb-12">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Welcome to EduPrompt Studio! 🎯</h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            EduPrompt Studio helps you create effective AI prompts tailored to your teaching needs. Whether you're designing lesson plans, creating practice exercises, or developing assessments, our platform combines your expertise with research-based educational principles to generate professional-quality prompts.
+          </p>
+        </div>
+      </section>
+
+      <!-- Getting Started -->
+      <section id="getting-started" class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2">🚀 Getting Started</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-blue-800 mb-4">Quick Start Steps</h3>
+            <ol class="space-y-3 text-gray-700">
+              <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
+                <span><strong>Choose a template</strong> for quick start, or create from scratch</span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
+                <span><strong>Fill in your teaching details</strong> using our guided form</span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">3</span>
+                <span><strong>Select enhancement mode</strong> (recommended for best results)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">4</span>
+                <span><strong>Generate your prompt</strong> and copy it to use with any AI tool</span>
+              </li>
+            </ol>
+          </div>
+
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-green-800 mb-4">Your First Prompt</h3>
+            <p class="text-gray-700 mb-4">Let's create a simple math exercise prompt:</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <div class="flex"><span class="font-semibold w-20">Template:</span> Practice Exercises</div>
+              <div class="flex"><span class="font-semibold w-20">Subject:</span> Fractions - understanding equivalence</div>
+              <div class="flex"><span class="font-semibold w-20">Context:</span> Primary students (ages 6-11)</div>
+              <div class="flex"><span class="font-semibold w-20">Generate:</span> Click "Generate Prompt"</div>
+              <div class="flex"><span class="font-semibold w-20">Copy:</span> Use "Copy to Clipboard"</div>
+              <div class="flex"><span class="font-semibold w-20">Paste:</span> Into ChatGPT, Claude, etc.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interface Guide -->
+      <section id="interface" class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-green-600 pb-2">🖥️ Understanding the Interface</h2>
+        
+        <div class="space-y-8">
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">🤖 Teaching Role</h3>
+            <p class="text-gray-700 mb-3"><strong>What it is:</strong> Your role as an educator</p>
+            <p class="text-gray-700 mb-3"><strong>Choose from:</strong> Elementary teacher, Math teacher, Special education teacher, etc.</p>
+            <div class="bg-blue-100 p-3 rounded border-l-4 border-blue-500">
+              <p class="text-blue-800"><strong>💡 Tip:</strong> This helps the AI understand your perspective and expertise level</p>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">📖 Subject Content and Learning Objectives</h3>
+            <p class="text-gray-700 mb-3"><strong>What it is:</strong> The topic you're teaching and what students should learn</p>
+            <p class="text-gray-700 mb-3"><strong>Example:</strong> "Fractions - understanding equivalence and converting to decimals"</p>
+            <div class="bg-blue-100 p-3 rounded border-l-4 border-blue-500">
+              <p class="text-blue-800"><strong>💡 Tip:</strong> Be specific about both the content and the learning goals</p>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">🎯 Learning Experience Type</h3>
+            <p class="text-gray-700 mb-4"><strong>What it is:</strong> What you want the AI to create for you</p>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-white p-4 rounded border">
+                <h4 class="font-semibold text-purple-800 mb-2">Technology-Enhanced Content</h4>
+                <p class="text-sm text-gray-600">Lesson plans, exercises, assessments</p>
+              </div>
+              <div class="bg-white p-4 rounded border">
+                <h4 class="font-semibold text-purple-800 mb-2">Technology-Enhanced Pedagogy</h4>
+                <p class="text-sm text-gray-600">Activities, experiments, applications</p>
+              </div>
+              <div class="bg-white p-4 rounded border">
+                <h4 class="font-semibold text-purple-800 mb-2">Comprehensive Learning Design</h4>
+                <p class="text-sm text-gray-600">Critical thinking, differentiation, problem-solving</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">🧠 Teaching Approach</h3>
+            <p class="text-gray-700 mb-4"><strong>What it is:</strong> How you prefer to teach this content</p>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">AI</span>
+                <div>
+                  <strong>AI Supports Direct Teaching:</strong> Teacher-led with AI assistance
+                </div>
+              </div>
+              <div class="flex items-start">
+                <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">AI</span>
+                <div>
+                  <strong>AI Enables Student Discovery:</strong> Student-centered with AI facilitation
+                </div>
+              </div>
+              <div class="flex items-start">
+                <span class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">AI</span>
+                <div>
+                  <strong>AI Adapts to Individual Needs:</strong> Personalized learning paths
+                </div>
+              </div>
+              <div class="flex items-start">
+                <span class="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">AI</span>
+                <div>
+                  <strong>AI Enhances Assessment:</strong> Feedback and evaluation support
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Enhancement Options -->
+      <section id="enhancements" class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-yellow-600 pb-2">⚡ Enhancement Options</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+            <h3 class="text-xl font-semibold text-yellow-800 mb-4">🎓 Learning Theory Enhancements (Recommended)</h3>
+            <p class="text-gray-700 mb-4"><strong>What happens:</strong> Your prompt gets enhanced with research-based educational principles</p>
+            <div class="space-y-2 text-gray-700">
+              <div class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span>Activities span different thinking levels (Bloom's Taxonomy)</span>
+              </div>
+              <div class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span>Multiple ways to engage diverse learners (UDL principles)</span>
+              </div>
+              <div class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span>Age-appropriate learning progression</span>
+              </div>
+              <div class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span>Subject-specific best practices</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">⚙️ Generate Exact Prompt</h3>
+            <p class="text-gray-700 mb-4"><strong>What happens:</strong> You get exactly what you specify, no additions</p>
+            <p class="text-gray-700 mb-4"><strong>Use when:</strong> You have very specific requirements or want full control</p>
+            
+            <div class="bg-white p-4 rounded border mt-4">
+              <h4 class="font-semibold text-gray-800 mb-2">Example Comparison:</h4>
+              <div class="space-y-3 text-sm">
+                <div>
+                  <strong class="text-gray-600">Basic:</strong> "Create practice exercises for fractions"
+                </div>
+                <div>
+                  <strong class="text-yellow-600">Enhanced:</strong> "Create practice exercises for fractions ensuring activities span remember, understand, and apply cognitive levels, progressing to higher-order thinking, and provide multiple means of representation to accommodate diverse learners"
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Templates Guide -->
+      <section id="templates" class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-purple-600 pb-2">📚 Templates Guide</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Lesson Planning -->
+          <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+            <h3 class="text-lg font-semibold text-blue-800 mb-4">📚 Lesson Planning</h3>
+            <div class="space-y-3">
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Complete Lesson Plan</h4>
+                <p class="text-sm text-gray-600">Full lesson development with objectives, activities, timing</p>
+              </div>
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Warm-up Activities</h4>
+                <p class="text-sm text-gray-600">5-10 minute engaging starters</p>
+              </div>
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Introduction to New Topic</h4>
+                <p class="text-sm text-gray-600">First-time concept introduction</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Critical Thinking -->
+          <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+            <h3 class="text-lg font-semibold text-green-800 mb-4">🤔 Critical Thinking</h3>
+            <div class="space-y-3">
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Critical Thinking Questions</h4>
+                <p class="text-sm text-gray-600">Open-ended, analytical questions</p>
+              </div>
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Problem-Solving Activities</h4>
+                <p class="text-sm text-gray-600">Real-world scenario challenges</p>
+              </div>
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Discussions & Debates</h4>
+                <p class="text-sm text-gray-600">Structured collaborative formats</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assessment -->
+          <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+            <h3 class="text-lg font-semibold text-purple-800 mb-4">🎯 Assessment</h3>
+            <div class="space-y-3">
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Quiz & Assessment</h4>
+                <p class="text-sm text-gray-600">Multiple question types with rubrics</p>
+              </div>
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Create Rubrics</h4>
+                <p class="text-sm text-gray-600">Clear evaluation criteria</p>
+              </div>
+              <div class="bg-white p-3 rounded">
+                <h4 class="font-semibold text-gray-800">Provide Feedback</h4>
+                <p class="text-sm text-gray-600">Constructive student feedback</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Best Practices -->
+      <section id="best-practices" class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-red-600 pb-2">🎯 Best Practices</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+            <h3 class="text-lg font-semibold text-green-800 mb-4">✅ Do This</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span><strong>Be specific</strong> about learning objectives</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span><strong>Include student context</strong> (age, ability, environment)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span><strong>Use enhancement mode</strong> for research-based improvements</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span><strong>Review and edit</strong> the generated prompt before using</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-600 mr-2">✓</span>
+                <span><strong>Test with your AI tool</strong> and refine as needed</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+            <h3 class="text-lg font-semibold text-red-800 mb-4">❌ Avoid This</h3>
+            <ul class="space-y-3 text-gray-700">
+              <li class="flex items-start">
+                <span class="text-red-600 mr-2">✗</span>
+                <span>Vague subject descriptions ("math stuff")</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-600 mr-2">✗</span>
+                <span>Ignoring student context</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-600 mr-2">✗</span>
+                <span>Using prompts without reviewing them first</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-600 mr-2">✗</span>
+                <span>Expecting perfection on first try</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-600 mr-2">✗</span>
+                <span>Being too generic in requirements</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-blue-50 p-6 rounded-lg border border-blue-200">
+          <h3 class="text-lg font-semibold text-blue-800 mb-4">🔧 Advanced Features</h3>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-gray-800 mb-2">⚡ Improve This Prompt</h4>
+              <p class="text-gray-700 text-sm mb-3">After generating a prompt, make it even better:</p>
+              <ol class="text-sm text-gray-600 space-y-1">
+                <li>1. Click "Improve This Prompt"</li>
+                <li>2. Select desired improvements</li>
+                <li>3. Apply selected enhancements</li>
+                <li>4. Edit the result if needed</li>
+              </ol>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold text-gray-800 mb-2">📋 Copy and Customize</h4>
+              <p class="text-gray-700 text-sm mb-3">Make the prompt your own:</p>
+              <ol class="text-sm text-gray-600 space-y-1">
+                <li>1. Review the generated prompt</li>
+                <li>2. Edit directly in the text box</li>
+                <li>3. Copy to clipboard when ready</li>
+                <li>4. Save for future reference</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Examples -->
+      <section id="examples" class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-indigo-600 pb-2">💡 Examples in Action</h2>
+        
+        <div class="space-y-8">
+          <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+            <h3 class="text-xl font-semibold text-blue-800 mb-4">Example 1: Elementary Math</h3>
+            <p class="text-gray-700 mb-4"><strong>Goal:</strong> Create fraction practice for 3rd graders</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Form Inputs:</h4>
+                <div class="space-y-1 text-sm text-gray-600">
+                  <div><strong>Role:</strong> Elementary school teacher</div>
+                  <div><strong>Subject:</strong> Fractions - understanding halves and quarters</div>
+                  <div><strong>Task:</strong> Generate practice exercises with answers</div>
+                  <div><strong>Context:</strong> Primary students (ages 6-11)</div>
+                  <div><strong>Approach:</strong> AI gives personalized support</div>
+                  <div><strong>Tone:</strong> Encouraging and supportive</div>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Generated Prompt:</h4>
+                <div class="bg-white p-3 rounded border text-sm text-gray-700 italic">
+                  "You are an elementary school teacher creating practice exercises for understanding halves and quarters for primary students (ages 6-11). Provide personalized support and encouragement while maintaining an encouraging tone. Include varying difficulty levels with step-by-step solutions and real-world applications..."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+            <h3 class="text-xl font-semibold text-green-800 mb-4">Example 2: High School Science</h3>
+            <p class="text-gray-700 mb-4"><strong>Goal:</strong> Create lab experiment for chemistry class</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Form Inputs:</h4>
+                <div class="space-y-1 text-sm text-gray-600">
+                  <div><strong>Role:</strong> Science teacher</div>
+                  <div><strong>Subject:</strong> Chemical reactions - acid-base neutralization</div>
+                  <div><strong>Task:</strong> Design hands-on experiments</div>
+                  <div><strong>Context:</strong> Upper secondary (ages 15-18)</div>
+                  <div><strong>Approach:</strong> Students explore with AI as research assistant</div>
+                  <div><strong>Tone:</strong> Academic and precise</div>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">Generated Prompt:</h4>
+                <div class="bg-white p-3 rounded border text-sm text-gray-700 italic">
+                  "You are a science teacher designing hands-on experiments on chemical reactions focusing on acid-base neutralization for upper secondary students (ages 15-18). Students should explore concepts using AI as a research assistant while maintaining an academic and precise tone..."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tips for Success -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-green-600 pb-2">🚀 Tips for Success</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-purple-800 mb-3">📝 Keep Notes</h3>
+            <p class="text-gray-700 text-sm">Save prompts that work well for future reference and modification.</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-yellow-800 mb-3">🤝 Share and Collaborate</h3>
+            <p class="text-gray-700 text-sm">Share successful prompts with colleagues and learn from their approaches.</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-red-800 mb-3">📱 Stay Updated</h3>
+            <p class="text-gray-700 text-sm">Educational AI tools evolve rapidly. Keep experimenting with new features and approaches.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-orange-600 pb-2">🔧 Troubleshooting</h2>
+        
+        <div class="space-y-6">
+          <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+            <h3 class="text-lg font-semibold text-orange-800 mb-4">Common Issues & Solutions</h3>
+            
+            <div class="space-y-4">
+              <div class="bg-white p-4 rounded border">
+                <h4 class="font-semibold text-gray-800 mb-2">❓ "The prompt doesn't match my needs"</h4>
+                <p class="text-gray-700 text-sm mb-2"><strong>Solution:</strong> Edit the generated prompt directly or try different form selections</p>
+                <p class="text-blue-700 text-sm"><strong>💡 Tip:</strong> The text box is fully editable - customize as needed</p>
+              </div>
+              
+              <div class="bg-white p-4 rounded border">
+                <h4 class="font-semibold text-gray-800 mb-2">❓ "The AI (ChatGPT/Claude) doesn't follow the prompt"</h4>
+                <p class="text-gray-700 text-sm mb-2"><strong>Solution:</strong> Try being more specific in your requirements</p>
+                <p class="text-blue-700 text-sm"><strong>💡 Tip:</strong> Add phrases like "You must include..." or "Essential requirements:"</p>
+              </div>
+              
+              <div class="bg-white p-4 rounded border">
+                <h4 class="font-semibold text-gray-800 mb-2">❓ "I need something very specific that isn't in the templates"</h4>
+                <p class="text-gray-700 text-sm mb-2"><strong>Solution:</strong> Start with "Create from scratch" and use custom inputs</p>
+                <p class="text-blue-700 text-sm"><strong>💡 Tip:</strong> Use the "Include" field for specific requirements</p>
+              </div>
+              
+              <div class="bg-white p-4 rounded border">
+                <h4 class="font-semibold text-gray-800 mb-2">❓ "The enhancement seems too complex"</h4>
+                <p class="text-gray-700 text-sm mb-2"><strong>Solution:</strong> Switch to "Basic Mode" for simpler prompts</p>
+                <p class="text-blue-700 text-sm"><strong>💡 Alternative:</strong> Use enhanced mode but edit out complexity after generation</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+              <h3 class="text-lg font-semibold text-blue-800 mb-4">🛠️ Technical Issues</h3>
+              <ul class="space-y-2 text-gray-700 text-sm">
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Refresh your browser</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Check your internet connection</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Try a different browser if needed</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Clear browser cache and cookies</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h3 class="text-lg font-semibold text-green-800 mb-4">💡 Better Prompts</h3>
+              <ul class="space-y-2 text-gray-700 text-sm">
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">•</span>
+                  <span>Experiment with different templates</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">•</span>
+                  <span>Try various teaching approaches</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">•</span>
+                  <span>Use the improvement feature</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">•</span>
+                  <span>Edit generated prompts to fit your style</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ready to Get Started -->
+      <section class="text-center py-12">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-8 shadow-lg">
+          <h2 class="text-3xl font-bold mb-4">Ready to Get Started? 🚀</h2>
+          <p class="text-lg mb-6 opacity-90">
+            EduPrompt Studio is designed to support your teaching expertise with AI-powered assistance. 
+            Start with a template that matches your immediate needs, and don't hesitate to experiment with different options.
+          </p>
+          <p class="text-xl font-semibold mb-6">
+            Remember: You're the educational expert - EduPrompt Studio just helps you communicate your expertise to AI tools more effectively.
+          </p>
+          <a href="/" class="btn btn-lg bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+            🎯 Start Creating Prompts
+          </a>
+          <p class="text-sm mt-4 opacity-75">
+            Happy prompting! ✨
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8 text-gray-600">
+      <p class="text-sm">
+        For technical support or questions about using EduPrompt Studio, 
+        <a href="mailto:support@eduprompt.studio" class="text-blue-600 hover:text-blue-800 underline">contact support</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Smooth scrolling for anchor links -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Highlight active section in table of contents
+      const sections = document.querySelectorAll('section[id]');
+      const tocLinks = document.querySelectorAll('a[href^="#"]');
+      
+      function highlightActiveSection() {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        tocLinks.forEach(link => {
+          link.classList.remove('bg-blue-200');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('bg-blue-200');
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', highlightActiveSection);
+      highlightActiveSection(); // Initial call
+    });
+  </script>
+
+</body>
+</html>
