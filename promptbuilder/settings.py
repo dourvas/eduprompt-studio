@@ -28,6 +28,11 @@ ALLOWED_HOSTS = [
     '.railway.app',
     '.up.railway.app',
 ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://eduprompt-studio-production.up.railway.app',
+    'https://*.railway.app',
+    'https://*.up.railway.app',
+]
 
 # Application definition
 INSTALLED_APPS = [
