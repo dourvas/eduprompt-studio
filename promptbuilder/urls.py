@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from generator.views import index, generate_prompt, help_page
+from generator.views import index, generate_prompt, help_page, track_copy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),  # η αρχική σελίδα
     path('help/', help_page, name='help_page'),
     path('generate/', generate_prompt, name='generate_prompt'),  # για POST request
+    path('track-copy/', track_copy, name='track_copy'),
 ]
 
 # Serve static files in development

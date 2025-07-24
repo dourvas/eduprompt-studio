@@ -7,11 +7,29 @@ import requests
 import json
 import time
 import logging
+from .models import UserSession, PromptGeneration, PageView, TemplateUsage
+import time
 
 # Setup logging
 logger = logging.getLogger(__name__)
 
 def index(request):
+    # Ensure session exists
+    if not request.session.session_key:
+        request.session.create()
+    
+    session_id = request.session.session_key
+    session, created = UserSession.objects.get_or_create(
+        session_id=session_id,
+        defaults={'referrer': request.META.get('HTTP_REFERER', '')}
+    )
+    
+    if not created:
+        session.pages_visited += 1
+        session.save()
+    
+    PageView.objects.create(session=session, path=request.path)
+    
     return render(request, "generator/index.html")
 
 def add_theoretical_enhancement(prompt, form_data):
@@ -228,6 +246,33 @@ Do not include ```json, markdown, or any other formatting. Just pure JSON.
             logger.error(f"Unexpected parsing error: {e}")
             text_response = "Sorry, an unexpected error occurred."
 
+        # Track prompt generation
+        session_id = request.session.session_key or request.session.create()
+        session, created = UserSession.objects.get_or_create(session_id=session_id)
+        
+        # Update template usage if template was used
+        template_used = data.get("template", "")
+        if template_used:
+            template_obj, created = TemplateUsage.objects.get_or_create(template_name=template_used)
+            template_obj.usage_count += 1
+            template_obj.save()
+        
+        # Create prompt generation record
+        PromptGeneration.objects.create(
+            session=session,
+            template_used=template_used,
+            role=data.get("role", ""),
+            subject=data.get("subject", ""),
+            task=data.get("task", ""),
+            context=data.get("context", ""),
+            methodology=data.get("methodology", ""),
+            tone=data.get("tone", ""),
+            enhancement_mode=enhancement_type,
+            success=True,
+            response_time_seconds=total_time,
+            generated_prompt=text_response
+        )
+        
         return JsonResponse({"response": text_response})
     
     else:
@@ -235,3 +280,20 @@ Do not include ```json, markdown, or any other formatting. Just pure JSON.
 
 def help_page(request):
     return render(request, "generator/help.html")
+
+@csrf_exempt
+def track_copy(request):
+    if request.method == "POST":
+        session_id = request.session.session_key
+        if session_id:
+            # Find the latest prompt generation for this session
+            latest_prompt = PromptGeneration.objects.filter(
+                session__session_id=session_id
+            ).order_by('-timestamp').first()
+            
+            if latest_prompt:
+                latest_prompt.copied_to_clipboard = True
+                latest_prompt.save()
+        
+        return JsonResponse({"status": "success"})
+    return JsonResponse({"error": "Only POST allowed"}, status=400)
