@@ -6,3 +6,5 @@ gunicorn==21.2.0
 whitenoise==6.6.0
 psycopg2-binary==2.9.7
 dj-database-url==2.1.0
+setuptools>=65.0.0
+wheel>=0.37.0
