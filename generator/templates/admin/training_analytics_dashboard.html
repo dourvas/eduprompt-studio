@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Needs Analytics - EduPrompt Studio</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: #f8f9fa; 
+        }
+        .header { 
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6); 
+            color: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            margin-bottom: 30px; 
+            text-align: center;
+        }
+        .header h1 { margin: 0 0 10px 0; font-size: 2.5rem; }
+        .header p { margin: 0; opacity: 0.9; font-size: 1.1rem; }
+        
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            margin-bottom: 30px; 
+        }
+        .stat-card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+        .stat-card h3 { 
+            margin: 0 0 15px 0; 
+            color: #374151; 
+            font-size: 1.1rem; 
+            font-weight: 600;
+        }
+        .stat-number { 
+            font-size: 2.5rem; 
+            font-weight: bold; 
+            color: #3B82F6; 
+            margin-bottom: 5px;
+        }
+        .stat-card p { 
+            margin: 0; 
+            color: #6B7280; 
+            font-size: 0.9rem;
+        }
+        
+        .chart-container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            margin-bottom: 30px;
+            border: 1px solid #e5e7eb;
+        }
+        .chart-container h3 { 
+            margin: 0 0 20px 0; 
+            color: #374151; 
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .chart-wrapper { 
+            position: relative; 
+            height: 400px; 
+        }
+        
+        .loading { 
+            text-align: center; 
+            color: #6B7280; 
+            font-style: italic;
+        }
+        .error { 
+            text-align: center; 
+            color: #EF4444; 
+            background: #FEF2F2; 
+            padding: 20px; 
+            border-radius: 8px;
+            border: 1px solid #FECACA;
+        }
+        
+        .close-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #6B7280;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .close-btn:hover {
+            background: #4B5563;
+        }
+    </style>
+</head>
+<body>
+    <button class="close-btn" onclick="window.close()">✕ Close</button>
+    
+    <div class="header">
+        <h1>📊 Training Needs Analytics</h1>
+        <p>Phase 2 Research Data - Comprehensive Analysis</p>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>📋 Survey Completion</h3>
+            <div class="stat-number" id="completionRate">Loading...</div>
+            <p>Response rate from all sessions</p>
+        </div>
+        <div class="stat-card">
+            <h3>📧 Research Participation</h3>
+            <div class="stat-number" id="emailRate">Loading...</div>
+            <p>Provided email for follow-up</p>
+        </div>
+        <div class="stat-card">
+            <h3>🎤 Interview Interest</h3>
+            <div class="stat-number" id="interviewRate">Loading...</div>
+            <p>Willing to be interviewed</p>
+        </div>
+        <div class="stat-card">
+            <h3>🎯 Average Priorities</h3>
+            <div class="stat-number" id="avgPriorities">Loading...</div>
+            <p>Priorities set per participant</p>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="chart-container">
+        <h3>🎯 Most Popular Training Interests</h3>
+        <div class="chart-wrapper">
+            <canvas id="interestsChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <h3>🏆 Top Priority Areas (1st Priority Only)</h3>
+        <div class="chart-wrapper">
+            <canvas id="prioritiesChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <h3>📊 Research Participation Breakdown</h3>
+        <div class="chart-wrapper">
+            <canvas id="participationChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTrainingAnalytics();
+        });
+
+        async function loadTrainingAnalytics() {
+            try {
+                console.log('Loading training analytics...');
+                const response = await fetch('/admin/generator/usersession/training-analytics-data/');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data loaded:', data);
+                
+                // Update summary stats
+                document.getElementById('completionRate').textContent = data.completion_rate + '%';
+                document.getElementById('emailRate').textContent = data.email_rate + '%';
+                document.getElementById('interviewRate').textContent = data.interview_rate + '%';
+                document.getElementById('avgPriorities').textContent = data.avg_priorities;
+                
+                // Create charts
+                createInterestsChart(data.interests_distribution);
+                createPrioritiesChart(data.priorities_distribution);
+                createParticipationChart(data.participation_stats);
+                
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+                document.querySelectorAll('.stat-number').forEach(el => {
+                    el.textContent = 'Error';
+                    el.style.color = '#EF4444';
+                });
+            }
+        }
+
+        function formatInterestName(key) {
+            const names = {
+                'technical_training': 'Technical Training',
+                'pedagogical_integration': 'Classroom Integration',
+                'content_assessment': 'Content & Assessment',
+                'academic_integrity': 'Academic Integrity',
+                'ai_literacy': 'AI Literacy',
+                'ethics': 'Ethics & Responsible Use',
+                'school_implementation': 'School Implementation',
+                'workshops': 'Hands-on Workshops',
+                'community': 'Educator Community',
+                'other': 'Other Needs'
+            };
+            return names[key] || key;
+        }
+
+        function createInterestsChart(data) {
+            const ctx = document.getElementById('interestsChart').getContext('2d');
+            
+            const labels = Object.keys(data).map(formatInterestName);
+            const values = Object.values(data);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Selections',
+                        data: values,
+                        backgroundColor: '#3B82F6',
+                        borderColor: '#1D4ED8',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createPrioritiesChart(data) {
+            const ctx = document.getElementById('prioritiesChart').getContext('2d');
+            
+            const labels = Object.keys(data).map(formatInterestName);
+            const values = Object.values(data);
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: [
+                            '#F59E0B', '#10B981', '#EF4444', '#8B5CF6', 
+                            '#06B6D4', '#F97316', '#84CC16', '#EC4899'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+        }
+
+        function createParticipationChart(data) {
+            const ctx = document.getElementById('participationChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Email + Interview', 'Email Only', 'Interview Only', 'No Participation'],
+                    datasets: [{
+                        data: [data.both, data.email_only, data.interview_only, data.none],
+                        backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#9CA3AF']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "admin/change_list.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+.training-analytics-btn {
+    background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    transition: all 0.2s ease;
+}
+.training-analytics-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    color: white;
+    text-decoration: none;
+}
+.training-analytics-btn:before {
+    content: "📊 ";
+    margin-right: 5px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 20px;">
+    <a href="/admin/generator/usersession/training-analytics/" 
+       target="_blank" 
+       class="training-analytics-btn">
+        View Training Needs Analytics Dashboard
+    </a>
+</div>
+
+{{ block.super }}
+{% endblock %}

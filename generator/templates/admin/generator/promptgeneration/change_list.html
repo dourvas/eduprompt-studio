@@ -1,0 +1,33 @@
+{% extends "admin/change_list.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    /* Compact header με 80% width για να αφήσει χώρο στο ADD button */
+    .analytics-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 8px 15px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        height: 40px;
+        width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Compact navigation header με 80% width -->
+<div class="analytics-header">
+    <h3 style="margin: 0; font-size: 1rem;">📊 EduPrompt Studio Analytics</h3>
+    <a href="{% url 'admin:theory_analytics_dashboard' %}" 
+       style="background: rgba(255,255,255,0.9); color: #4338ca; padding: 4px 10px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.85rem;">
+        📈 Analytics Dashboard
+    </a>
+</div>
+
+{{ block.super }}
+{% endblock %}
