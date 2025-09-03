@@ -2,6 +2,6 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn promptbuilder.wsgi:application"
+startCommand = "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn promptapp.wsgi:application"
 healthcheckPath = "/"
 healthcheckTimeout = 300

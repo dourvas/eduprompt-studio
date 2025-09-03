@@ -1,0 +1,158 @@
+<!-- Training Needs Survey Modal - 2 Step Design -->
+<div id="trainingNeedsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-xl p-6 max-w-lg mx-4 shadow-2xl transform transition-all duration-300 scale-95" id="trainingModalContent">
+    
+    <!-- Progress Indicator -->
+    <div class="flex items-center justify-center mb-6">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold" id="step1Indicator">1</div>
+        <div class="w-8 h-1 bg-gray-200" id="progressBar"></div>
+        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-sm font-bold" id="step2Indicator">2</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Interests Selection -->
+    <div id="step1Content">
+      <!-- Header -->
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-white text-2xl">🚀</span>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Help us improve EduPrompt Studio</h3>
+        <p class="text-gray-600 text-sm">What areas of AI in education interest you?</p>
+        <p class="text-gray-500 text-xs mt-1">(Select all that apply)</p>
+      </div>
+
+      <!-- Interests Grid - Compact 2-column -->
+<div class="grid grid-cols-2 gap-2 mb-4 max-h-64 overflow-y-auto">
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="technical_training" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Technical AI tools</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="pedagogical_integration" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Classroom integration</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="content_assessment" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Content & assessment</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="academic_integrity" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Academic integrity</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="ai_literacy" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Teaching AI literacy</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="ethics" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Ethics & responsible use</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="school_implementation" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">School-wide strategies</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="workshops" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Hands-on workshops</span>
+  </label>
+
+  <label class="interest-option flex items-center p-2 border border-gray-200 rounded cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50">
+    <input type="checkbox" name="training_interests" value="community" class="training-checkbox mr-2 w-3 h-3">
+    <span class="text-xs">Educator community</span>
+  </label>
+
+  <!-- Other option spans both columns -->
+  <div class="interest-option col-span-2 border border-gray-200 rounded p-2">
+    <label class="flex items-center cursor-pointer mb-1">
+      <input type="checkbox" name="training_interests" value="other" class="training-checkbox mr-2 w-3 h-3">
+      <span class="text-xs">Other:</span>
+    </label>
+    <input type="text" name="training_other" placeholder="Please specify..." 
+           class="w-full text-xs border border-gray-300 rounded px-2 py-1 hidden"
+           id="trainingOtherText">
+  </div>
+</div>
+
+      <!-- Step 1 Buttons -->
+      <div class="flex gap-3">
+        <button type="button" onclick="closeTrainingNeedsModal()" 
+                class="flex-1 px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm hover:bg-gray-50 transition-all">
+          Skip
+        </button>
+        <button type="button" onclick="goToStep2()" 
+                class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all">
+          Next →
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Priorities & Email -->
+    <div id="step2Content" class="hidden">
+      <!-- Header -->
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-white text-2xl">🎯</span>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Set your priorities</h3>
+        <p class="text-gray-600 text-sm">Rank your top 3 most important areas</p>
+      </div>
+
+      <!-- Selected Interests Display -->
+      <div class="mb-4">
+        <h4 class="text-sm font-medium text-gray-700 mb-2">Your selected interests:</h4>
+        <div id="selectedInterestsList" class="space-y-2">
+          <!-- Will be populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Priority Counter -->
+      <div id="priorityMessage" class="text-center text-sm text-gray-600 mb-4">
+        <span id="priorityCount">0</span>/3 priorities set
+      </div>
+
+      <!-- Email Section -->
+      <div class="border-t pt-4 mb-6">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          📧 Email for AI education research (optional):
+        </label>
+        <input type="email" name="follow_up_email" 
+               class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm mb-3"
+               placeholder="your.email@school.edu">
+        <p class="text-xs text-gray-500 mb-3">Help us develop better AI training for educators</p>
+        
+        <label class="flex items-center">
+          <input type="checkbox" name="research_interview" value="true" class="mr-2">
+          <span class="text-sm">I'm interested in a brief research interview</span>
+        </label>
+      </div>
+
+      <!-- Step 2 Buttons -->
+      <div class="flex gap-3">
+        <button type="button" onclick="goToStep1()" 
+                class="flex-1 px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm hover:bg-gray-50 transition-all">
+          ← Back
+        </button>
+        <button type="button" onclick="submitTrainingNeeds()" 
+                class="btn-submit flex-1 px-4 py-2 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-lg text-sm font-medium hover:from-green-700 hover:to-blue-700 transition-all">
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <!-- Privacy note -->
+    <p class="text-xs text-gray-500 text-center mt-4">
+      Your responses help improve AI training for educators<br>
+      Data used anonymously for doctoral research at International Hellenic University
+    </p>
+
+  </div>
+</div>

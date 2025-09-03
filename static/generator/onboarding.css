@@ -1,0 +1,143 @@
+/* onboarding.css - EduPrompt Studio Onboarding Modal Styles */
+
+/* Modal backdrop and container */
+#onboardingModal {
+    backdrop-filter: blur(4px);
+}
+
+#onboardingModal .transform {
+    transition: transform 0.3s ease-out;
+}
+
+/* Custom radio button styling */
+.onboarding-radio {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.onboarding-radio:checked {
+    border-color: #3b82f6;
+    background-color: #3b82f6;
+}
+
+.onboarding-radio:checked::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Hover effects */
+.onboarding-radio:hover {
+    border-color: #6366f1;
+}
+
+/* Focus states for accessibility */
+.onboarding-radio:focus {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+}
+
+/* Radio option containers */
+.radio-option {
+    transition: all 0.2s ease;
+}
+
+.radio-option:hover {
+    background-color: #f9fafb;
+    border-color: #6366f1;
+}
+
+.radio-option:has(.onboarding-radio:checked) {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+}
+
+/* Modal animations */
+.modal-enter {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.modal-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.3s ease-out;
+}
+
+.modal-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.modal-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s ease-in;
+}
+
+/* Research badge styling */
+.research-badge {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+    border: 1px solid #bfdbfe;
+}
+
+/* Button styling */
+.btn-skip {
+    transition: all 0.2s ease;
+}
+
+.btn-skip:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.btn-continue {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    transition: all 0.2s ease;
+}
+
+.btn-continue:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* University icon styling */
+.university-icon {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .modal-content {
+        margin: 1rem;
+        max-width: calc(100vw - 2rem);
+    }
+    
+    .radio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .university-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    .university-icon span {
+        font-size: 1.25rem;
+    }
+}
