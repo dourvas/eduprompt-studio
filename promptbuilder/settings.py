@@ -7,6 +7,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from pathlib import Path
+from decouple import config
+
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,6 +22,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-0(fm1s!z%-ci^q$^*ih37
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+# Survey System Control
+ENABLE_SURVEYS = config('ENABLE_SURVEYS', default='true', cast=bool)
 
 ALLOWED_HOSTS = [
     'localhost', 

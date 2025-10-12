@@ -1316,6 +1316,10 @@ async function trackCopySuccess() {
 }
 
 function checkAndShowTrainingNeeds() {
+  if (typeof SURVEYS_ENABLED !== 'undefined' && !SURVEYS_ENABLED) {
+    console.log('Surveys are disabled - training needs will not show');
+    return;
+  }
   console.log('checkAndShowTrainingNeeds called');
   console.log('trainingNeedsShown:', trainingNeedsShown);
   console.log('hasCompletedOnboarding:', hasCompletedOnboarding());
@@ -1345,6 +1349,10 @@ function hasCompletedTrainingNeeds() {
 }
 
 function showTrainingNeedsModal() {
+  if (typeof SURVEYS_ENABLED !== 'undefined' && !SURVEYS_ENABLED) {
+    console.log('Surveys are disabled - training modal will not show');
+    return;
+  }
   console.log('showTrainingNeedsModal called');
   
   const modal = document.getElementById('trainingNeedsModal');
@@ -2688,6 +2696,13 @@ function setupStep2PriorityListeners() {
   });
 }
 </script>
+
+<!-- Survey System Control -->
+<script>
+    const SURVEYS_ENABLED = {{ settings.ENABLE_SURVEYS|lower }};
+    console.log('SURVEYS_ENABLED:', SURVEYS_ENABLED);
+</script>
+
 <script src="{% static 'generator/onboarding.js' %}"></script>
 {% include 'generator/modals/training_needs_modal.html' %}
 </body>

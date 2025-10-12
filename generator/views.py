@@ -24,20 +24,25 @@ def index(request):
     # Ensure session exists
     if not request.session.session_key:
         request.session.create()
-    
+   
     session_id = request.session.session_key
     session, created = UserSession.objects.get_or_create(
         session_id=session_id,
         defaults={'referrer': request.META.get('HTTP_REFERER', '')}
     )
-    
+   
     if not created:
         session.pages_visited += 1
         session.save()
-    
+   
     PageView.objects.create(session=session, path=request.path)
-    
-    return render(request, "generator/index.html")
+   
+    # Pass ENABLE_SURVEYS to template
+    context = {
+        'settings': settings
+    }
+   
+    return render(request, "generator/index.html", context)  
 
 # NEW ENHANCED THEORY SELECTION SYSTEM
 
@@ -493,6 +498,11 @@ def onboarding_data_collection(request):
         "timestamp": "ISO timestamp"
     }
     """
+    if not settings.ENABLE_SURVEYS:
+        return JsonResponse({
+            'status': 'disabled',
+            'message': 'Surveys are currently disabled'
+        })
     try:
         # Parse JSON data
         data = json.loads(request.body)
@@ -764,6 +774,11 @@ def training_needs_data_collection(request):
         "research_interview_interest": true/false
     }
     """
+    if not settings.ENABLE_SURVEYS:
+        return JsonResponse({
+            'status': 'disabled',
+            'message': 'Surveys are currently disabled'
+        })
     try:
         # Parse JSON data
         data = json.loads(request.body)
