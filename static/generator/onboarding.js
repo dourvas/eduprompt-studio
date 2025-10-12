@@ -139,16 +139,22 @@ class OnboardingModal {
     }
 
     checkShouldShow() {
-        // Don't show if already shown in this session
-        if (sessionStorage.getItem('onboarding_shown')) {
-            return;
-        }
-
-        // Show after 15 seconds
-        this.timer = setTimeout(() => {
-            this.show();
-        }, 15000);
+    // Check if surveys are enabled
+    if (typeof SURVEYS_ENABLED !== 'undefined' && !SURVEYS_ENABLED) {
+        console.log('Surveys are disabled - onboarding will not show');
+        return;
     }
+
+    // Don't show if already shown in this session
+    if (sessionStorage.getItem('onboarding_shown')) {
+        return;
+    }
+
+    // Show after 15 seconds
+    this.timer = setTimeout(() => {
+        this.show();
+    }, 15000);
+}
 
     show() {
         if (this.modalShown) return;
