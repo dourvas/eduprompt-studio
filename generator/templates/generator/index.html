@@ -89,357 +89,186 @@
 
         
 
-        <!-- QUICK START TEMPLATES -->
-
         <div class="mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-200">
-
-          <label for="template" class="block text-lg font-semibold mb-3 text-purple-800">
-
-            ⚡ Quick Start - Choose a template (optional)
-
-          </label>
-
-          <select id="template" name="template" class="select select-bordered w-full max-w-md bg-white">
-
-            <option value="">Create from scratch</option>
-
-            <optgroup label="📚 Lesson Planning">
-
-              <option value="lesson_plan">Complete Lesson Plan</option>
-
-              <option value="warm_up">Warm-up Activities</option>
-
-              <option value="lesson_intro">Introduction to New Topic</option>
-
-            </optgroup>
-
-            <optgroup label="🤔 Critical Thinking">
-
-              <option value="critical_questions">Critical Thinking Questions</option>
-
-              <option value="problem_solving">Problem-Solving Activities</option>
-
-              <option value="debates">Discussions & Debates</option>
-
-            </optgroup>
-
-            <optgroup label="📝 Practice & Activities">
-
-              <option value="practice_exercises">Practice Exercises</option>
-
-              <option value="group_activities">Group Activities</option>
-
-              <option value="creative_writing">Creative Writing Prompts</option>
-
-            </optgroup>
-
-            <optgroup label="🎯 Assessment">
-
-              <option value="quiz_assessment">Quiz & Assessment</option>
-
-              <option value="rubrics">Create Rubrics</option>
-
-              <option value="feedback">Provide Feedback</option>
-
-            </optgroup>
-
-            <optgroup label="🌟 Differentiation">
-
-              <option value="differentiated">Differentiated Activities</option>
-
-              <option value="special_needs">Special Educational Needs</option>
-
-              <option value="revision">Revision Activities</option>
-
-            </optgroup>
-
-          </select>
-
-          <p class="text-sm text-purple-600 mt-2">💡 Select a template to auto-fill the form fields</p>
-
-        </div>
-
-
-
-        <!-- ROLE -->
-
-        <div class="mb-6">
-
-          <label for="role" class="block text-lg font-semibold mb-3 text-gray-700">
-
-            🤖 What's your teaching role?
-
-          </label>
-
-          <div class="flex flex-col sm:flex-row gap-3">
-
-            <select id="role" name="role" class="select select-bordered flex-1">
-
-              <option value="">Select a role</option>
-
-              <optgroup label="Education Levels">
-
-                <option>Kindergarten teacher</option>
-
-                <option>Elementary school teacher</option>
-
-                <option>Middle school teacher</option>
-
-                <option>High school teacher</option>
-
-                <option>Special education teacher</option>
-
-                <option>Language instructor</option>
-
-              </optgroup>
-
-              <optgroup label="Subject Specialists">
-
-                <option>Math teacher</option>
-
-                <option>Science teacher</option>
-
-                <option>History teacher</option>
-
-                <option>Literature teacher</option>
-
-                <option>Art teacher</option>
-
-                <option>PE teacher</option>
-
-              </optgroup>
-
-              <optgroup label="Other Roles">
-
-                <option>Tutor</option>
-
-                <option>Parent explaining to child</option>
-
-                <option>Educational consultant</option>
-
-                <option>Other</option>
-
-              </optgroup>
-
-            </select>
-
-            <input id="roleOther" name="roleOther" type="text"
-
-              placeholder="Please specify..."
-
-              class="input input-bordered flex-1 hidden" />
-
-          </div>
-
-        </div>
-
-
-
-        <!-- SUBJECT/TOPIC -->
-
-        <div class="mb-6">
-
-          <label for="subject" class="block text-lg font-semibold mb-3 text-gray-700">
-
-            📖 What subject content and learning objectives?
-
-          </label>
-
-          <input id="subject" name="subject" type="text"
-
-            placeholder="e.g., Fractions - understanding equivalence and operations, World War II - analyzing causes and effects"
-
-            class="input input-bordered w-full"
-
-            required />
-
-            <p class="text-sm text-gray-500 mt-1">Include both the subject area and specific learning goals</p>
-
-        </div>
-
-
-
-        <!-- TASK -->
-
-        <div class="mb-6">
-
-          <label for="task" class="block text-lg font-semibold mb-3 text-gray-700">
-
-            🎯 What learning experience do you want to create?
-
-          </label>
-
-          <div class="flex flex-col sm:flex-row gap-3">
-
-            <select id="task" name="task" class="select select-bordered flex-1">
-
-              <option value="">Select a task</option>
-
-              <optgroup label="Technology-Enhanced Content Creation">
-
-                <option>Create a complete lesson plan with objectives</option>
-
-                <option>Generate practice exercises with answers</option>
-
-                <option>Design a quiz or assessment</option>
-
-                <option>Create a project rubric</option>
-
-                <option>Create vocabulary activities</option>
-
-                <option>Provide feedback on student work</option>
-
-              </optgroup>
-
-              <optgroup label="Technology-Enhanced Pedagogy">
-
-                <option>Design a warm-up activity</option>
-
-                <option>Create an introduction to new topic</option>
-
-                <option>Create gamified learning activities</option>
-
-                <option>Design hands-on experiments</option>
-
-                <option>Create storytelling activities</option>
-
-                <option>Design real-world applications</option>
-
-              </optgroup>
-
-              <optgroup label="Comprehensive Learning Design">
-
-                <option>Create critical thinking questions</option>
-
-                <option>Design problem-solving scenarios</option>
-
-                <option>Generate debate topics and arguments</option>
-
-                <option>Create case studies for analysis</option>
-
-                <option>Design differentiated activities</option>
-
-                <option>Create activities for multiple intelligences</option>
-
-                <option>Adapt content for special needs</option>
-
-                <option>Generate extension activities</option>
-
-                <option>Create revision activities</option>
-
-                <option>Generate creative writing prompts</option>
-
-              </optgroup>
-
-              <optgroup label="Other">
-
-                <option>Other</option>
-
-              </optgroup>
-
-            </select>
-
-            <input id="taskOther" name="taskOther" type="text"
-
-              placeholder="Please specify..."
-
-              class="input input-bordered flex-1 hidden" />
-
-          </div>
-
-        </div>
-
-
-
-        <!-- CONTEXT -->
-
-        <div class="mb-6">
-
-          <label for="context" class="block text-lg font-semibold mb-3 text-gray-700">
-
-            🎓 Who is this for? What's the context?
-
-          </label>
-
-          <div class="flex flex-col sm:flex-row gap-3">
-
-            <select id="context" name="context" class="select select-bordered flex-1" required>
-
-              <option value="">Select context</option>
-
-              <optgroup label="Age Groups">
-
-                <option>Preschool (ages 3-5)</option>
-
-                <option>Primary students (ages 6-11)</option>
-
-                <option>Lower secondary (ages 12-14)</option>
-
-                <option>Upper secondary (ages 15-18)</option>
-
-                <option>Adult learners</option>
-
-              </optgroup>
-
-              <optgroup label="Learning Environments">
-
-                <option>Traditional classroom</option>
-
-                <option>Online/remote learning</option>
-
-                <option>Hybrid classroom</option>
-
-                <option>Homeschool setting</option>
-
-                <option>After-school program</option>
-
-              </optgroup>
-
-              <optgroup label="Special Considerations">
-
-                <option>Mixed-ability classroom</option>
-
-                <option>ESL/EFL learners</option>
-
-                <option>Students with learning difficulties</option>
-
-                <option>Gifted students</option>
-
-                <option>Students preparing for exams</option>
-
-              </optgroup>
-
-              <optgroup label="Other">
-
-                <option>Other</option>
-
-              </optgroup>
-
-            </select>
-
-            <input id="contextOther" name="contextOther" type="text"
-
-              placeholder="Please specify..."
-
-              class="input input-bordered flex-1 hidden" />
-
-          </div>
-
-        </div>
-
-
-
-      <!-- METHODOLOGY - Enhanced version με research-based suggestions -->
+  <label for="template" class="block text-lg font-semibold mb-3 text-purple-800">
+    ⚡ Γρήγορη Εκκίνηση - Επιλέξτε πρότυπο (προαιρετικό)
+  </label>
+  <select id="template" name="template" class="select select-bordered w-full max-w-md bg-white">
+    <option value="">Δημιουργία από την αρχή</option>
+    <optgroup label="📚 Σχεδιασμός Μαθήματος">
+      <option value="lesson_plan">Πλήρες Σχέδιο Μαθήματος</option>
+      <option value="warm_up">Δραστηριότητες Προθέρμανσης</option>
+      <option value="lesson_intro">Εισαγωγή σε Νέο Θέμα</option>
+    </optgroup>
+    <optgroup label="🤔 Κριτική Σκέψη">
+      <option value="critical_questions">Ερωτήσεις Κριτικής Σκέψης</option>
+      <option value="problem_solving">Δραστηριότητες Επίλυσης Προβλημάτων</option>
+      <option value="debates">Συζητήσεις & Διαλογικές Συζητήσεις</option>
+    </optgroup>
+    <optgroup label="📝 Εξάσκηση & Δραστηριότητες">
+      <option value="practice_exercises">Ασκήσεις Εξάσκησης</option>
+      <option value="group_activities">Ομαδικές Δραστηριότητες</option>
+      <option value="creative_writing">Δημιουργική Γραφή</option>
+    </optgroup>
+    <optgroup label="🎯 Αξιολόγηση">
+      <option value="quiz_assessment">Κουίζ & Αξιολόγηση</option>
+      <option value="rubrics">Δημιουργία Κριτηρίων Αξιολόγησης (Rubrics)</option>
+      <option value="feedback">Παροχή Ανατροφοδότησης</option>
+    </optgroup>
+    <optgroup label="🌟 Διαφοροποίηση">
+      <option value="differentiated">Διαφοροποιημένες Δραστηριότητες</option>
+      <option value="special_needs">Ειδικές Εκπαιδευτικές Ανάγκες</option>
+      <option value="revision">Δραστηριότητες Επανάληψης</option>
+    </optgroup>
+  </select>
+  <p class="text-sm text-purple-600 mt-2">💡 Επιλέξτε πρότυπο για αυτόματη συμπλήρωση των πεδίων</p>
+</div>
+
+<!-- ROLE -->
+<div class="mb-6">
+  <label for="role" class="block text-lg font-semibold mb-3 text-gray-700">
+    🤖 Ποιος είναι ο διδακτικός σας ρόλος;
+  </label>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <select id="role" name="role" class="select select-bordered flex-1">
+      <option value="">Επιλέξτε ρόλο</option>
+      <optgroup label="Εκπαιδευτικές Βαθμίδες">
+        <option>Kindergarten teacher</option>
+        <option>Elementary school teacher</option>
+        <option>Middle school teacher</option>
+        <option>High school teacher</option>
+        <option>Special education teacher</option>
+        <option>Language instructor</option>
+      </optgroup>
+      <optgroup label="Ειδικότητες Μαθημάτων">
+        <option>Math teacher</option>
+        <option>Science teacher</option>
+        <option>History teacher</option>
+        <option>Literature teacher</option>
+        <option>Art teacher</option>
+        <option>PE teacher</option>
+      </optgroup>
+      <optgroup label="Άλλοι Ρόλοι">
+        <option>Tutor</option>
+        <option>Parent explaining to child</option>
+        <option>Educational consultant</option>
+        <option>Other</option>
+      </optgroup>
+    </select>
+    <input id="roleOther" name="roleOther" type="text"
+      placeholder="Παρακαλώ διευκρινίστε..."
+      class="input input-bordered flex-1 hidden" />
+  </div>
+</div>
+
+<!-- SUBJECT/TOPIC -->
+<div class="mb-6">
+  <label for="subject" class="block text-lg font-semibold mb-3 text-gray-700">
+    📖 Ποιο είναι το περιεχόμενο και οι μαθησιακοί στόχοι;
+  </label>
+  <input id="subject" name="subject" type="text"
+    placeholder="π.χ., Κλάσματα - κατανόηση ισοδυναμίας και πράξεων, Β' Παγκόσμιος Πόλεμος - ανάλυση αιτιών και συνεπειών"
+    class="input input-bordered w-full"
+    required />
+    <p class="text-sm text-gray-500 mt-1">Συμπεριλάβετε τόσο τη θεματική περιοχή όσο και τους συγκεκριμένους μαθησιακούς στόχους</p>
+</div>
+
+<!-- TASK -->
+<div class="mb-6">
+  <label for="task" class="block text-lg font-semibold mb-3 text-gray-700">
+    🎯 Τι μαθησιακή εμπειρία θέλετε να δημιουργήσετε;
+  </label>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <select id="task" name="task" class="select select-bordered flex-1">
+      <option value="">Επιλέξτε δραστηριότητα</option>
+      <optgroup label="Δημιουργία Περιεχομένου με Τεχνολογία">
+        <option>Create a complete lesson plan with objectives</option>
+        <option>Generate practice exercises with answers</option>
+        <option>Design a quiz or assessment</option>
+        <option>Create a project rubric</option>
+        <option>Create vocabulary activities</option>
+        <option>Provide feedback on student work</option>
+      </optgroup>
+      <optgroup label="Παιδαγωγική με Τεχνολογία">
+        <option>Design a warm-up activity</option>
+        <option>Create an introduction to new topic</option>
+        <option>Create gamified learning activities</option>
+        <option>Design hands-on experiments</option>
+        <option>Create storytelling activities</option>
+        <option>Design real-world applications</option>
+      </optgroup>
+      <optgroup label="Ολοκληρωμένος Σχεδιασμός Μάθησης">
+        <option>Create critical thinking questions</option>
+        <option>Design problem-solving scenarios</option>
+        <option>Generate debate topics and arguments</option>
+        <option>Create case studies for analysis</option>
+        <option>Design differentiated activities</option>
+        <option>Create activities for multiple intelligences</option>
+        <option>Adapt content for special needs</option>
+        <option>Generate extension activities</option>
+        <option>Create revision activities</option>
+        <option>Generate creative writing prompts</option>
+      </optgroup>
+      <optgroup label="Άλλο">
+        <option>Other</option>
+      </optgroup>
+    </select>
+    <input id="taskOther" name="taskOther" type="text"
+      placeholder="Παρακαλώ διευκρινίστε..."
+      class="input input-bordered flex-1 hidden" />
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<div class="mb-6">
+  <label for="context" class="block text-lg font-semibold mb-3 text-gray-700">
+    🎓 Για ποιους απευθύνεται; Ποιο είναι το πλαίσιο;
+  </label>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <select id="context" name="context" class="select select-bordered flex-1" required>
+      <option value="">Επιλέξτε πλαίσιο</option>
+      <optgroup label="Ηλικιακές Ομάδες">
+        <option>Preschool (ages 3-5)</option>
+        <option>Primary students (ages 6-11)</option>
+        <option>Lower secondary (ages 12-14)</option>
+        <option>Upper secondary (ages 15-18)</option>
+        <option>Adult learners</option>
+      </optgroup>
+      <optgroup label="Μαθησιακά Περιβάλλοντα">
+        <option>Traditional classroom</option>
+        <option>Online/remote learning</option>
+        <option>Hybrid classroom</option>
+        <option>Homeschool setting</option>
+        <option>After-school program</option>
+      </optgroup>
+      <optgroup label="Ειδικές Περιπτώσεις">
+        <option>Mixed-ability classroom</option>
+        <option>ESL/EFL learners</option>
+        <option>Students with learning difficulties</option>
+        <option>Gifted students</option>
+        <option>Students preparing for exams</option>
+      </optgroup>
+      <optgroup label="Άλλο">
+        <option>Other</option>
+      </optgroup>
+    </select>
+    <input id="contextOther" name="contextOther" type="text"
+      placeholder="Παρακαλώ διευκρινίστε..."
+      class="input input-bordered flex-1 hidden" />
+  </div>
+</div>
+
+<!-- METHODOLOGY -->
 <div class="mb-6">
   <label for="methodology" class="block text-lg font-semibold mb-3 text-gray-700">
-    🧠 What teaching approach supports your learning goals?
+    🧠 Ποια διδακτική προσέγγιση υποστηρίζει τους μαθησιακούς στόχους σας;
   </label>
   
   <div class="flex flex-col sm:flex-row gap-3">
     <select id="methodology" name="methodology" class="select select-bordered flex-1">
-      <option value="">Select methodology</option>
+      <option value="">Επιλέξτε μεθοδολογία</option>
       
-      <optgroup label="Traditional Pedagogical Methods">
+      <optgroup label="Παραδοσιακές Παιδαγωγικές Μέθοδοι">
         <option>Direct Instruction</option>
         <option>Inquiry-based Learning</option>
         <option>Problem-based Learning</option>
@@ -449,7 +278,7 @@
         <option>Assessment-focused approaches</option>
       </optgroup>
       
-      <optgroup label="Technology-Enhanced Methods">
+      <optgroup label="Μέθοδοι με Ενσωμάτωση Τεχνολογίας">
         <option>Technology-supported Direct Instruction</option>
         <option>Digital Inquiry Learning</option>
         <option>Technology-enhanced Problem Solving</option>
@@ -459,28 +288,28 @@
         <option>Technology-enhanced Assessment</option>
       </optgroup>
       
-      <optgroup label="Other">
+      <optgroup label="Άλλο">
         <option>Other</option>
       </optgroup>
     </select>
     
     <input id="methodologyOther" name="methodologyOther" type="text"
-      placeholder="Please specify..."
+      placeholder="Παρακαλώ διευκρινίστε..."
       class="input input-bordered flex-1 hidden" />
   </div>
   
-  <!-- Research-Based Suggestion Display -->
+  <!-- Πρόταση Βασισμένη σε Έρευνα -->
   <div id="methodology_suggestion" class="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200 hidden">
     <div class="flex items-start space-x-2">
       <div class="text-blue-600 mt-0.5 flex-shrink-0">💡</div>
       <div class="min-w-0 flex-1">
-        <div class="text-sm font-medium text-blue-800 mb-1">Research-Based Suggestion:</div>
+        <div class="text-sm font-medium text-blue-800 mb-1">Πρόταση Βασισμένη σε Έρευνα:</div>
         <div id="suggestion_content" class="text-sm text-blue-700 leading-relaxed mb-2"></div>
         <div class="text-xs text-blue-600 italic" id="suggestion_citation"></div>
         
-        <!-- Alternative Options -->
+        <!-- Εναλλακτικές Επιλογές -->
         <div class="mt-3 pt-2 border-t border-blue-200">
-          <div class="text-xs font-medium text-blue-800 mb-2">Alternative approaches you might consider:</div>
+          <div class="text-xs font-medium text-blue-800 mb-2">Εναλλακτικές προσεγγίσεις που μπορείτε να εξετάσετε:</div>
           <div id="alternative_options" class="flex flex-wrap gap-2"></div>
         </div>
       </div>
@@ -488,166 +317,107 @@
   </div>
 </div>
 
+<!-- TONE -->
+<div class="mb-6">
+  <label for="tone" class="block text-lg font-semibold mb-3 text-gray-700">
+    🎭 Ποιος τόνος πρέπει να υιοθετήσει η ΤΝ;
+  </label>
+  <div class="flex flex-col sm:flex-row gap-3">
+    <select id="tone" name="tone" class="select select-bordered flex-1">
+      <option value="">Επιλέξτε τόνο</option>
+      <optgroup label="Υποστηρικτικός">
+        <option>Encouraging and supportive</option>
+        <option>Patient and gentle</option>
+        <option>Motivational and inspiring</option>
+        <option>Nurturing and caring</option>
+      </optgroup>
+      <optgroup label="Ελκυστικός">
+        <option>Friendly and conversational</option>
+        <option>Humorous and playful</option>
+        <option>Enthusiastic and energetic</option>
+        <option>Curious and exploratory</option>
+      </optgroup>
+      <optgroup label="Επαγγελματικός">
+        <option>Academic and precise</option>
+        <option>Neutral and objective</option>
+        <option>Formal and structured</option>
+        <option>Clear and direct</option>
+      </optgroup>
+      <optgroup label="Χαλαρός">
+        <option>Informal and casual</option>
+        <option>Relaxed and approachable</option>
+        <option>Other</option>
+      </optgroup>
+    </select>
+    <input id="toneOther" name="toneOther" type="text"
+      placeholder="Παρακαλώ διευκρινίστε..."
+      class="input input-bordered flex-1 hidden" />
+  </div>
+</div>
 
-        <!-- TONE -->
+<!-- EXAMPLES / EXCLUSIONS -->
+<div class="mb-8">
+  <label for="examples" class="block text-lg font-semibold mb-3 text-gray-700">
+    📋 Επιπλέον Οδηγίες (Προαιρετικό)
+  </label>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm font-medium mb-2 text-green-700">✅ Να περιλαμβάνει:</label>
+      <textarea id="include" name="include"
+        placeholder="π.χ., Παραδείγματα από την καθημερινή ζωή, οπτικά μέσα, βήμα-βήμα οδηγίες"
+        class="textarea textarea-bordered w-full h-24 border-green-300 focus:border-green-500"></textarea>
+    </div>
+    <div>
+      <label class="block text-sm font-medium mb-2 text-red-700">❌ Να αποφεύγει:</label>
+      <textarea id="exclude" name="exclude"
+        placeholder="π.χ., Πολύπλοκη ορολογία, αφηρημένες έννοιες, μακροσκελείς εξηγήσεις"
+        class="textarea textarea-bordered w-full h-24 border-red-300 focus:border-red-500"></textarea>
+    </div>
+  </div>
+  <p class="text-sm text-gray-500 mt-2">💡 Αυτά τα πεδία είναι προαιρετικά αλλά βοηθούν στη δημιουργία πιο στοχευμένων prompts</p>
+</div>
 
-        <div class="mb-6">
-
-          <label for="tone" class="block text-lg font-semibold mb-3 text-gray-700">
-
-            🎭 What tone should the AI adopt?
-
-          </label>
-
-          <div class="flex flex-col sm:flex-row gap-3">
-
-            <select id="tone" name="tone" class="select select-bordered flex-1">
-
-              <option value="">Select tone</option>
-
-              <optgroup label="Supportive">
-
-                <option>Encouraging and supportive</option>
-
-                <option>Patient and gentle</option>
-
-                <option>Motivational and inspiring</option>
-
-                <option>Nurturing and caring</option>
-
-              </optgroup>
-
-              <optgroup label="Engaging">
-
-                <option>Friendly and conversational</option>
-
-                <option>Humorous and playful</option>
-
-                <option>Enthusiastic and energetic</option>
-
-                <option>Curious and exploratory</option>
-
-              </optgroup>
-
-              <optgroup label="Professional">
-
-                <option>Academic and precise</option>
-
-                <option>Neutral and objective</option>
-
-                <option>Formal and structured</option>
-
-                <option>Clear and direct</option>
-
-              </optgroup>
-
-              <optgroup label="Casual">
-
-                <option>Informal and casual</option>
-
-                <option>Relaxed and approachable</option>
-
-                <option>Other</option>
-
-              </optgroup>
-
-            </select>
-
-            <input id="toneOther" name="toneOther" type="text"
-
-              placeholder="Please specify..."
-
-              class="input input-bordered flex-1 hidden" />
-
-          </div>
-
-        </div>
-
-
-
-        <!-- EXAMPLES / EXCLUSIONS -->
-
-        <div class="mb-8">
-
-          <label for="examples" class="block text-lg font-semibold mb-3 text-gray-700">
-
-            📋 Additional Guidelines (Optional)
-
-          </label>
-
-          <div class="grid md:grid-cols-2 gap-4">
-
-            <div>
-
-              <label class="block text-sm font-medium mb-2 text-green-700">✅ Include:</label>
-
-              <textarea id="include" name="include"
-
-                placeholder="e.g., Real-life examples, visual aids, step-by-step instructions"
-
-                class="textarea textarea-bordered w-full h-24 border-green-300 focus:border-green-500"></textarea>
-
-            </div>
-
-            <div>
-
-              <label class="block text-sm font-medium mb-2 text-red-700">❌ Avoid:</label>
-
-              <textarea id="exclude" name="exclude"
-
-                placeholder="e.g., Complex terminology, abstract concepts, lengthy explanations"
-
-                class="textarea textarea-bordered w-full h-24 border-red-300 focus:border-red-500"></textarea>
-
-            </div>
-
-          </div>
-
-          <p class="text-sm text-gray-500 mt-2">💡 These fields are optional but help create more targeted prompts</p>
-
-        </div>
-
-        <!-- ENHANCEMENT OPTIONS - Αντικαταστήστε το υπάρχον section -->
+<!-- ENHANCEMENT OPTIONS -->
 <div class="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-  <h4 class="font-semibold text-yellow-800 mb-3">🎓 Prompt Enhancement Options:</h4>
+  <h4 class="font-semibold text-yellow-800 mb-3">🎓 Επιλογές Βελτίωσης Prompt:</h4>
   <div class="space-y-3">
     <label class="flex items-center">
       <input type="radio" name="enhancement" value="enhanced" class="mr-2" checked>
       <span class="text-sm">
-        <strong>Generate with learning theory enhancements</strong> (recommended)
-        <br><em class="text-gray-600">Includes educational frameworks to improve pedagogical effectiveness</em>
+        <strong>Δημιουργία με βελτιώσεις θεωρίας μάθησης</strong> (συνιστάται)
+        <br><em class="text-gray-600">Περιλαμβάνει εκπαιδευτικά πλαίσια για βελτίωση της παιδαγωγικής αποτελεσματικότητας</em>
       </span>
     </label>
     
-    <!-- Theory Selection - Shows when Enhanced is selected -->
+    <!-- Επιλογή Θεωρίας - Εμφανίζεται όταν επιλεγεί το Enhanced -->
     <div id="theory_selection_section" class="ml-6 mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-      <label class="block text-sm font-medium text-blue-800 mb-2">Select Educational Theory:</label>
+      <label class="block text-sm font-medium text-blue-800 mb-2">Επιλέξτε Εκπαιδευτική Θεωρία:</label>
       
       <div class="space-y-3">
-        <!-- Theory Dropdown -->
+        <!-- Αναπτυσσόμενο Μενού Θεωριών -->
         <select id="theory_enhancement" name="theory_enhancement" class="select select-bordered w-full bg-white text-sm">
-          <option value="">Auto-select best theory for this task</option>
-          <option value="blooms">Bloom's Taxonomy - Cognitive Progression</option>
-          <option value="udl">UDL Principles - Inclusive Design</option>
-          <option value="tpack">TPACK Framework - Technology Integration</option>
-          <option value="constructivist">Constructivist Learning - Active Discovery</option>
-          <option value="social_learning">Social Learning Theory - Peer Collaboration</option>
-          <option value="scaffolding">Scaffolding - Gradual Support</option>
-          <option value="differentiation">Differentiated Instruction - Individual Pathways</option>
+          <option value="">Αυτόματη επιλογή καλύτερης θεωρίας για αυτή τη δραστηριότητα</option>
+          <option value="blooms">Ταξινομία Bloom (Bloom's Taxonomy) - Γνωστική Εξέλιξη</option>
+          <option value="udl">Αρχές UDL (Universal Design for Learning) - Συμπεριληπτικός Σχεδιασμός</option>
+          <option value="tpack">Πλαίσιο TPACK - Ενσωμάτωση Τεχνολογίας</option>
+          <option value="constructivist">Εποικοδομιστική Μάθηση (Constructivist Learning) - Ενεργή Ανακάλυψη</option>
+          <option value="social_learning">Θεωρία Κοινωνικής Μάθησης (Social Learning Theory) - Συνεργασία με Συνομηλίκους</option>
+          <option value="scaffolding">Σκαλωσιά (Scaffolding) - Σταδιακή Υποστήριξη</option>
+          <option value="differentiation">Διαφοροποιημένη Διδασκαλία (Differentiated Instruction) - Εξατομικευμένες Διαδρομές</option>
         </select>
         
-        <!-- Smart Recommendation Display -->
+        <!-- Έξυπνη Εμφάνιση Σύστασης -->
         <div id="theory_recommendation" class="bg-green-50 p-3 rounded-lg border border-green-300 hidden">
           <div class="flex items-start space-x-2">
             <div class="text-green-600 mt-0.5 flex-shrink-0">💡</div>
             <div class="min-w-0 flex-1">
-              <div class="text-sm font-medium text-green-800 mb-1">System Recommendation:</div>
+              <div class="text-sm font-medium text-green-800 mb-1">Σύσταση Συστήματος:</div>
               <div id="recommendation_text" class="text-sm text-green-700 leading-relaxed"></div>
             </div>
           </div>
         </div>
         
-        <!-- Theory Information Display -->
+        <!-- Εμφάνιση Πληροφοριών Θεωρίας -->
         <div id="theory_info" class="bg-gray-50 p-3 rounded-lg border border-gray-200 hidden">
           <div class="text-sm">
             <div class="font-medium text-gray-800 mb-1" id="theory_title"></div>
@@ -660,26 +430,20 @@
     <label class="flex items-center">
       <input type="radio" name="enhancement" value="basic" class="mr-2">
       <span class="text-sm">
-        <strong>Generate exact prompt as specified</strong>
-        <br><em class="text-gray-600">No additional theoretical enhancements</em>
+        <strong>Δημιουργία ακριβώς όπως καθορίστηκε</strong>
+        <br><em class="text-gray-600">Χωρίς πρόσθετες θεωρητικές βελτιώσεις</em>
       </span>
     </label>
   </div>
 </div>
 
-        <!-- SUBMIT BUTTON -->
-
-        <div class="text-center">
-
-          <button type="button" id="generateBtn" onclick="generateWithGemini()" 
-
-                  class="btn btn-primary text-white px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
-
-            🚀 Generate Prompt
-
-          </button>
-
-        </div>
+<!-- SUBMIT BUTTON -->
+<div class="text-center">
+  <button type="button" id="generateBtn" onclick="generateWithGemini()" 
+          class="btn btn-primary text-white px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+    🚀 Δημιουργία Prompt
+  </button>
+</div>
 
         
 
