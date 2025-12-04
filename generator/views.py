@@ -55,29 +55,29 @@ def suggest_optimal_theory(methodology, task, context):
     context_lower = context.lower()
     
     # Methodology-based suggestions (highest priority)
-    if any(keyword in methodology_lower for keyword in ['inquiry', 'explore', 'discovery', 'problem']):
+    if any(keyword in methodology_lower for keyword in ['διερευνητική', 'εξερεύνηση', 'ανακάλυψη', 'πρόβλημα']):
         return 'constructivist'
-    elif any(keyword in methodology_lower for keyword in ['collaborative', 'group', 'peer']):
+    elif any(keyword in methodology_lower for keyword in ['συνεργατική', 'ομάδα', 'ομαδική', 'συνεργασία']):
         return 'social_learning'
-    elif any(keyword in methodology_lower for keyword in ['technology', 'ai', 'digital']):
+    elif any(keyword in methodology_lower for keyword in ['τεχνολογία', 'ψηφιακή', 'ai']):
         return 'tpack'
-    elif any(keyword in methodology_lower for keyword in ['differentiated', 'adaptive', 'personalized']):
+    elif any(keyword in methodology_lower for keyword in ['διαφοροποιημένη', 'προσαρμοστική', 'εξατομικευμένη']):
         return 'udl'
-    elif any(keyword in methodology_lower for keyword in ['scaffolding', 'support', 'guidance']):
+    elif any(keyword in methodology_lower for keyword in ['υποστήριξη', 'καθοδήγηση', 'scaffolding']):
         return 'scaffolding'
     
     # Task-based suggestions (medium priority)
-    elif any(keyword in task_lower for keyword in ['critical thinking', 'questions', 'analysis']):
+    elif any(keyword in task_lower for keyword in ['κριτική σκέψη', 'ερωτήσεις', 'ανάλυση']):
         return 'blooms'
-    elif any(keyword in task_lower for keyword in ['assessment', 'quiz', 'rubric']):
+    elif any(keyword in task_lower for keyword in ['αξιολόγηση', 'κουίζ', 'ρουμπρίκα']):
         return 'blooms'
-    elif any(keyword in task_lower for keyword in ['lesson plan', 'curriculum']):
+    elif any(keyword in task_lower for keyword in ['σχέδιο μαθήματος', 'πλάνο μαθήματος', 'αναλυτικό πρόγραμμα']):
         return 'blooms'
-    elif any(keyword in task_lower for keyword in ['differentiated', 'multiple intelligences']):
+    elif any(keyword in task_lower for keyword in ['διαφοροποιημένη', 'πολλαπλές νοημοσύνες']):
         return 'differentiation'
     
     # Context-based suggestions (lower priority)
-    elif any(keyword in context_lower for keyword in ['mixed-ability', 'special needs', 'learning difficulties']):
+    elif any(keyword in context_lower for keyword in ['μικτό επίπεδο', 'ειδικές ανάγκες', 'μαθησιακές δυσκολίες']):
         return 'udl'
     
     # Default fallback
@@ -87,29 +87,27 @@ def generate_blooms_enhancement(form_data):
     """Generate Bloom's Taxonomy specific enhancement"""
     task = form_data.get("task", "").lower()
     
-    if any(keyword in task for keyword in ["critical thinking", "questions", "analysis"]):
-        return "Structure questions to progress from analysis (break down concepts) to evaluation (judge quality/value) to creation (generate new ideas), following Bloom's cognitive taxonomy levels"
-    elif any(keyword in task for keyword in ["practice", "exercises", "activities"]):
-        return "Design activities that span remember (recall facts) → understand (explain concepts) → apply (use knowledge) → analyze (examine relationships), progressing through Bloom's taxonomy"
-    elif any(keyword in task for keyword in ["assessment", "quiz", "rubric"]):
-        return "Include assessment items covering multiple cognitive levels: remembering key facts, understanding main concepts, applying knowledge to new situations, and analyzing complex scenarios (Bloom's taxonomy)"
-    elif any(keyword in task for keyword in ["lesson plan", "introduction"]):
-        return "Structure the lesson to progress through cognitive levels from foundational knowledge (remember/understand) to application and higher-order thinking (analyze/evaluate/create), following Bloom's taxonomy"
+    if any(keyword in task for keyword in ["κριτική σκέψη", "ερωτήσεις", "ανάλυση"]):
+        return "Δόμησε τις ερωτήσεις ώστε να προχωρούν από ανάλυση (ανάλυση εννοιών) σε αξιολόγηση (κρίση ποιότητας/αξίας) σε δημιουργία (παραγωγή νέων ιδεών), ακολουθώντας τα γνωστικά επίπεδα της Ταξινομίας Bloom"
+    elif any(keyword in task for keyword in ["άσκηση", "ασκήσεις", "δραστηριότητες"]):
+        return "Σχεδίασε δραστηριότητες που καλύπτουν: θυμάμαι (ανάκληση γεγονότων) → κατανοώ (εξήγηση εννοιών) → εφαρμόζω (χρήση γνώσης) → αναλύω (εξέταση σχέσεων), προοδευτικά μέσα από την Ταξινομία Bloom"
+    elif any(keyword in task for keyword in ["αξιολόγηση", "κουίζ", "ρουμπρίκα"]):
+        return "Συμπεριέλαβε στοιχεία αξιολόγησης που καλύπτουν πολλαπλά γνωστικά επίπεδα: απομνημόνευση βασικών γεγονότων, κατανόηση κύριων εννοιών, εφαρμογή γνώσης σε νέες καταστάσεις, και ανάλυση σύνθετων σεναρίων (Ταξινομία Bloom)"
+    elif any(keyword in task for keyword in ["σχέδιο μαθήματος", "πλάνο μαθήματος", "εισαγωγή"]):
+        return "Δόμησε το μάθημα ώστε να προχωρά μέσα από γνωστικά επίπεδα από θεμελιώδη γνώση (θυμάμαι/κατανοώ) σε εφαρμογή και σκέψη υψηλότερης τάξης (αναλύω/αξιολογώ/δημιουργώ), ακολουθώντας την Ταξινομία Bloom"
     else:
-        return "Incorporate cognitive progression from basic recall to higher-order thinking skills, following Bloom's taxonomy levels"
+        return "Ενσωμάτωσε γνωστική πρόοδο από βασική ανάκληση σε δεξιότητες σκέψης υψηλότερης τάξης, ακολουθώντας τα επίπεδα της Ταξινομίας Bloom"
 
 def generate_udl_enhancement(form_data):
     """Generate UDL specific enhancement"""
     context = form_data.get("context", "").lower()
     
-    if any(keyword in context for keyword in ["mixed-ability", "learning difficulties", "special needs"]):
-        return "Provide multiple means of representation (visual, auditory, tactile), multiple means of engagement (choice, relevance, challenge levels), and multiple means of expression (verbal, written, demonstration) to support diverse learners (UDL principles)"
-    elif any(keyword in context for keyword in ["esl", "efl"]):
-        return "Include visual supports, simplified language options, and multiple ways to demonstrate understanding to accommodate language learners (UDL principles)"
+    if any(keyword in context for keyword in ["μικτό επίπεδο", "μαθησιακές δυσκολίες", "ειδικές ανάγκες"]):
+        return "Παρέχε πολλαπλά μέσα αναπαράστασης (οπτικά, ακουστικά, απτικά), πολλαπλά μέσα αφοσίωσης (επιλογή, συνάφεια, επίπεδα πρόκλησης), και πολλαπλά μέσα έκφρασης (προφορικά, γραπτά, επίδειξη) για να υποστηρίξεις διαφορετικούς μαθητές (αρχές UDL)"
+    elif any(keyword in context for keyword in ["δεύτερη γλώσσα", "ξένη γλώσσα"]):
+        return "Συμπεριέλαβε οπτικές υποστηρίξεις, απλοποιημένες γλωσσικές επιλογές, και πολλαπλούς τρόπους επίδειξης κατανόησης για να φιλοξενήσεις μαθητές γλώσσας (αρχές UDL)"
     else:
-        return "Design with flexibility in content presentation, student engagement methods, and expression formats to accommodate diverse learning needs (UDL principles)"
-
-# Replace the generate_tpack_enhancement function in views.py
+        return "Σχεδίασε με ευελιξία στην παρουσίαση περιεχομένου, στις μεθόδους αφοσίωσης μαθητών, και στις μορφές έκφρασης για να φιλοξενήσεις διαφορετικές μαθησιακές ανάγκες (αρχές UDL)"
 
 def generate_tpack_enhancement(form_data):
     """Generate TPACK specific enhancement - more specific and actionable"""
@@ -117,67 +115,67 @@ def generate_tpack_enhancement(form_data):
     methodology = form_data.get("methodology", "").lower()
     subject = form_data.get("subject", "").lower()
     
-    if any(keyword in task for keyword in ["lesson plan", "curriculum", "complete plan"]):
-        return "Explicitly specify: (1) which AI tools/features will be used, (2) how they support specific learning objectives, (3) what pedagogical role technology plays in fraction instruction, and (4) how digital tools enhance content understanding rather than replace teaching (TPACK framework)"
+    if any(keyword in task for keyword in ["σχέδιο μαθήματος", "πλάνο μαθήματος", "αναλυτικό πρόγραμμα", "πλήρες πλάνο"]):
+        return "Καθόρισε ρητά: (1) ποια εργαλεία/χαρακτηριστικά AI θα χρησιμοποιηθούν, (2) πώς υποστηρίζουν συγκεκριμένους μαθησιακούς στόχους, (3) ποιος παιδαγωγικός ρόλος παίζει η τεχνολογία στη διδασκαλία, και (4) πώς τα ψηφιακά εργαλεία ενισχύουν την κατανόηση περιεχομένου αντί να αντικαθιστούν τη διδασκαλία (πλαίσιο TPACK)"
     
-    elif any(keyword in task for keyword in ["assessment", "quiz", "rubric"]):
-        return "Detail how AI-enhanced assessment tools will measure fraction understanding, specify the pedagogical rationale for using technology in evaluation, and explain how digital assessment connects to fraction learning goals (TPACK framework)"
+    elif any(keyword in task for keyword in ["αξιολόγηση", "κουίζ", "ρουμπρίκα"]):
+        return "Λεπτομέρησε πώς τα εργαλεία αξιολόγησης που ενισχύονται με AI θα μετρήσουν την κατανόηση, καθόρισε την παιδαγωγική αιτιολογία για τη χρήση τεχνολογίας στην αξιολόγηση, και εξήγησε πώς η ψηφιακή αξιολόγηση συνδέεται με τους μαθησιακούς στόχους (πλαίσιο TPACK)"
     
-    elif any(keyword in task for keyword in ["practice", "exercises", "activities"]):
-        return "Describe specific AI-powered practice tools, explain how technology personalizes fraction practice, detail the pedagogical benefits of digital exercises, and specify how AI feedback supports fraction skill development (TPACK framework)"
+    elif any(keyword in task for keyword in ["άσκηση", "ασκήσεις", "δραστηριότητες"]):
+        return "Περίγραψε συγκεκριμένα εργαλεία εξάσκησης που τροφοδοτούνται από AI, εξήγησε πώς η τεχνολογία εξατομικεύει την εξάσκηση, λεπτομέρησε τα παιδαγωγικά οφέλη των ψηφιακών ασκήσεων, και καθόρισε πώς η ανατροφοδότηση AI υποστηρίζει την ανάπτυξη δεξιοτήτων (πλαίσιο TPACK)"
     
-    elif any(keyword in methodology for keyword in ["ai", "technology", "digital"]):
-        return "Clearly define the AI's pedagogical role, specify how technology enhances fraction instruction methods, explain the connection between digital tools and mathematical content mastery, and justify technology choices with educational theory (TPACK framework)"
+    elif any(keyword in methodology for keyword in ["ai", "τεχνολογία", "ψηφιακή"]):
+        return "Καθόρισε σαφώς τον παιδαγωγικό ρόλο του AI, προσδιόρισε πώς η τεχνολογία ενισχύει τις μεθόδους διδασκαλίας, εξήγησε τη σύνδεση μεταξύ ψηφιακών εργαλείων και κυριαρχίας περιεχομένου, και δικαιολόγησε τις τεχνολογικές επιλογές με εκπαιδευτική θεωρία (πλαίσιο TPACK)"
     
     else:
-        return "Include specific details about: how technology supports fraction learning goals, what pedagogical purpose AI serves, and how digital tools enhance rather than replace effective math teaching practices (TPACK framework)"
+        return "Συμπεριέλαβε συγκεκριμένες λεπτομέρειες για το: πώς η τεχνολογία υποστηρίζει τους μαθησιακούς στόχους, ποιος παιδαγωγικός σκοπός εξυπηρετεί το AI, και πώς τα ψηφιακά εργαλεία ενισχύουν αντί να αντικαθιστούν αποτελεσματικές διδακτικές πρακτικές (πλαίσιο TPACK)"
+
 def generate_constructivist_enhancement(form_data):
     """Generate Constructivist Learning enhancement"""
     methodology = form_data.get("methodology", "").lower()
     
-    if any(keyword in methodology for keyword in ["inquiry", "discovery", "explore"]):
-        return "Support active knowledge construction through guided discovery, encouraging learners to build understanding through hands-on exploration and meaningful connections to prior knowledge"
-    elif any(keyword in methodology for keyword in ["problem", "real-world"]):
-        return "Facilitate learning through authentic problem-solving experiences where students construct knowledge by connecting new information to existing understanding and real-world contexts"
+    if any(keyword in methodology for keyword in ["διερευνητική", "ανακάλυψη", "εξερεύνηση"]):
+        return "Υποστήριξε την ενεργή κατασκευή γνώσης μέσω καθοδηγούμενης ανακάλυψης, ενθαρρύνοντας τους μαθητές να χτίσουν κατανόηση μέσω πρακτικής εξερεύνησης και ουσιαστικών συνδέσεων με προηγούμενη γνώση"
+    elif any(keyword in methodology for keyword in ["πρόβλημα", "πραγματικός κόσμος", "πραγματικές καταστάσεις"]):
+        return "Διευκόλυνε τη μάθηση μέσω αυθεντικών εμπειριών επίλυσης προβλημάτων όπου οι μαθητές κατασκευάζουν γνώση συνδέοντας νέες πληροφορίες με υπάρχουσα κατανόηση και πραγματικά πλαίσια"
     else:
-        return "Encourage active knowledge construction through hands-on experiences, reflection, and connection-making rather than passive information reception"
+        return "Ενθάρρυνε την ενεργή κατασκευή γνώσης μέσω πρακτικών εμπειριών, στοχασμού, και δημιουργίας συνδέσεων αντί για παθητική λήψη πληροφοριών"
 
 def generate_social_learning_enhancement(form_data):
     """Generate Social Learning Theory enhancement"""
     methodology = form_data.get("methodology", "").lower()
     
-    if any(keyword in methodology for keyword in ["collaborative", "group", "peer"]):
-        return "Leverage peer interaction and collaborative learning opportunities where students learn through observation, discussion, and shared knowledge construction in social contexts"
-    elif any(keyword in methodology for keyword in ["discussion", "teamwork"]):
-        return "Create structured opportunities for social learning through peer modeling, collaborative problem-solving, and shared reflection on learning processes"
+    if any(keyword in methodology for keyword in ["συνεργατική", "ομάδα", "ομαδική", "συνεργασία"]):
+        return "Αξιοποίησε την αλληλεπίδραση μεταξύ συνομηλίκων και τις ευκαιρίες συνεργατικής μάθησης όπου οι μαθητές μαθαίνουν μέσω παρατήρησης, συζήτησης, και κοινής κατασκευής γνώσης σε κοινωνικά πλαίσια"
+    elif any(keyword in methodology for keyword in ["συζήτηση", "ομαδική εργασία"]):
+        return "Δημιούργησε δομημένες ευκαιρίες για κοινωνική μάθηση μέσω μοντελοποίησης από συνομηλίκους, συνεργατικής επίλυσης προβλημάτων, και κοινού στοχασμού για τις μαθησιακές διαδικασίες"
     else:
-        return "Incorporate peer interaction and social learning opportunities to enhance understanding through shared knowledge construction"
+        return "Ενσωμάτωσε αλληλεπίδραση με συνομηλίκους και ευκαιρίες κοινωνικής μάθησης για να ενισχύσεις την κατανόηση μέσω κοινής κατασκευής γνώσης"
 
 def generate_scaffolding_enhancement(form_data):
     """Generate Scaffolding enhancement"""
     context = form_data.get("context", "").lower()
     task = form_data.get("task", "").lower()
     
-    if any(keyword in context for keyword in ["ages 3-5", "preschool"]):
-        return "Provide extensive scaffolding with concrete examples, hands-on materials, and step-by-step guidance, gradually reducing support as children develop independence"
-    elif any(keyword in context for keyword in ["ages 6-11", "primary"]):
-        return "Include scaffolding supports such as graphic organizers, worked examples, and guided practice, with clear steps toward independent application"
-    elif any(keyword in task for keyword in ["complex", "advanced"]):
-        return "Break down complex tasks into manageable steps with temporary supports, modeling, and guided practice before expecting independent performance"
+    if any(keyword in context for keyword in ["3-5", "νηπιαγωγείο", "προσχολική"]):
+        return "Παρέχε εκτενή υποστήριξη με συγκεκριμένα παραδείγματα, πρακτικά υλικά, και βήμα-προς-βήμα καθοδήγηση, μειώνοντας σταδιακά την υποστήριξη καθώς τα παιδιά αναπτύσσουν αυτονομία"
+    elif any(keyword in context for keyword in ["6-11", "δημοτικό", "πρωτοβάθμια"]):
+        return "Συμπεριέλαβε υποστηρίξεις όπως γραφικούς οργανωτές, επεξεργασμένα παραδείγματα, και καθοδηγούμενη εξάσκηση, με σαφή βήματα προς ανεξάρτητη εφαρμογή"
+    elif any(keyword in task for keyword in ["σύνθετη", "προχωρημένη", "δύσκολη"]):
+        return "Διαίρεσε σύνθετες εργασίες σε διαχειρίσιμα βήματα με προσωρινές υποστηρίξεις, μοντελοποίηση, και καθοδηγούμενη εξάσκηση πριν αναμένεις ανεξάρτητη επίδοση"
     else:
-        return "Provide appropriate scaffolding supports that can be gradually removed as learners develop competence and confidence"
+        return "Παρέχε κατάλληλες υποστηρίξεις που μπορούν να αφαιρεθούν σταδιακά καθώς οι μαθητές αναπτύσσουν ικανότητα και αυτοπεποίθηση"
 
 def generate_differentiation_enhancement(form_data):
     """Generate Differentiated Instruction enhancement"""
     task = form_data.get("task", "").lower()
     
-    if any(keyword in task for keyword in ["differentiated", "multiple intelligences"]):
-        return "Address diverse learning preferences through varied content presentation, process options, and product choices, allowing multiple pathways to demonstrate understanding"
-    elif any(keyword in task for keyword in ["adaptive", "personalized"]):
-        return "Provide flexible learning options that adapt to individual student needs, interests, and readiness levels through varied instructional approaches"
+    if any(keyword in task for keyword in ["διαφοροποιημένη", "πολλαπλές νοημοσύνες"]):
+        return "Απευθύνσου σε διαφορετικές μαθησιακές προτιμήσεις μέσω ποικίλης παρουσίασης περιεχομένου, επιλογών διαδικασίας, και επιλογών προϊόντος, επιτρέποντας πολλαπλές διαδρομές για επίδειξη κατανόησης"
+    elif any(keyword in task for keyword in ["προσαρμοστική", "εξατομικευμένη"]):
+        return "Παρέχε ευέλικτες μαθησιακές επιλογές που προσαρμόζονται στις ατομικές ανάγκες, ενδιαφέροντα, και επίπεδα ετοιμότητας των μαθητών μέσω ποικίλων διδακτικών προσεγγίσεων"
     else:
-        return "Include differentiation strategies that address diverse learning styles, abilities, and interests through multiple instructional approaches"
-
+        return "Συμπεριέλαβε στρατηγικές διαφοροποίησης που απευθύνονται σε διαφορετικά μαθησιακά στυλ, ικανότητες, και ενδιαφέροντα μέσω πολλαπλών διδακτικών προσεγγίσεων"
 # Replace the add_selected_theory_enhancement function in views.py
 
 def add_selected_theory_enhancement(prompt, form_data, selected_theory):
@@ -211,22 +209,22 @@ def add_selected_theory_enhancement(prompt, form_data, selected_theory):
         enhancement = theory_enhancements[selected_theory]
         if enhancement:
             # Find the Instructions section and add enhancement as instruction #7
-            instructions_start = prompt.find("Instructions:")
+            instructions_start = prompt.find("Οδηγίες:")  # ← ΑΛΛΑΓΗ: Ελληνικά
             if instructions_start != -1:
                 # Find the end of instruction 6
-                instruction_6_end = prompt.find("6. Keep it professional and focused on the educational task")
+                instruction_6_end = prompt.find("6. Κράτησέ την επαγγελματική και εστιασμένη στην εκπαιδευτική εργασία")  # ← ΑΛΛΑΓΗ
                 if instruction_6_end != -1:
                     instruction_6_end = prompt.find("\n", instruction_6_end) + 1
                     
                     # Insert the enhancement as instruction #7
-                    enhancement_instruction = f"7. IMPORTANT: {enhancement}\n"
+                    enhancement_instruction = f"7. ΣΗΜΑΝΤΙΚΟ: {enhancement}\n"  # ← ΑΛΛΑΓΗ: Ελληνικά
                     
                     prompt = (prompt[:instruction_6_end] + 
                             enhancement_instruction + 
                             prompt[instruction_6_end:])
             else:
                 # Fallback: if no Instructions section found, append normally
-                prompt += f"\n\nEducational Enhancement: {enhancement}"
+                prompt += f"\n\nΕκπαιδευτική Ενίσχυση: {enhancement}"  # ← ΑΛΛΑΓΗ: Ελληνικά
     
     return prompt, selected_theory
 
