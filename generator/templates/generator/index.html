@@ -263,41 +263,48 @@
 <!-- METHODOLOGY -->
 <div class="mb-6">
   <label for="methodology" class="block text-lg font-semibold mb-3 text-gray-700">
-    🧠 Ποια διδακτική προσέγγιση υποστηρίζει τους μαθησιακούς στόχους σας;
+    🎯 Μέθοδος Διδασκαλίας
+    <span class="text-sm text-gray-500 font-normal ml-2">(Πώς θα οργανώσεις τη δραστηριότητα)</span>
   </label>
   
   <div class="flex flex-col sm:flex-row gap-3">
     <select id="methodology" name="methodology" class="select select-bordered flex-1">
-  <option value="">Επιλέξτε μεθοδολογία</option>
-  
-  <optgroup label="Παραδοσιακές Παιδαγωγικές Μέθοδοι">
-    <option>Άμεση Διδασκαλία</option>
-    <option>Διερευνητική Μάθηση</option>
-    <option>Μάθηση Βασισμένη σε Προβλήματα</option>
-    <option>Συνεργατική Μάθηση</option>
-    <option>Μάθηση Βασισμένη σε Έργα</option>
-    <option>Διαφοροποιημένη Διδασκαλία</option>
-    <option>Προσεγγίσεις Επικεντρωμένες στην Αξιολόγηση</option>
-  </optgroup>
-  
-  <optgroup label="Μέθοδοι με Ενσωμάτωση Τεχνολογίας">
-    <option>Άμεση Διδασκαλία με Υποστήριξη Τεχνολογίας</option>
-    <option>Ψηφιακή Διερευνητική Μάθηση</option>
-    <option>Επίλυση Προβλημάτων με Ενσωμάτωση Τεχνολογίας</option>
-    <option>Ψηφιακή Συνεργατική Μάθηση</option>
-    <option>Εργασία σε Έργα με Ενσωμάτωση Τεχνολογίας</option>
-    <option>Προσαρμοστική Μάθηση με Ψηφιακά Εργαλεία</option>
-    <option>Αξιολόγηση με Ενσωμάτωση Τεχνολογίας</option>
-  </optgroup>
-  
-  <optgroup label="Άλλο">
-    <option>Άλλο</option>
-  </optgroup>
-</select>
+      <option value="">Επιλέξτε μεθοδολογία</option>
+      
+      <optgroup label="Παραδοσιακές Παιδαγωγικές Μέθοδοι">
+        <option>Άμεση Διδασκαλία</option>
+        <option>Διερευνητική Μάθηση</option>
+        <option>Μάθηση Βασισμένη σε Προβλήματα</option>
+        <option>Συνεργατική Μάθηση</option>
+        <option>Μάθηση Βασισμένη σε Έργα</option>
+        <option>Διαφοροποιημένη Διδασκαλία</option>
+        <option>Προσεγγίσεις Επικεντρωμένες στην Αξιολόγηση</option>
+      </optgroup>
+      
+      <optgroup label="Μέθοδοι με Ενσωμάτωση Τεχνολογίας">
+        <option>Άμεση Διδασκαλία με Υποστήριξη Τεχνολογίας</option>
+        <option>Ψηφιακή Διερευνητική Μάθηση</option>
+        <option>Επίλυση Προβλημάτων με Ενσωμάτωση Τεχνολογίας</option>
+        <option>Ψηφιακή Συνεργατική Μάθηση</option>
+        <option>Εργασία σε Έργα με Ενσωμάτωση Τεχνολογίας</option>
+        <option>Προσαρμοστική Μάθηση με Ψηφιακά Εργαλεία</option>
+        <option>Αξιολόγηση με Ενσωμάτωση Τεχνολογίας</option>
+      </optgroup>
+      
+      <optgroup label="Άλλο">
+        <option>Άλλο</option>
+      </optgroup>
+    </select>
     
     <input id="methodologyOther" name="methodologyOther" type="text"
       placeholder="Παρακαλώ διευκρινίστε..."
       class="input input-bordered flex-1 hidden" />
+  </div>
+  
+  <!-- NEW: Methodology explanation box - ΕΞΩ από το flex container -->
+  <div id="methodology_info" class="hidden mt-2 p-3 bg-blue-50 border-l-4 border-blue-500 rounded">
+    <p id="methodology_description" class="text-sm text-gray-700 mb-1"></p>
+    <p id="methodology_when" class="text-xs text-blue-600 italic"></p>
   </div>
   
   <!-- Πρόταση Βασισμένη σε Έρευνα -->
@@ -307,7 +314,6 @@
       <div class="min-w-0 flex-1">
         <div class="text-sm font-medium text-blue-800 mb-1">Πρόταση Βασισμένη σε Έρευνα:</div>
         <div id="suggestion_content" class="text-sm text-blue-700 leading-relaxed mb-2"></div>
-        <!--<div class="text-xs text-blue-600 italic" id="suggestion_citation"></div>-->
         
         <!-- Εναλλακτικές Επιλογές -->
         <div class="mt-3 pt-2 border-t border-blue-200">
@@ -405,7 +411,7 @@
           <option value="constructivist">Εποικοδομιστική Μάθηση (Constructivist Learning) - Ενεργή Ανακάλυψη</option>
           <option value="social_learning">Θεωρία Κοινωνικής Μάθησης (Social Learning Theory) - Συνεργασία με Συνομηλίκους</option>
           <option value="scaffolding">Σκαλωσιά (Scaffolding) - Σταδιακή Υποστήριξη</option>
-          <option value="differentiation">Διαφοροποιημένη Διδασκαλία (Differentiated Instruction) - Εξατομικευμένες Διαδρομές</option>
+          <!--<option value="differentiation">Διαφοροποιημένη Διδασκαλία (Differentiated Instruction) - Εξατομικευμένες Διαδρομές</option>-->
         </select>
         
         <!-- Έξυπνη Εμφάνιση Σύστασης -->
@@ -1844,71 +1850,167 @@ const theoryInfo = {
     educational_value: "Παρέχει προσωρινή υποστήριξη που μειώνεται σταδιακά καθώς οι μαθητές αναπτύσσουν αυτονομία - σαν βοηθητικές ρόδες για τη μάθηση.",
     suitable_for: ["υποστήριξη", "καθοδήγηση", "βήμα-προς-βήμα", "σταδιακή", "coaching", "αρχάριος"]
   },
-  differentiation: {
-    title: "Διαφοροποιημένη Διδασκαλία",
-    description: "Προσαρμόζει τη διδασκαλία για να καλύψει ποικίλες ανάγκες, ικανότητες και ενδιαφέροντα μαθητών. Αναγνωρίζει ότι ένα μέγεθος δεν ταιριάζει σε όλους στην εκπαίδευση.",
-    educational_value: "Αναγνωρίζει ότι οι μαθητές μαθαίνουν διαφορετικά και παρέχει πολλαπλές διαδρομές προς την επιτυχία βάσει ατομικών αναγκών και δυνατοτήτων.",
-    suitable_for: ["πολλαπλές νοημοσύνες", "προσαρμοστική", "εξατομικευμένη", "ευέλικτη", "ατομική", "ποικίλη"]
+};
+
+// NEW: Methodology Information Database
+const methodologyInfo = {
+  "Άμεση Διδασκαλία": {
+    description: "Ο εκπαιδευτικός παρέχει ρητή, δομημένη καθοδήγηση με σαφή βήματα και άμεση ανατροφοδότηση. Ιδανική για νέες έννοιες που χρειάζονται συστηματική εξήγηση.",
+    when_to_use: "Χρησιμοποίησε για: βασικές δεξιότητες, νέες έννοιες, συστηματική διδασκαλία"
+  },
+  "Διερευνητική Μάθηση": {
+    description: "Οι μαθητές εξερευνούν και ανακαλύπτουν γνώση μέσω ερωτήσεων και διερεύνησης. Αναπτύσσει κριτική σκέψη και ικανότητες επίλυσης προβλημάτων.",
+    when_to_use: "Χρησιμοποίησε για: κριτική σκέψη, ερωτήσεις, ανάλυση, ανακάλυψη"
+  },
+  "Συνεργατική Μάθηση": {
+    description: "Οι μαθητές συνεργάζονται σε ομάδες για να επιτύχουν κοινούς στόχους μαθησιακούς. Αναπτύσσει κοινωνικές δεξιότητες και βαθύτερη κατανόηση μέσω διάλογου.",
+    when_to_use: "Χρησιμοποίησε για: ομαδική εργασία, συζητήσεις, peer learning, κοινωνικές δεξιότητες"
+  },
+  "Μάθηση Βασισμένη σε Προβλήματα": {
+    description: "Οι μαθητές μαθαίνουν μέσω επίλυσης αυθεντικών προβλημάτων πραγματικού κόσμου. Αναπτύσσει δεξιότητες επίλυσης προβλημάτων και κριτικής σκέψης.",
+    when_to_use: "Χρησιμοποίησε για: εφαρμογές πραγματικού κόσμου, σύνθετα προβλήματα, αυθεντικές προκλήσεις"
+  },
+  "Μάθηση Βασισμένη σε Έργα": {
+    description: "Οι μαθητές δημιουργούν εκτεταμένα έργα που ενσωματώνουν πολλαπλές δεξιότητες και γνώσεις. Προάγει τη δημιουργικότητα και την αυτονομία.",
+    when_to_use: "Χρησιμοποίησε για: δημιουργικά έργα, μακροχρόνιες εργασίες, ολοκληρωμένες δραστηριότητες"
+  },
+  "Gamified Learning (Παιχνιδοποίηση)": {
+    description: "Χρήση στοιχείων παιχνιδιού (πόντοι, επίπεδα, προκλήσεις) για αύξηση της δέσμευσης και κινήτρων των μαθητών.",
+    when_to_use: "Χρησιμοποίησε για: αύξηση κινήτρων, εμπλοκή μαθητών, επανάληψη"
+  },
+  "Διαφοροποιημένη Διδασκαλία": {
+    description: "Προσαρμογή της διδασκαλίας για να καλύψει ποικίλες ανάγκες, ικανότητες και ενδιαφέροντα μαθητών. Αναγνωρίζει ότι κάθε μαθητής μαθαίνει διαφορετικά.",
+    when_to_use: "Χρησιμοποίησε για: μικτές τάξεις, πολλαπλά επίπεδα, διαφορετικές μαθησιακές ανάγκες"
+  },
+  "Τεχνολογικά Υποστηριζόμενη Άμεση Διδασκαλία": {
+    description: "Συνδυασμός δομημένης διδασκαλίας με ψηφιακά εργαλεία για ενισχυμένη ανατροφοδότηση και εξάσκηση.",
+    when_to_use: "Χρησιμοποίησε για: ψηφιακή διδασκαλία, προσαρμοστική εξάσκηση, άμεση ανατροφοδότηση"
+  },
+  "Ψηφιακή Συνεργατική Μάθηση": {
+    description: "Συνεργασία μέσω ψηφιακών πλατφορμών και εργαλείων. Επιτρέπει σύγχρονη και ασύγχρονη αλληλεπίδραση.",
+    when_to_use: "Χρησιμοποίησε για: online συνεργασία, απομακρυσμένη μάθηση, ψηφιακά έργα"
+  },
+  "Ψηφιακή Διερευνητική Μάθηση": {
+    description: "Χρήση ψηφιακών εργαλείων για διερεύνηση, έρευνα και ανακάλυψη. Παρέχει πρόσβαση σε πλούσιες πηγές πληροφοριών.",
+    when_to_use: "Χρησιμοποίησε για: ψηφιακή έρευνα, online διερεύνηση, πρόσβαση σε πηγές"
+  },
+  "Τεχνολογικά Ενισχυμένη Επίλυση Προβλημάτων": {
+    description: "Χρήση προσαρμοστικών ψηφιακών εργαλείων για επίλυση προβλημάτων με άμεση ανατροφοδότηση και προσαρμοσμένη δυσκολία.",
+    when_to_use: "Χρησιμοποίησε για: προσαρμοστική εξάσκηση, προσωποποιημένη μάθηση, simulation"
+  },
+  "Τεχνολογικά Ενισχυμένη Αξιολόγηση": {
+    description: "Ψηφιακά εργαλεία αξιολόγησης που παρέχουν άμεση ανατροφοδότηση και αναλυτικά στοιχεία για τη μαθησιακή πρόοδο.",
+    when_to_use: "Χρησιμοποίησε για: formative assessment, άμεση ανατροφοδότηση, data-driven decisions"
+  },
+  "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία": {
+    description: "Χρήση αλγορίθμων και AI για αυτόματη προσαρμογή του περιεχομένου και της δυσκολίας στις ανάγκες κάθε μαθητή.",
+    when_to_use: "Χρησιμοποίησε για: εξατομικευμένη μάθηση, προσαρμοστική δυσκολία, personalized pathways"
   }
 };
 
-// Smart Theory Recommendation Logic
+// NEW: Show methodology explanation when selected
+function showMethodologyInfo(methodologyText) {
+  const infoDiv = document.getElementById('methodology_info');
+  const descDiv = document.getElementById('methodology_description');
+  const whenDiv = document.getElementById('methodology_when');
+  
+  if (methodologyText && methodologyInfo[methodologyText]) {
+    const info = methodologyInfo[methodologyText];
+    descDiv.textContent = info.description;
+    whenDiv.textContent = info.when_to_use;
+    infoDiv.classList.remove('hidden');
+  } else {
+    infoDiv.classList.add('hidden');
+  }
+}
 // Smart Theory Recommendation Logic - ΕΛΛΗΝΙΚΑ
+// Smart Theory Recommendation Logic with Conflict Avoidance
 function suggestRelevantTheory(methodology, task, context) {
   const methodologyLower = methodology.toLowerCase();
   const taskLower = task.toLowerCase();
   const contextLower = context.toLowerCase();
   
-  // ===== ΠΡΟΤΕΡΑΙΟΤΗΤΑ 1: TASK-BASED (όταν υπάρχει συγκεκριμένο task) =====
-  if (taskLower.includes('κριτική σκέψη') || taskLower.includes('ερωτήσεις') || taskLower.includes('ανάλυση')) {
+  // ===== CONFLICT AVOIDANCE: Methodology-based exclusions FIRST =====
+  
+  // If using Collaborative methodology, DON'T suggest Social Learning (redundant)
+  if (methodologyLower.includes('συνεργατική') || methodologyLower.includes('ομάδ') || methodologyLower.includes('ψηφιακή συνεργατική')) {
+    // Instead, check task for complementary theories
+    if (taskLower.includes('κριτική σκέψη') || taskLower.includes('ανάλυση') || taskLower.includes('αξιολόγηση')) {
+      return 'blooms';
+    }
+    if (contextLower.includes('μικτό επίπεδο') || contextLower.includes('ειδικές ανάγκες')) {
+      return 'udl';
+    }
+    return 'scaffolding'; // Complementary, not redundant
+  }
+  
+  // If using Inquiry methodology, DON'T suggest Constructivist (overlap)
+  if (methodologyLower.includes('διερευνητική') || methodologyLower.includes('εξερεύνηση') || methodologyLower.includes('ψηφιακή διερευνητική')) {
+    // Suggest Bloom's as complementary
     return 'blooms';
   }
-  if (taskLower.includes('αξιολόγηση') || taskLower.includes('κουίζ') || taskLower.includes('ρουμπρίκα') || taskLower.includes('κριτηρίων')) {
+  
+  // If using Differentiated methodology, suggest UDL (related but distinct - accessibility focus)
+  if (methodologyLower.includes('διαφοροποιημένη')) {
+    return 'udl';
+  }
+  
+  // ===== TASK-BASED SUGGESTIONS (Priority after conflict avoidance) =====
+  
+  if (taskLower.includes('κριτική σκέψη') || taskLower.includes('ερωτήσεων κριτικής') || taskLower.includes('ανάλυση')) {
     return 'blooms';
   }
-  if (taskLower.includes('σχέδιο μαθήματος') || taskLower.includes('πλάνο μαθήματος') || taskLower.includes('αναλυτικό πρόγραμμα')) {
+  if (taskLower.includes('αξιολόγηση') || taskLower.includes('κουίζ') || taskLower.includes('ρουμπρίκα')) {
     return 'blooms';
   }
-  if (taskLower.includes('φύλλο εργασίας') || taskLower.includes('φύλλου εργασίας')) {
-    return 'differentiation';
+  if (taskLower.includes('σχέδιο μαθήματος') || taskLower.includes('πλήρους σχεδίου') || taskLower.includes('πλάνο')) {
+    return 'blooms';
   }
-  if (taskLower.includes('διαφοροποιημένη') || taskLower.includes('πολλαπλές νοημοσύνες')) {
-    return 'differentiation';
+  if (taskLower.includes('φύλλο εργασίας') || taskLower.includes('ολοκληρωμένου φύλλου')) {
+    return 'udl'; // Changed from differentiation to UDL
+  }
+  if (taskLower.includes('διαφοροποιημέν') || taskLower.includes('πολλαπλές νοημοσύνες')) {
+    return 'udl'; // Changed from differentiation to UDL
   }
   if (taskLower.includes('ομαδικές δραστηριότητες') || taskLower.includes('ομαδική εργασία')) {
     return 'social_learning';
   }
-  if (taskLower.includes('επίλυση προβλημάτων') || taskLower.includes('πρόβλημα') || taskLower.includes('σενάριο')) {
+  if (taskLower.includes('επίλυση προβλημάτων') || taskLower.includes('σεναρί') || taskLower.includes('πρόβλημα')) {
     return 'constructivist';
   }
-  if (taskLower.includes('ασκήσεις') || taskLower.includes('εξάσκηση')) {
+  if (taskLower.includes('ασκήσεις') || taskLower.includes('εξάσκηση') || taskLower.includes('εξάσκησης')) {
     return 'scaffolding';
   }
   if (taskLower.includes('δημιουργική γραφή') || taskLower.includes('προτροπών')) {
     return 'constructivist';
   }
-  if (taskLower.includes('συζήτηση') || taskLower.includes('επιχειρήματ')) {
+  if (taskLower.includes('συζήτηση') || taskLower.includes('επιχειρήματ') || taskLower.includes('θέματα')) {
     return 'social_learning';
   }
-  
-  // ===== ΠΡΟΤΕΡΑΙΟΤΗΤΑ 2: METHODOLOGY-BASED (fallback) =====
-  if (methodologyLower.includes('διερευνητική') || methodologyLower.includes('εξερεύνηση') || methodologyLower.includes('ανακάλυψη')) {
+  if (taskLower.includes('μελέτ') || taskLower.includes('περίπτωση')) {
     return 'constructivist';
   }
-  if (methodologyLower.includes('συνεργατική') || methodologyLower.includes('ομάδα') || methodologyLower.includes('ομαδική') || methodologyLower.includes('συνεργασία')) {
-    return 'social_learning';
-  }
-  if (methodologyLower.includes('τεχνολογία') || methodologyLower.includes('ψηφιακή') || methodologyLower.includes('ai')) {
+  
+  // ===== METHODOLOGY-BASED SUGGESTIONS (Fallback for non-conflicting cases) =====
+  
+  if (methodologyLower.includes('τεχνολογία') || methodologyLower.includes('ψηφιακή') || methodologyLower.includes('ai') || methodologyLower.includes('τεχνολογικά')) {
     return 'tpack';
   }
-  if (methodologyLower.includes('διαφοροποιημένη') || methodologyLower.includes('προσαρμοστική')) {
-    return 'udl';
+  if (methodologyLower.includes('προβλήματα') || methodologyLower.includes('problem')) {
+    return 'constructivist';
   }
-  if (methodologyLower.includes('υποστήριξη') || methodologyLower.includes('καθοδήγηση')) {
+  if (methodologyLower.includes('έργα') || methodologyLower.includes('project')) {
+    return 'constructivist';
+  }
+  if (methodologyLower.includes('gamified') || methodologyLower.includes('παιχνιδοποί')) {
     return 'scaffolding';
   }
+  if (methodologyLower.includes('προσαρμοστική') || methodologyLower.includes('adaptive')) {
+    return 'udl';
+  }
   
-  // ===== ΠΡΟΤΕΡΑΙΟΤΗΤΑ 3: CONTEXT-BASED (fallback) =====
+  // ===== CONTEXT-BASED SUGGESTIONS (Final fallback) =====
+  
   if (contextLower.includes('μικτό επίπεδο') || contextLower.includes('ειδικές ανάγκες') || contextLower.includes('μαθησιακές δυσκολίες')) {
     return 'udl';
   }
@@ -2011,18 +2113,22 @@ document.addEventListener('DOMContentLoaded', function() {
     radio.addEventListener('change', toggleTheorySelection);
   });
   
-  // Form field changes for recommendations - ΜΕ RESET του userSelected flag
-  document.getElementById('methodology').addEventListener('change', function() {
-    // Καθάρισε το user-selected flag όταν αλλάζει η methodology
-    delete document.getElementById('theory_enhancement').dataset.userSelected;
-    updateTheoryRecommendation();
-  });
+  // Form field changes for recommendations
+document.getElementById('methodology').addEventListener('change', function() {
+  // NEW: Show methodology explanation
+  showMethodologyInfo(this.value);
   
-  document.getElementById('task').addEventListener('change', function() {
-    // Καθάρισε το user-selected flag όταν αλλάζει το task
-    delete document.getElementById('theory_enhancement').dataset.userSelected;
-    updateTheoryRecommendation();
-  });
+  // Hide methodology suggestion when user manually changes
+  if (this.value !== '') {
+    document.getElementById('methodology_suggestion').classList.add('hidden');
+  }
+  
+  // Reset theory user-selection flag
+  delete document.getElementById('theory_enhancement').dataset.userSelected;
+  
+  // Update theory recommendation
+  updateTheoryRecommendation();
+});
   
   document.getElementById('context').addEventListener('change', function() {
     // Καθάρισε το user-selected flag όταν αλλάζει το context
