@@ -1809,91 +1809,104 @@ Return only the improved prompt, ready to use. Do not include explanations or ad
 // Educational Theory Information Database
 const theoryInfo = {
   blooms: {
-    title: "Bloom's Taxonomy",
-    description: "Structures learning from basic recall to creative thinking, helping students progress systematically through cognitive levels. Perfect for building comprehensive learning experiences.",
-    educational_value: "Helps structure questions from basic recall to creative thinking, making learning more systematic and progressive for students.",
-    suitable_for: ["critical thinking", "questions", "assessment", "lesson plan", "analysis", "evaluation"]
+    title: "Ταξινομία Bloom",
+    description: "Δομεί τη μάθηση από βασική ανάκληση σε δημιουργική σκέψη, βοηθώντας τους μαθητές να προχωρούν συστηματικά μέσω γνωστικών επιπέδων. Ιδανική για οικοδόμηση ολοκληρωμένων μαθησιακών εμπειριών.",
+    educational_value: "Βοηθά στη δόμηση ερωτήσεων από βασική ανάκληση σε δημιουργική σκέψη, καθιστώντας τη μάθηση πιο συστηματική και προοδευτική για τους μαθητές.",
+    suitable_for: ["κριτική σκέψη", "ερωτήσεις", "αξιολόγηση", "σχέδιο μαθήματος", "ανάλυση", "αξιολόγηση"]
   },
   udl: {
-    title: "Universal Design for Learning (UDL)",
-    description: "Provides multiple ways for students to access, engage with, and demonstrate learning. Essential for inclusive classrooms with diverse learners.",
-    educational_value: "Ensures all learners can access content through multiple pathways - essential when teaching diverse student groups with different needs.",
-    suitable_for: ["mixed-ability", "special needs", "differentiated", "inclusive", "diverse", "learning difficulties"]
+    title: "Καθολικός Σχεδιασμός για τη Μάθηση (UDL)",
+    description: "Παρέχει πολλαπλούς τρόπους για τους μαθητές να έχουν πρόσβαση, να αλληλεπιδράσουν και να επιδείξουν μάθηση. Απαραίτητο για συμπεριληπτικές τάξεις με ποικίλους μαθητές.",
+    educational_value: "Διασφαλίζει ότι όλοι οι μαθητές μπορούν να έχουν πρόσβαση στο περιεχόμενο μέσω πολλαπλών διαδρομών - απαραίτητο όταν διδάσκετε ποικίλες ομάδες μαθητών με διαφορετικές ανάγκες.",
+    suitable_for: ["μικτό επίπεδο", "ειδικές ανάγκες", "διαφοροποιημένη", "συμπεριληπτική", "ποικίλη", "μαθησιακές δυσκολίες"]
   },
-  tpack: {
-    title: "TPACK Framework",
-    description: "Integrates Technology, Pedagogy, and Content Knowledge for meaningful technology use in education, ensuring tech enhances rather than replaces good teaching.",
-    educational_value: "Helps you meaningfully integrate technology with your teaching methods, rather than just adding tech for tech's sake.",
-    suitable_for: ["technology", "digital", "gamified", "online", "interactive", "ai"]
+  track: {
+    title: "Πλαίσιο TPACK",
+    description: "Ενσωματώνει Τεχνολογία, Παιδαγωγική και Γνώση Περιεχομένου για ουσιαστική χρήση τεχνολογίας στην εκπαίδευση, διασφαλίζοντας ότι η τεχνολογία ενισχύει αντί να αντικαθιστά τη διδασκαλία.",
+    educational_value: "Σας βοηθά να ενσωματώσετε ουσιαστικά την τεχνολογία με τις διδακτικές μεθόδους σας, αντί να προσθέτετε απλώς τεχνολογία χάριν της τεχνολογίας.",
+    suitable_for: ["τεχνολογία", "ψηφιακή", "gamified", "online", "διαδραστική", "ai"]
   },
   constructivist: {
-    title: "Constructivist Learning",
-    description: "Students actively build knowledge through hands-on discovery and meaningful connections. Perfect for inquiry-based and problem-solving approaches.",
-    educational_value: "Supports active knowledge construction where students build understanding through discovery rather than passive listening.",
-    suitable_for: ["inquiry", "discovery", "problem", "explore", "investigate", "hands-on"]
+    title: "Κατασκευαστική Μάθηση",
+    description: "Οι μαθητές χτίζουν ενεργά γνώση μέσω πρακτικής ανακάλυψης και ουσιαστικών συνδέσεων. Ιδανική για διερευνητικές προσεγγίσεις και επίλυση προβλημάτων.",
+    educational_value: "Υποστηρίζει την ενεργή κατασκευή γνώσης όπου οι μαθητές χτίζουν κατανόηση μέσω ανακάλυψης αντί για παθητική ακρόαση.",
+    suitable_for: ["διερευνητική", "ανακάλυψη", "πρόβλημα", "εξερεύνηση", "διερεύνηση", "πρακτική"]
   },
   social_learning: {
-    title: "Social Learning Theory",
-    description: "Leverages peer interaction and collaboration for deeper learning. Students learn through observation, discussion, and shared knowledge construction.",
-    educational_value: "Harnesses the power of peer interaction and collaboration, as students often learn effectively from each other.",
-    suitable_for: ["collaborative", "group", "peer", "discussion", "teamwork", "social"]
+    title: "Θεωρία Κοινωνικής Μάθησης",
+    description: "Αξιοποιεί την αλληλεπίδραση μεταξύ συνομηλίκων και τη συνεργασία για βαθύτερη μάθηση. Οι μαθητές μαθαίνουν μέσω παρατήρησης, συζήτησης και κοινής κατασκευής γνώσης.",
+    educational_value: "Αξιοποιεί τη δύναμη της αλληλεπίδρασης και της συνεργασίας μεταξύ συνομηλίκων, καθώς οι μαθητές συχνά μαθαίνουν αποτελεσματικά ο ένας από τον άλλον.",
+    suitable_for: ["συνεργατική", "ομάδα", "συνομήλικοι", "συζήτηση", "ομαδική εργασία", "κοινωνική"]
   },
   scaffolding: {
-    title: "Scaffolding",
-    description: "Provides temporary support structures that gradually decrease as learners develop independence. Like training wheels for learning new skills.",
-    educational_value: "Provides temporary support that gradually decreases as students develop independence - like training wheels for learning.",
-    suitable_for: ["support", "guidance", "step-by-step", "gradual", "coaching", "beginner"]
+    title: "Υποστήριξη (Scaffolding)",
+    description: "Παρέχει προσωρινές δομές υποστήριξης που μειώνονται σταδιακά καθώς οι μαθητές αναπτύσσουν αυτονομία. Σαν βοηθητικές ρόδες για τη μάθηση νέων δεξιοτήτων.",
+    educational_value: "Παρέχει προσωρινή υποστήριξη που μειώνεται σταδιακά καθώς οι μαθητές αναπτύσσουν αυτονομία - σαν βοηθητικές ρόδες για τη μάθηση.",
+    suitable_for: ["υποστήριξη", "καθοδήγηση", "βήμα-προς-βήμα", "σταδιακή", "coaching", "αρχάριος"]
   },
   differentiation: {
-    title: "Differentiated Instruction",
-    description: "Adapts teaching to meet diverse learner needs, abilities, and interests. Recognizes that one size does not fit all in education.",
-    educational_value: "Recognizes that students learn differently and provides multiple pathways to success based on individual needs and strengths.",
-    suitable_for: ["multiple intelligences", "adaptive", "personalized", "flexible", "individual", "varied"]
+    title: "Διαφοροποιημένη Διδασκαλία",
+    description: "Προσαρμόζει τη διδασκαλία για να καλύψει ποικίλες ανάγκες, ικανότητες και ενδιαφέροντα μαθητών. Αναγνωρίζει ότι ένα μέγεθος δεν ταιριάζει σε όλους στην εκπαίδευση.",
+    educational_value: "Αναγνωρίζει ότι οι μαθητές μαθαίνουν διαφορετικά και παρέχει πολλαπλές διαδρομές προς την επιτυχία βάσει ατομικών αναγκών και δυνατοτήτων.",
+    suitable_for: ["πολλαπλές νοημοσύνες", "προσαρμοστική", "εξατομικευμένη", "ευέλικτη", "ατομική", "ποικίλη"]
   }
 };
 
 // Smart Theory Recommendation Logic
+// Smart Theory Recommendation Logic - ΕΛΛΗΝΙΚΑ
 function suggestRelevantTheory(methodology, task, context) {
   const methodologyLower = methodology.toLowerCase();
   const taskLower = task.toLowerCase();
   const contextLower = context.toLowerCase();
   
-  // Priority mapping based on educational context
-  if (methodologyLower.includes('inquiry') || methodologyLower.includes('explore') || methodologyLower.includes('discovery')) {
+  // Priority mapping based on educational context - ΕΛΛΗΝΙΚΑ KEYWORDS
+  if (methodologyLower.includes('διερευνητική') || methodologyLower.includes('εξερεύνηση') || methodologyLower.includes('ανακάλυψη')) {
     return 'constructivist';
   }
-  if (methodologyLower.includes('collaborative') || methodologyLower.includes('group') || methodologyLower.includes('peer')) {
+  if (methodologyLower.includes('συνεργατική') || methodologyLower.includes('ομάδα') || methodologyLower.includes('ομαδική') || methodologyLower.includes('συνεργασία')) {
     return 'social_learning';
   }
-  if (methodologyLower.includes('technology') || methodologyLower.includes('ai') || methodologyLower.includes('digital')) {
+  if (methodologyLower.includes('τεχνολογία') || methodologyLower.includes('ψηφιακή') || methodologyLower.includes('ai')) {
     return 'tpack';
   }
-  if (methodologyLower.includes('differentiated') || methodologyLower.includes('adaptive')) {
+  if (methodologyLower.includes('διαφοροποιημένη') || methodologyLower.includes('προσαρμοστική')) {
     return 'udl';
   }
-  if (methodologyLower.includes('scaffolding') || methodologyLower.includes('support')) {
+  if (methodologyLower.includes('υποστήριξη') || methodologyLower.includes('καθοδήγηση')) {
     return 'scaffolding';
   }
   
-  // Task-based suggestions
-  if (taskLower.includes('critical thinking') || taskLower.includes('questions') || taskLower.includes('analysis')) {
+  // Task-based suggestions - ΕΛΛΗΝΙΚΑ KEYWORDS
+  if (taskLower.includes('κριτική σκέψη') || taskLower.includes('ερωτήσεις') || taskLower.includes('ανάλυση')) {
     return 'blooms';
   }
-  if (taskLower.includes('assessment') || taskLower.includes('quiz') || taskLower.includes('rubric')) {
+  if (taskLower.includes('αξιολόγηση') || taskLower.includes('κουίζ') || taskLower.includes('ρουμπρίκα') || taskLower.includes('κριτηρίων')) {
     return 'blooms';
   }
-  if (taskLower.includes('lesson plan') || taskLower.includes('curriculum')) {
+  if (taskLower.includes('σχέδιο μαθήματος') || taskLower.includes('πλάνο μαθήματος') || taskLower.includes('αναλυτικό πρόγραμμα')) {
     return 'blooms';
   }
-  if (taskLower.includes('differentiated') || taskLower.includes('multiple intelligences')) {
+  if (taskLower.includes('φύλλο εργασίας') || taskLower.includes('φύλλου εργασίας')) {
     return 'differentiation';
   }
+  if (taskLower.includes('διαφοροποιημένη') || taskLower.includes('πολλαπλές νοημοσύνες')) {
+    return 'differentiation';
+  }
+  if (taskLower.includes('ομαδικές δραστηριότητες') || taskLower.includes('ομαδική εργασία')) {
+    return 'social_learning';
+  }
+  if (taskLower.includes('επίλυση προβλημάτων') || taskLower.includes('πρόβλημα')) {
+    return 'constructivist';
+  }
+  if (taskLower.includes('ασκήσεις') || taskLower.includes('εξάσκηση')) {
+    return 'scaffolding';
+  }
   
-  // Context-based suggestions
-  if (contextLower.includes('mixed-ability') || contextLower.includes('special needs') || contextLower.includes('learning difficulties')) {
+  // Context-based suggestions - ΕΛΛΗΝΙΚΑ KEYWORDS
+  if (contextLower.includes('μικτό επίπεδο') || contextLower.includes('ειδικές ανάγκες') || contextLower.includes('μαθησιακές δυσκολίες')) {
     return 'udl';
   }
-  if (contextLower.includes('ages 3-5') || contextLower.includes('preschool')) {
+  if (contextLower.includes('3-5') || contextLower.includes('νηπιαγωγείο')) {
     return 'scaffolding';
   }
   
@@ -1901,7 +1914,7 @@ function suggestRelevantTheory(methodology, task, context) {
   return 'blooms';
 }
 
-// Update theory recommendation when methodology/task changes
+// Update theory recommendation when methodology/task changes - ΕΛΛΗΝΙΚΑ
 function updateTheoryRecommendation() {
   const methodology = document.getElementById('methodology').value;
   const task = document.getElementById('task').value;
@@ -1922,7 +1935,7 @@ function updateTheoryRecommendation() {
       theoryDropdown.value = suggestedTheory;
       
       recommendationText.innerHTML = `
-        <strong>${theoryData.title}</strong> was auto-selected.<br>
+        <strong>${theoryData.title}</strong> επιλέχθηκε αυτόματα.<br>
         ${theoryData.educational_value}
       `;
       
@@ -1935,12 +1948,12 @@ function updateTheoryRecommendation() {
       
       if (suggestedTheory !== currentValue) {
         recommendationText.innerHTML = `
-          You're using <strong>${currentTheoryData?.title || 'a selected theory'}</strong>.<br>
-          💡 New recommendation: <strong>${theoryData.title}</strong> - ${theoryData.educational_value}
+          Χρησιμοποιείτε <strong>${currentTheoryData?.title || 'επιλεγμένη θεωρία'}</strong>.<br>
+          💡 Νέα πρόταση: <strong>${theoryData.title}</strong> - ${theoryData.educational_value}
         `;
       } else {
         recommendationText.innerHTML = `
-          <strong>${theoryData.title}</strong> matches your selection - great choice!<br>
+          <strong>${theoryData.title}</strong> ταιριάζει με την επιλογή σας - εξαιρετική επιλογή!<br>
           ${theoryData.educational_value}
         `;
       }
@@ -1952,7 +1965,7 @@ function updateTheoryRecommendation() {
   }
 }
 
-// Show theory information when selected
+// Show theory information when selected - ΗΔΗ ΛΕΙΤΟΥΡΓΕΙ
 function showTheoryInfo(theoryKey) {
   const infoDiv = document.getElementById('theory_info');
   const titleDiv = document.getElementById('theory_title');
