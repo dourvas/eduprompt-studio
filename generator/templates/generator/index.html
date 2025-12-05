@@ -307,7 +307,7 @@
       <div class="min-w-0 flex-1">
         <div class="text-sm font-medium text-blue-800 mb-1">Πρόταση Βασισμένη σε Έρευνα:</div>
         <div id="suggestion_content" class="text-sm text-blue-700 leading-relaxed mb-2"></div>
-        <div class="text-xs text-blue-600 italic" id="suggestion_citation"></div>
+        <!--<div class="text-xs text-blue-600 italic" id="suggestion_citation"></div>-->
         
         <!-- Εναλλακτικές Επιλογές -->
         <div class="mt-3 pt-2 border-t border-blue-200">
@@ -2028,117 +2028,99 @@ document.addEventListener('DOMContentLoaded', function() {
 const methodologyResearch = {
   // BULLETPROOF (Research-backed) connections
   critical_questions: {
-    suggested: "Inquiry-based Learning",
-    rationale: "Research shows that inquiry-based learning effectively develops critical thinking through Socratic questioning and student-led discovery.",
-    citation: "Lazonder & Harmsen (2016): Meta-analysis of 72 studies, d=0.50 for learning outcomes",
-    alternatives: ["Problem-based Learning", "Collaborative Learning", "Direct Instruction"]
+    suggested: "Διερευνητική Μάθηση",
+    rationale: "Η έρευνα δείχνει ότι η διερευνητική μάθηση αναπτύσσει αποτελεσματικά την κριτική σκέψη μέσω σωκρατικής ερώτησης και ανακάλυψης με πρωτοβουλία των μαθητών.",
+    alternatives: ["Μάθηση Βασισμένη σε Προβλήματα", "Συνεργατική Μάθηση", "Άμεση Διδασκαλία"]
   },
   
   problem_solving: {
-    suggested: "Problem-based Learning", 
-    rationale: "Problem-based learning is highly effective for developing problem-solving skills through authentic, real-world challenges.",
-    citation: "Hattie (2009): 31 meta-analyses, 1,064 studies, weighted effect size: 0.53",
-    alternatives: ["Inquiry-based Learning", "Collaborative Learning", "Technology-enhanced Problem Solving"]
+    suggested: "Μάθηση Βασισμένη σε Προβλήματα", 
+    rationale: "Η μάθηση βασισμένη σε προβλήματα είναι εξαιρετικά αποτελεσματική για την ανάπτυξη δεξιοτήτων επίλυσης προβλημάτων μέσω αυθεντικών προκλήσεων πραγματικού κόσμου.",
+    alternatives: ["Διερευνητική Μάθηση", "Συνεργατική Μάθηση", "Τεχνολογικά Ενισχυμένη Επίλυση Προβλημάτων"]
   },
   
   group_activities: {
-    suggested: "Collaborative Learning",
-    rationale: "Collaborative learning structures effectively promote peer interaction, shared knowledge construction, and social learning.",
-    citation: "Chen et al. (2018): Meta-analysis of 356 CSCL studies showing positive effects on all learning outcomes",
-    alternatives: ["Digital Collaborative Learning", "Problem-based Learning", "Project-based Learning"]
+    suggested: "Συνεργατική Μάθηση",
+    rationale: "Οι δομές συνεργατικής μάθησης προάγουν αποτελεσματικά την αλληλεπίδραση μεταξύ συνομηλίκων, την κοινή κατασκευή γνώσης και την κοινωνική μάθηση.",
+    alternatives: ["Ψηφιακή Συνεργατική Μάθηση", "Μάθηση Βασισμένη σε Προβλήματα", "Μάθηση Βασισμένη σε Έργα"]
   },
   
   lesson_plan: {
-    suggested: "Direct Instruction",
-    rationale: "Direct instruction provides systematic, explicit teaching that is highly effective for structured lesson delivery and knowledge acquisition.",
-    citation: "Stockard et al. (2018): Meta-analysis of 328 studies, 4,000+ effects, all positive and statistically significant",
-    alternatives: ["Technology-supported Direct Instruction", "Differentiated Instruction", "Assessment-focused approaches"]
+    suggested: "Άμεση Διδασκαλία",
+    rationale: "Η άμεση διδασκαλία παρέχει συστηματική, ρητή διδασκαλία που είναι εξαιρετικά αποτελεσματική για δομημένη παράδοση μαθήματος και απόκτηση γνώσης.",
+    alternatives: ["Τεχνολογικά Υποστηριζόμενη Άμεση Διδασκαλία", "Διαφοροποιημένη Διδασκαλία", "Προσεγγίσεις Εστιασμένες στην Αξιολόγηση"]
   },
   
-  // MODERATE EVIDENCE - Good pedagogical fit but less research
   warm_up: {
-    suggested: "Collaborative Learning",
-    rationale: "Warm-up activities benefit from peer interaction and social engagement to activate prior knowledge and build classroom community.",
-    citation: "Pedagogical best practice - social activation of prior knowledge",
-    alternatives: ["Digital Collaborative Learning", "Inquiry-based Learning", "Direct Instruction"]
+    suggested: "Συνεργατική Μάθηση",
+    rationale: "Οι δραστηριότητες προθέρμανσης επωφελούνται από την αλληλεπίδραση μεταξύ συνομηλίκων και την κοινωνική δέσμευση για ενεργοποίηση προηγούμενης γνώσης και οικοδόμηση κοινότητας τάξης.",
+    alternatives: ["Ψηφιακή Συνεργατική Μάθηση", "Διερευνητική Μάθηση", "Άμεση Διδασκαλία"]
   },
   
   lesson_intro: {
-    suggested: "Inquiry-based Learning", 
-    rationale: "New topic introductions are most engaging when they spark curiosity and encourage student questions and exploration.",
-    citation: "Constructivist learning principles - curiosity-driven engagement",
-    alternatives: ["Problem-based Learning", "Direct Instruction", "Digital Inquiry Learning"]
+    suggested: "Διερευνητική Μάθηση", 
+    rationale: "Οι εισαγωγές νέων θεμάτων είναι πιο ελκυστικές όταν προκαλούν περιέργεια και ενθαρρύνουν ερωτήσεις και εξερεύνηση από τους μαθητές.",
+    alternatives: ["Μάθηση Βασισμένη σε Προβλήματα", "Άμεση Διδασκαλία", "Ψηφιακή Διερευνητική Μάθηση"]
   },
   
   debates: {
-    suggested: "Collaborative Learning",
-    rationale: "Debate activities inherently require structured peer interaction, argumentation skills, and social learning processes.",
-    citation: "Social learning theory - argumentation develops through peer interaction",
-    alternatives: ["Digital Collaborative Learning", "Inquiry-based Learning", "Assessment-focused approaches"]
+    suggested: "Συνεργατική Μάθηση",
+    rationale: "Οι δραστηριότητες συζήτησης απαιτούν εγγενώς δομημένη αλληλεπίδραση μεταξύ συνομηλίκων, δεξιότητες επιχειρηματολογίας και διαδικασίες κοινωνικής μάθησης.",
+    alternatives: ["Ψηφιακή Συνεργατική Μάθηση", "Διερευνητική Μάθηση", "Προσεγγίσεις Εστιασμένες στην Αξιολόγηση"]
   },
   
-  // PRACTICAL EVIDENCE - Clear pedagogical logic
   practice_exercises: {
-    suggested: "Technology-enhanced Problem Solving",
-    rationale: "Practice exercises benefit from adaptive feedback, personalized difficulty adjustment, and immediate response available through digital tools.",
-    citation: "Educational technology research - adaptive practice optimizes learning",
-    alternatives: ["Direct Instruction", "Differentiated Instruction", "Adaptive Learning with digital tools"]
+    suggested: "Τεχνολογικά Ενισχυμένη Επίλυση Προβλημάτων",
+    rationale: "Οι ασκήσεις εξάσκησης επωφελούνται από προσαρμοστική ανατροφοδότηση, εξατομικευμένη προσαρμογή δυσκολίας και άμεση απόκριση διαθέσιμη μέσω ψηφιακών εργαλείων.",
+    alternatives: ["Άμεση Διδασκαλία", "Διαφοροποιημένη Διδασκαλία", "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία"]
   },
 
   worksheet: {
-  suggested: "Differentiated Instruction",
-  rationale: "Comprehensive worksheets require multiple activity types addressing diverse learning styles, cognitive levels, and skill development - the core of differentiated instruction.",
-  citation: "Tomlinson (2001): Differentiation through varied pathways, activities, and products",
-  alternatives: ["Direct Instruction", "Technology-enhanced Problem Solving", "Adaptive Learning with digital tools"]
-},
+    suggested: "Διαφοροποιημένη Διδασκαλία",
+    rationale: "Τα ολοκληρωμένα φύλλα εργασίας απαιτούν πολλαπλούς τύπους δραστηριοτήτων που απευθύνονται σε διαφορετικά μαθησιακά στυλ, γνωστικά επίπεδα και ανάπτυξη δεξιοτήτων - ο πυρήνας της διαφοροποιημένης διδασκαλίας.",
+    alternatives: ["Άμεση Διδασκαλία", "Τεχνολογικά Ενισχυμένη Επίλυση Προβλημάτων", "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία"]
+  },
   
   creative_writing: {
-    suggested: "Project-based Learning",
-    rationale: "Creative writing involves extended, self-directed creation processes that align with project-based learning principles.",
-    citation: "Constructivist learning - creative expression requires active knowledge construction", 
-    alternatives: ["Inquiry-based Learning", "Tech-integrated Project Work", "Differentiated Instruction"]
+    suggested: "Μάθηση Βασισμένη σε Έργα",
+    rationale: "Η δημιουργική γραφή περιλαμβάνει εκτεταμένες, αυτοκαθοδηγούμενες διαδικασίες δημιουργίας που ευθυγραμμίζονται με τις αρχές της μάθησης βασισμένης σε έργα.",
+    alternatives: ["Διερευνητική Μάθηση", "Τεχνολογικά Ενσωματωμένη Εργασία Έργου", "Διαφοροποιημένη Διδασκαλία"]
   },
   
   quiz_assessment: {
-    suggested: "Technology-enhanced Assessment",
-    rationale: "Digital assessment tools provide immediate feedback, data analytics, and adaptive questioning that enhance learning outcomes.",
-    citation: "Assessment theory - immediate feedback improves learning (Black & Wiliam)",
-    alternatives: ["Assessment-focused approaches", "Direct Instruction", "Adaptive Learning with digital tools"]
+    suggested: "Τεχνολογικά Ενισχυμένη Αξιολόγηση",
+    rationale: "Τα ψηφιακά εργαλεία αξιολόγησης παρέχουν άμεση ανατροφοδότηση, αναλυτικά στοιχεία δεδομένων και προσαρμοστική ερώτηση που ενισχύουν τα μαθησιακά αποτελέσματα.",
+    alternatives: ["Προσεγγίσεις Εστιασμένες στην Αξιολόγηση", "Άμεση Διδασκαλία", "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία"]
   },
   
   rubrics: {
-    suggested: "Direct Instruction",
-    rationale: "Rubric creation requires systematic, explicit explanation of criteria and standards, aligning with direct instruction principles.",
-    citation: "Assessment theory - clear criteria require structured explanation",
-    alternatives: ["Assessment-focused approaches", "Technology-enhanced Assessment", "Differentiated Instruction"]
+    suggested: "Άμεση Διδασκαλία",
+    rationale: "Η δημιουργία κριτηρίων αξιολόγησης απαιτεί συστηματική, ρητή εξήγηση κριτηρίων και προτύπων, ευθυγραμμιζόμενη με τις αρχές της άμεσης διδασκαλίας.",
+    alternatives: ["Προσεγγίσεις Εστιασμένες στην Αξιολόγηση", "Τεχνολογικά Ενισχυμένη Αξιολόγηση", "Διαφοροποιημένη Διδασκαλία"]
   },
   
   feedback: {
-    suggested: "Technology-enhanced Assessment",
-    rationale: "Effective feedback requires personalization, timeliness, and scalability - strengths of digital feedback systems.",
-    citation: "Feedback research (Hattie) - personalized, timely feedback maximizes learning",
-    alternatives: ["Assessment-focused approaches", "Adaptive Learning with digital tools", "Differentiated Instruction"]
+    suggested: "Τεχνολογικά Ενισχυμένη Αξιολόγηση",
+    rationale: "Η αποτελεσματική ανατροφοδότηση απαιτεί εξατομίκευση, έγκαιρη παράδοση και επεκτασιμότητα - δυνατά σημεία των ψηφιακών συστημάτων ανατροφοδότησης.",
+    alternatives: ["Προσεγγίσεις Εστιασμένες στην Αξιολόγηση", "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία", "Διαφοροποιημένη Διδασκαλία"]
   },
   
   differentiated: {
-    suggested: "Adaptive Learning with digital tools",
-    rationale: "True differentiation requires personalized pathways and flexible content delivery, best achieved through adaptive digital systems.",
-    citation: "UDL research - multiple pathways require technological flexibility",
-    alternatives: ["Differentiated Instruction", "Technology-supported Direct Instruction", "Digital Collaborative Learning"]
+    suggested: "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία",
+    rationale: "Η αληθινή διαφοροποίηση απαιτεί εξατομικευμένες διαδρομές και ευέλικτη παράδοση περιεχομένου, που επιτυγχάνεται καλύτερα μέσω προσαρμοστικών ψηφιακών συστημάτων.",
+    alternatives: ["Διαφοροποιημένη Διδασκαλία", "Τεχνολογικά Υποστηριζόμενη Άμεση Διδασκαλία", "Ψηφιακή Συνεργατική Μάθηση"]
   },
   
   special_needs: {
-    suggested: "Adaptive Learning with digital tools",
-    rationale: "Students with special needs benefit significantly from assistive technologies, personalized accommodations, and flexible digital supports.",
-    citation: "Special education research - technology enables accessibility and accommodation",
-    alternatives: ["Differentiated Instruction", "Technology-enhanced Assessment", "Direct Instruction"]
+    suggested: "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία",
+    rationale: "Οι μαθητές με ειδικές ανάγκες επωφελούνται σημαντικά από βοηθητικές τεχνολογίες, εξατομικευμένες προσαρμογές και ευέλικτες ψηφιακές υποστηρίξεις.",
+    alternatives: ["Διαφοροποιημένη Διδασκαλία", "Τεχνολογικά Ενισχυμένη Αξιολόγηση", "Άμεση Διδασκαλία"]
   },
   
   revision: {
-    suggested: "Adaptive Learning with digital tools",
-    rationale: "Effective revision requires spaced repetition, adaptive questioning, and personalized review timing - optimized by algorithmic systems.",
-    citation: "Cognitive science - spaced repetition and retrieval practice research",
-    alternatives: ["Technology-enhanced Assessment", "Direct Instruction", "Assessment-focused approaches"]
+    suggested: "Προσαρμοστική Μάθηση με ψηφιακά εργαλεία",
+    rationale: "Η αποτελεσματική επανάληψη απαιτεί διαστηματική επανάληψη, προσαρμοστική ερώτηση και εξατομικευμένο χρονοδιάγραμμα επανεξέτασης - βελτιστοποιημένα από αλγοριθμικά συστήματα.",
+    alternatives: ["Τεχνολογικά Ενισχυμένη Αξιολόγηση", "Άμεση Διδασκαλία", "Προσεγγίσεις Εστιασμένες στην Αξιολόγηση"]
   }
 };
 
@@ -2146,7 +2128,6 @@ const methodologyResearch = {
 function showMethodologySuggestion(templateId) {
   const suggestionDiv = document.getElementById('methodology_suggestion');
   const contentDiv = document.getElementById('suggestion_content');
-  const citationDiv = document.getElementById('suggestion_citation');
   const alternativesDiv = document.getElementById('alternative_options');
   const methodologySelect = document.getElementById('methodology');
   
@@ -2156,9 +2137,8 @@ function showMethodologySuggestion(templateId) {
     // Auto-select the suggested methodology
     methodologySelect.value = research.suggested;
     
-    // Show the suggestion content
-    contentDiv.innerHTML = `<strong>${research.suggested}</strong> is recommended. ${research.rationale}`;
-    citationDiv.textContent = research.citation;
+    // Show the suggestion content - ΕΛΛΗΝΙΚΑ (χωρίς citation)
+    contentDiv.innerHTML = `<strong>${research.suggested}</strong> συνιστάται. ${research.rationale}`;
     
     // Create alternative option buttons
     alternativesDiv.innerHTML = '';
