@@ -107,6 +107,7 @@
     </optgroup>
     <optgroup label="📝 Εξάσκηση & Δραστηριότητες">
       <option value="practice_exercises">Ασκήσεις Εξάσκησης</option>
+      <option value="worksheet">Δημιουργία Φύλλου Εργασίας</option>
       <option value="group_activities">Ομαδικές Δραστηριότητες</option>
       <option value="creative_writing">Δημιουργική Γραφή</option>
     </optgroup>
@@ -184,6 +185,7 @@
   <optgroup label="Δημιουργία Περιεχομένου με Τεχνολογία">
     <option>Δημιουργία πλήρους σχεδίου μαθήματος με στόχους</option>
     <option>Δημιουργία ασκήσεων εξάσκησης με απαντήσεις</option>
+    <option>Δημιουργία ολοκληρωμένου φύλλου εργασίας</option>
     <option>Σχεδιασμός κουίζ ή αξιολόγησης</option>
     <option>Δημιουργία ρουμπρίκας αξιολόγησης</option>
     <option>Δημιουργία δραστηριοτήτων λεξιλογίου</option>
@@ -635,288 +637,168 @@
 
     // Template definitions
 
-    const templates = {
-
-          lesson_plan: {
-
-            role: "High school teacher",
-
-            task: "Create a complete lesson plan with objectives",
-
-            context: "Upper secondary (ages 15-18)",
-
-            methodology: "Teacher explains, AI provides examples and practice (Direct Instruction)",
-
-            tone: "Academic and precise",
-
-            include: "Learning objectives, assessment methods, differentiation strategies, timing for each activity",
-
-            exclude: "Overly complex activities, unrealistic time expectations"
-
-          },
-
-          warm_up: {
-
-            role: "Elementary school teacher",
-
-            task: "Design a warm-up activity",
-
-            context: "Primary students (ages 6-11)",
-
-            methodology: "Students work in groups with AI facilitation (Collaborative Learning)",
-
-            tone: "Enthusiastic and energetic",
-
-            include: "Interactive elements, 5-10 minute duration, connection to previous learning",
-
-            exclude: "Lengthy explanations, sedentary activities"
-
-          },
-
-          lesson_intro: {
-
-            role: "Middle school teacher",
-
-            task: "Create an introduction to new topic",
-
-            context: "Lower secondary (ages 12-14)",
-
-            methodology: "Students explore with AI as research assistant (Inquiry-based Learning)",
-
-            tone: "Curious and exploratory",
-
-            include: "Hook activity, prior knowledge activation, learning objectives preview",
-
-            exclude: "Information overload, lengthy explanations at the start"
-
-          },
-
-          critical_questions: {
-
-            role: "Middle school teacher",
-
-            task: "Create critical thinking questions",
-
-            context: "Lower secondary (ages 12-14)",
-
-            methodology: "Students explore with AI as research assistant (Inquiry-based Learning)",
-
-            tone: "Curious and exploratory",
-
-            include: "Questions from different cognitive levels, open-ended questions",
-
-            exclude: "Yes/no questions, factual recall only"
-
-          },
-
-          problem_solving: {
-
-            role: "High school teacher",
-
-            task: "Design problem-solving scenarios",
-
-            context: "Upper secondary (ages 15-18)",
-
-            methodology: "Students solve problems with AI hints and scaffolding (Problem-based Learning)",
-
-            tone: "Encouraging and supportive",
-
-            include: "Real-world scenarios, step-by-step thinking process, collaborative elements",
-
-            exclude: "Abstract problems without context, overwhelming complexity"
-
-          },
-
-          debates: {
-
-            role: "High school teacher",
-
-            task: "Generate debate topics and arguments",
-
-            context: "Upper secondary (ages 15-18)",
-
-            methodology: "Students work in groups with AI facilitation (Collaborative Learning)",
-
-            tone: "Neutral and objective",
-
-            include: "Balanced perspectives, evidence-based arguments, structured format",
-
-            exclude: "Controversial personal topics, one-sided arguments"
-
-          },
-
-          practice_exercises: {
-
-            role: "Math teacher",
-
-            task: "Generate practice exercises with answers",
-
-            context: "Mixed-ability classroom",
-
-            methodology: "AI gives personalized support and encouragement (Scaffolding)",
-
-            tone: "Encouraging and supportive",
-
-            include: "Varying difficulty levels, step-by-step solutions, real-world applications",
-
-            exclude: "Repetitive drill exercises, abstract examples only"
-
-          },
-          worksheet: {
-            role: "Elementary school teacher",
-            task: "Create a comprehensive worksheet",
-            context: "Primary students (ages 6-11) with varied learning needs",
-            methodology: "AI provides different paths for different learners (Differentiated Instruction)",
-            tone: "Engaging and age-appropriate",
-            include: "Multiple activity types (matching, fill-in-blanks, labeling diagrams, word puzzles), visual elements, clear instructions, varied difficulty levels, space for creative work",
-            exclude: "Too many activities on one page, text-heavy without visuals, single activity type only"
-          },
-
-          group_activities: {
-
-            role: "High school teacher",
-
-            task: "Students work in groups with AI facilitation (Collaborative Learning)",
-
-            context: "Upper secondary (ages 15-18)",
-
-            methodology: "Students work in groups with AI facilitation (Collaborative Learning)",
-
-            tone: "Friendly and conversational",
-
-            include: "Clear roles for each member, specific objectives, time management",
-
-            exclude: "Vague instructions, unequal participation opportunities"
-
-          },
-
-          creative_writing: {
-
-            role: "Literature teacher",
-
-            task: "Generate creative writing prompts",
-
-            context: "Lower secondary (ages 12-14)",
-
-            methodology: "Students create projects with AI collaboration tools (Project-based Learning)",
-
-            tone: "Motivational and inspiring",
-
-            include: "Diverse themes, sensory details, character development prompts",
-
-            exclude: "Overly complex themes, adult topics"
-
-          },
-
-          quiz_assessment: {
-
-            role: "Science teacher",
-
-            task: "Design a quiz or assessment",
-
-            context: "Upper secondary (ages 15-18)",
-
-            methodology: "AI provides ongoing feedback during learning (Formative Assessment)",
-
-            tone: "Clear and direct",
-
-            include: "Multiple question types, clear rubrics, immediate feedback",
-
-            exclude: "Trick questions, ambiguous wording"
-
-          },
-
-          rubrics: {
-
-            role: "Elementary school teacher",
-
-            task: "Create a project rubric",
-
-            context: "Primary students (ages 6-11)",
-
-            methodology: "AI helps students reflect on their progress (Self-assessment & Reflection)",
-
-            tone: "Clear and direct",
-
-            include: "Age-appropriate criteria, visual elements, student-friendly language",
-
-            exclude: "Complex terminology, too many criteria"
-
-          },
-
-          feedback: {
-
-            role: "Elementary school teacher",
-
-            task: "Provide feedback on student work",
-
-            context: "Primary students (ages 6-11)",
-
-            methodology: "AI provides ongoing feedback during learning (Formative Assessment)",
-
-            tone: "Encouraging and supportive",
-
-            include: "Specific examples, growth-focused language, actionable next steps",
-
-            exclude: "Harsh criticism, vague comments, comparison to other students"
-
-          },
-
-          differentiated: {
-
-            role: "Special education teacher",
-
-            task: "Design differentiated activities",
-
-            context: "Students with learning difficulties",
-
-            methodology: "AI provides different paths for different learners (Differentiated Instruction)",
-
-            tone: "Patient and gentle",
-
-            include: "Multiple learning styles, scaffolding options, assistive technology",
-
-            exclude: "One-size-fits-all approaches, overwhelming complexity"
-
-          },
-
-          special_needs: {
-
-            role: "Special education teacher",
-
-            task: "Adapt content for special needs",
-
-            context: "Students with learning difficulties",
-
-            methodology: "AI offers multiple ways to show understanding (Multiple Intelligences)",
-
-            tone: "Patient and gentle",
-
-            include: "Visual supports, sensory breaks, simplified instructions, assistive technology",
-
-            exclude: "Complex multi-step tasks, time pressure, abstract concepts without support"
-
-          },
-
-          revision: {
-
-            role: "High school teacher",
-
-            task: "Create revision activities",
-
-            context: "Students preparing for exams",
-
-            methodology: "AI adjusts difficulty based on student progress (Adaptive Learning)",
-
-            tone: "Motivational and inspiring",
-
-            include: "Variety of review methods, self-testing opportunities, key concept summaries",
-
-            exclude: "Passive reading only, information overload"
-
-          }
-
-        };
+    // Template definitions
+const templates = {
+  lesson_plan: {
+    role: "Καθηγητής/τρια Λυκείου",
+    task: "Δημιουργία πλήρους σχεδίου μαθήματος με στόχους",
+    context: "Λύκειο (15-18 ετών)",
+    methodology: "Άμεση Διδασκαλία",
+    tone: "Ακαδημαϊκός και ακριβής",
+    include: "Μαθησιακοί στόχοι, μέθοδοι αξιολόγησης, στρατηγικές διαφοροποίησης, χρονοδιάγραμμα για κάθε δραστηριότητα",
+    exclude: "Υπερβολικά σύνθετες δραστηριότητες, μη ρεαλιστικές χρονικές προσδοκίες"
+  },
+
+  warm_up: {
+    role: "Δάσκαλος/Δασκάλα Δημοτικού",
+    task: "Σχεδιασμός δραστηριότητας προθέρμανσης",
+    context: "Δημοτικό (6-11 ετών)",
+    methodology: "Συνεργατική Μάθηση",
+    tone: "Ενθουσιώδης και ενεργητικός",
+    include: "Διαδραστικά στοιχεία, διάρκεια 5-10 λεπτών, σύνδεση με προηγούμενη μάθηση",
+    exclude: "Μακροσκελείς εξηγήσεις, καθιστικές δραστηριότητες"
+  },
+
+  lesson_intro: {
+    role: "Καθηγητής/τρια Γυμνασίου",
+    task: "Δημιουργία εισαγωγής σε νέο θέμα",
+    context: "Γυμνάσιο (12-14 ετών)",
+    methodology: "Διερευνητική Μάθηση",
+    tone: "Περίεργος και διερευνητικός",
+    include: "Δραστηριότητα έλξης ενδιαφέροντος, ενεργοποίηση προηγούμενης γνώσης, προεπισκόπηση μαθησιακών στόχων",
+    exclude: "Υπερφόρτωση πληροφοριών, μακροσκελείς εξηγήσεις στην αρχή"
+  },
+
+  critical_questions: {
+    role: "Καθηγητής/τρια Γυμνασίου",
+    task: "Δημιουργία ερωτήσεων κριτικής σκέψης",
+    context: "Γυμνάσιο (12-14 ετών)",
+    methodology: "Διερευνητική Μάθηση",
+    tone: "Περίεργος και διερευνητικός",
+    include: "Ερωτήσεις από διαφορετικά γνωστικά επίπεδα, ανοιχτές ερωτήσεις",
+    exclude: "Ερωτήσεις ναι/όχι, μόνο πραγματική ανάκληση"
+  },
+
+  problem_solving: {
+    role: "Καθηγητής/τρια Λυκείου",
+    task: "Σχεδιασμός σεναρίων επίλυσης προβλημάτων",
+    context: "Λύκειο (15-18 ετών)",
+    methodology: "Μάθηση Βασισμένη σε Προβλήματα",
+    tone: "Ενθαρρυντικός και υποστηρικτικός",
+    include: "Σενάρια πραγματικού κόσμου, διαδικασία σκέψης βήμα-προς-βήμα, συνεργατικά στοιχεία",
+    exclude: "Αφηρημένα προβλήματα χωρίς πλαίσιο, συντριπτική πολυπλοκότητα"
+  },
+
+  debates: {
+    role: "Καθηγητής/τρια Λυκείου",
+    task: "Δημιουργία θεμάτων και επιχειρημάτων συζήτησης",
+    context: "Λύκειο (15-18 ετών)",
+    methodology: "Συνεργατική Μάθηση",
+    tone: "Ουδέτερος και αντικειμενικός",
+    include: "Ισορροπημένες προοπτικές, επιχειρήματα βασισμένα σε αποδεικτικά στοιχεία, δομημένη μορφή",
+    exclude: "Αμφιλεγόμενα προσωπικά θέματα, μονόπλευρα επιχειρήματα"
+  },
+
+  practice_exercises: {
+    role: "Καθηγητής/τρια Μαθηματικών",
+    task: "Δημιουργία ασκήσεων εξάσκησης με απαντήσεις",
+    context: "Τάξη μικτού επιπέδου",
+    methodology: "Διαφοροποιημένη Διδασκαλία",
+    tone: "Ενθαρρυντικός και υποστηρικτικός",
+    include: "Διαφορετικά επίπεδα δυσκολίας, λύσεις βήμα-προς-βήμα, εφαρμογές πραγματικού κόσμου",
+    exclude: "Επαναλαμβανόμενες ασκήσεις εξάσκησης, μόνο αφηρημένα παραδείγματα"
+  },
+
+  worksheet: {
+    role: "Δάσκαλος/Δασκάλα Δημοτικού",
+    task: "Δημιουργία ολοκληρωμένου φύλλου εργασίας",
+    context: "Δημοτικό (6-11 ετών) με ποικίλες μαθησιακές ανάγκες",
+    methodology: "Διαφοροποιημένη Διδασκαλία",
+    tone: "Ελκυστικός και κατάλληλος για την ηλικία",
+    include: "Πολλαπλοί τύποι δραστηριοτήτων (αντιστοίχιση, συμπλήρωση κενών, επισημείωση διαγραμμάτων, λεξικά παζλ), οπτικά στοιχεία, σαφείς οδηγίες, διαφορετικά επίπεδα δυσκολίας, χώρος για δημιουργική εργασία",
+    exclude: "Πάρα πολλές δραστηριότητες σε μία σελίδα, κείμενο χωρίς οπτικά στοιχεία, μόνο ένας τύπος δραστηριότητας"
+  },
+
+  group_activities: {
+    role: "Καθηγητής/τρια Λυκείου",
+    task: "Σχεδιασμός ομαδικών δραστηριοτήτων",
+    context: "Λύκειο (15-18 ετών)",
+    methodology: "Συνεργατική Μάθηση",
+    tone: "Φιλικός και συνομιλητικός",
+    include: "Σαφείς ρόλοι για κάθε μέλος, συγκεκριμένοι στόχοι, διαχείριση χρόνου",
+    exclude: "Ασαφείς οδηγίες, άνισες ευκαιρίες συμμετοχής"
+  },
+
+  creative_writing: {
+    role: "Φιλόλογος",
+    task: "Δημιουργία προτροπών δημιουργικής γραφής",
+    context: "Γυμνάσιο (12-14 ετών)",
+    methodology: "Μάθηση Βασισμένη σε Έργα",
+    tone: "Παρακινητικός και εμπνευστικός",
+    include: "Ποικίλα θέματα, αισθητηριακές λεπτομέρειες, προτροπές ανάπτυξης χαρακτήρων",
+    exclude: "Υπερβολικά σύνθετα θέματα, θέματα ενηλίκων"
+  },
+
+  quiz_assessment: {
+    role: "Καθηγητής/τρια Φυσικής/Χημείας/Βιολογίας",
+    task: "Σχεδιασμός κουίζ ή αξιολόγησης",
+    context: "Λύκειο (15-18 ετών)",
+    methodology: "Εστιασμένη στην Αξιολόγηση",
+    tone: "Σαφής και άμεσος",
+    include: "Πολλαπλοί τύποι ερωτήσεων, σαφή κριτήρια αξιολόγησης, άμεση ανατροφοδότηση",
+    exclude: "Ερωτήσεις-παγίδες, ασαφής διατύπωση"
+  },
+
+  rubrics: {
+    role: "Δάσκαλος/Δασκάλα Δημοτικού",
+    task: "Δημιουργία κριτηρίων αξιολόγησης project",
+    context: "Δημοτικό (6-11 ετών)",
+    methodology: "Μάθηση Βασισμένη σε Έργα",
+    tone: "Σαφής και άμεσος",
+    include: "Κριτήρια κατάλληλα για την ηλικία, οπτικά στοιχεία, γλώσσα φιλική προς τον μαθητή",
+    exclude: "Σύνθετη ορολογία, πάρα πολλά κριτήρια"
+  },
+
+  feedback: {
+    role: "Δάσκαλος/Δασκάλα Δημοτικού",
+    task: "Παροχή ανατροφοδότησης σε εργασία μαθητή",
+    context: "Δημοτικό (6-11 ετών)",
+    methodology: "Εστιασμένη στην Αξιολόγηση",
+    tone: "Ενθαρρυντικός και υποστηρικτικός",
+    include: "Συγκεκριμένα παραδείγματα, γλώσσα εστιασμένη στην ανάπτυξη, ενεργά επόμενα βήματα",
+    exclude: "Σκληρή κριτική, ασαφή σχόλια, σύγκριση με άλλους μαθητές"
+  },
+
+  differentiated: {
+    role: "Ειδικός Παιδαγωγός",
+    task: "Σχεδιασμός διαφοροποιημένων δραστηριοτήτων",
+    context: "Μαθητές με μαθησιακές δυσκολίες",
+    methodology: "Διαφοροποιημένη Διδασκαλία",
+    tone: "Υπομονετικός και ήπιος",
+    include: "Πολλαπλά μαθησιακά στυλ, επιλογές υποστήριξης, βοηθητική τεχνολογία",
+    exclude: "Προσεγγίσεις ενός μεγέθους για όλους, συντριπτική πολυπλοκότητα"
+  },
+
+  special_needs: {
+    role: "Ειδικός Παιδαγωγός",
+    task: "Προσαρμογή περιεχομένου για ειδικές ανάγκες",
+    context: "Μαθητές με μαθησιακές δυσκολίες",
+    methodology: "Διαφοροποιημένη Διδασκαλία",
+    tone: "Υπομονετικός και ήπιος",
+    include: "Οπτικές υποστηρίξεις, αισθητηριακά διαλείμματα, απλοποιημένες οδηγίες, βοηθητική τεχνολογία",
+    exclude: "Σύνθετες πολυβηματικές εργασίες, χρονική πίεση, αφηρημένες έννοιες χωρίς υποστήριξη"
+  },
+
+  revision: {
+    role: "Καθηγητής/τρια Λυκείου",
+    task: "Δημιουργία δραστηριοτήτων επανάληψης",
+    context: "Μαθητές που προετοιμάζονται για εξετάσεις",
+    methodology: "Διαφοροποιημένη Διδασκαλία",
+    tone: "Παρακινητικός και εμπνευστικός",
+    include: "Ποικιλία μεθόδων επανάληψης, ευκαιρίες αυτοαξιολόγησης, περιλήψεις βασικών εννοιών",
+    exclude: "Μόνο παθητική ανάγνωση, υπερφόρτωση πληροφοριών"
+  }
+};
 
     // Handle template selection
 
