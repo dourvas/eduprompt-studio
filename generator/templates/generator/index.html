@@ -1486,7 +1486,6 @@ const userInput = `
     // Show prompt improvements modal
 
 async function showPromptImprovements() {
-      //alert("Function called!");
   const modal = document.getElementById('promptImprovementsModal');
   const loadingIndicator = document.getElementById('theoryLoadingIndicator');
   const theoryContent = document.getElementById('theoryContent');
@@ -1504,17 +1503,17 @@ async function showPromptImprovements() {
   const configDiv = document.getElementById('promptConfiguration');
   configDiv.innerHTML = `
     <div class="grid grid-cols-2 gap-2 text-sm">
-      <div><strong>Ρόλος:</strong> ${currentFormData.role || 'Not specified'}</div>
-      <div><strong>Θέμα:</strong> ${currentFormData.subject || 'Not specified'}</div>
-      <div><strong>Δραστηριότητα:</strong> ${currentFormData.task || 'Not specified'}</div>
-      <div><strong>Πλαίσιο:</strong> ${currentFormData.context || 'Not specified'}</div>
-      <div><strong>Μεθοδολογία:</strong> ${currentFormData.methodology || 'Not specified'}</div>
-      <div><strong>Τόνος:</strong> ${currentFormData.tone || 'Not specified'}</div>
+      <div><strong>Ρόλος:</strong> ${currentFormData.role || 'Δεν καθορίστηκε'}</div>
+      <div><strong>Θέμα:</strong> ${currentFormData.subject || 'Δεν καθορίστηκε'}</div>
+      <div><strong>Δραστηριότητα:</strong> ${currentFormData.task || 'Δεν καθορίστηκε'}</div>
+      <div><strong>Πλαίσιο:</strong> ${currentFormData.context || 'Δεν καθορίστηκε'}</div>
+      <div><strong>Μεθοδολογία:</strong> ${currentFormData.methodology || 'Δεν καθορίστηκε'}</div>
+      <div><strong>Τόνος:</strong> ${currentFormData.tone || 'Δεν καθορίστηκε'}</div>
     </div>
   `;
   
   // Create prompt improvement analysis prompt - ΕΛΛΗΝΙΚΑ
-const improvementPrompt = `
+  const improvementPrompt = `
 Είσαι ειδικός στη δημιουργία εκπαιδευτικών προτροπών AI. Με βάση αυτήν τη διαμόρφωση προτροπής:
 - Ρόλος: ${currentFormData.role}
 - Θέμα: ${currentFormData.subject}
@@ -1524,6 +1523,8 @@ const improvementPrompt = `
 - Τόνος: ${currentFormData.tone}
 
 Παρέχε 3 συγκεκριμένες βελτιώσεις που θα μπορούσε να προσθέσει ο χρήστης στην προτροπή του για να την κάνει πιο αποτελεσματική.
+
+ΣΗΜΑΝΤΙΚΟ: Απάντησε ΜΟΝΟ με JSON, χωρίς καμία άλλη εξήγηση.
 
 Μορφοποίησε την απάντησή σου ως JSON:
 {
@@ -1554,27 +1555,62 @@ const improvementPrompt = `
     
     if (data.response) {
       try {
-        // Remove markdown formatting if present
-        let cleanResponse = data.response;
-        if (cleanResponse.includes('```json')) {
-          cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/\n?```/g, '');
+        // ============= ENHANCED CLEANING =============
+        
+        // Log raw response for debugging
+        console.log('=== RAW GEMINI RESPONSE ===');
+        console.log('Type:', typeof data.response);
+        console.log('Length:', data.response.length);
+        console.log('First 200 chars:', data.response.substring(0, 200));
+        console.log('Last 200 chars:', data.response.substring(Math.max(0, data.response.length - 200)));
+        
+        let cleanResponse = data.response.trim();
+        
+        // Remove markdown code blocks - COMPREHENSIVE
+        // Handle: ```json\n{...}\n```
+        if (cleanResponse.startsWith('```')) {
+          console.log('Detected markdown code block');
+          // Remove opening ```json or ```
+          cleanResponse = cleanResponse.replace(/^```(?:json)?\s*/i, '');
+          // Remove closing ```
+          cleanResponse = cleanResponse.replace(/\s*```\s*$/i, '');
+          cleanResponse = cleanResponse.trim();
+          console.log('After markdown removal:', cleanResponse.substring(0, 100));
         }
-
+        
+        // Remove any remaining backticks
+        cleanResponse = cleanResponse.replace(/`/g, '');
+        
+        // Final trim
+        cleanResponse = cleanResponse.trim();
+        
+        console.log('=== CLEANED RESPONSE FOR PARSING ===');
+        console.log('First 300 chars:', cleanResponse.substring(0, 300));
+        
+        // Parse JSON
         const mainData = JSON.parse(cleanResponse);
+        
+        console.log('✅ JSON parsed successfully:', mainData);
         
         // Get improvements text and clean it up
         let improvementsText = mainData.prompt_improvements || "";
+        
+        if (!improvementsText || improvementsText.trim() === '') {
+          throw new Error('Empty prompt_improvements field');
+        }
         
         // Clean up JSON formatting
         improvementsText = improvementsText.replace(/^["\s]*/, '').replace(/["\s}]*$/, '');
         improvementsText = improvementsText.replace(/\\n/g, '\n').replace(/\\"/g, '"');
         
-        // Split improvements by numbered list (1., 2., 3.)
-        //const improvementItems = improvementsText.split(/(?=\d+\.\s+)/).filter(item => item.trim());
+        console.log('Improvements text:', improvementsText);
+        
         // Split improvements by numbered list (1., 2., 3.) and remove first empty/invalid item
         const improvementItems = improvementsText.split(/(?=\d+\.\s+)/)
           .filter(item => item.trim())
           .filter(item => /^\d+\./.test(item.trim())); // Only keep items that start with "1.", "2.", etc.
+        
+        console.log('Parsed improvement items:', improvementItems.length, 'items');
         
         // Create checkboxes for each improvement
         const improvementsList = document.getElementById('improvementsList');
@@ -1594,25 +1630,51 @@ const improvementPrompt = `
               improvementsList.innerHTML += checkboxHtml;
             }
           });
+          console.log('✅ Improvements displayed successfully');
         } else {
+          console.warn('⚠️ No valid improvement items found');
           improvementsList.innerHTML = '<p class="text-gray-600">Δεν υπάρχουν διαθέσιμες βελτιώσεις αυτή τη στιγμή.</p>';
         }
         
       } catch (jsonError) {
-        console.error("JSON parsing error:", jsonError);
+        // ============= ENHANCED ERROR HANDLING =============
+        console.error('❌ JSON PARSING ERROR');
+        console.error('Error name:', jsonError.name);
+        console.error('Error message:', jsonError.message);
+        console.error('Error stack:', jsonError.stack);
+        console.error('Response that failed to parse:', data.response);
+        
         const improvementsList = document.getElementById('improvementsList');
-        improvementsList.innerHTML = '<p class="text-gray-600">Σφάλμα ανάλυσης βελτιώσεων. Παρακαλώ δοκιμάστε ξανά.</p>';
+        improvementsList.innerHTML = `
+          <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+            <p class="text-red-800 font-semibold mb-2">Σφάλμα ανάλυσης βελτιώσεων</p>
+            <p class="text-red-700 text-sm mb-3">Παρακαλώ δοκιμάστε ξανά.</p>
+            <details class="text-xs">
+              <summary class="cursor-pointer text-red-600 hover:text-red-800 font-mono">Τεχνικές λεπτομέρειες (F12 Console για περισσότερα)</summary>
+              <div class="mt-2 bg-white p-2 rounded border border-red-200 overflow-auto max-h-40">
+                <p><strong>Error:</strong> ${jsonError.message}</p>
+                <p class="mt-1"><strong>Response preview:</strong></p>
+                <pre class="text-xs mt-1 whitespace-pre-wrap">${data.response.substring(0, 500)}</pre>
+              </div>
+            </details>
+          </div>
+        `;
       }
     } else {
+      console.error('❌ No response from API');
       const improvementsList = document.getElementById('improvementsList');
       improvementsList.innerHTML = '<p class="text-gray-600">Δεν λήφθηκε απάντηση. Παρακαλώ δοκιμάστε ξανά.</p>';
     }
     
   } catch (error) {
-    console.error("Improvement analysis error:", error);
+    console.error('❌ IMPROVEMENT ANALYSIS ERROR');
+    console.error('Error type:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Full error:', error);
+    
     const improvementsList = document.getElementById('improvementsList');
     if (improvementsList) {
-      improvementsList.innerHTML = '<p class="text-gray-600">Αδυναμία ανάλυσης βελτιώσεων αυτή τη στιγμή.</p>';
+      improvementsList.innerHTML = '<p class="text-gray-600">Αδυναμία ανάλυσης βελτιώσεων αυτή τη στιγμή. Ελέγξτε τη σύνδεση δικτύου.</p>';
     }
   } finally {
     loadingIndicator.classList.add('hidden');
