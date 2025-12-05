@@ -1859,24 +1859,7 @@ function suggestRelevantTheory(methodology, task, context) {
   const taskLower = task.toLowerCase();
   const contextLower = context.toLowerCase();
   
-  // Priority mapping based on educational context - ΕΛΛΗΝΙΚΑ KEYWORDS
-  if (methodologyLower.includes('διερευνητική') || methodologyLower.includes('εξερεύνηση') || methodologyLower.includes('ανακάλυψη')) {
-    return 'constructivist';
-  }
-  if (methodologyLower.includes('συνεργατική') || methodologyLower.includes('ομάδα') || methodologyLower.includes('ομαδική') || methodologyLower.includes('συνεργασία')) {
-    return 'social_learning';
-  }
-  if (methodologyLower.includes('τεχνολογία') || methodologyLower.includes('ψηφιακή') || methodologyLower.includes('ai')) {
-    return 'tpack';
-  }
-  if (methodologyLower.includes('διαφοροποιημένη') || methodologyLower.includes('προσαρμοστική')) {
-    return 'udl';
-  }
-  if (methodologyLower.includes('υποστήριξη') || methodologyLower.includes('καθοδήγηση')) {
-    return 'scaffolding';
-  }
-  
-  // Task-based suggestions - ΕΛΛΗΝΙΚΑ KEYWORDS
+  // ===== ΠΡΟΤΕΡΑΙΟΤΗΤΑ 1: TASK-BASED (όταν υπάρχει συγκεκριμένο task) =====
   if (taskLower.includes('κριτική σκέψη') || taskLower.includes('ερωτήσεις') || taskLower.includes('ανάλυση')) {
     return 'blooms';
   }
@@ -1895,14 +1878,37 @@ function suggestRelevantTheory(methodology, task, context) {
   if (taskLower.includes('ομαδικές δραστηριότητες') || taskLower.includes('ομαδική εργασία')) {
     return 'social_learning';
   }
-  if (taskLower.includes('επίλυση προβλημάτων') || taskLower.includes('πρόβλημα')) {
+  if (taskLower.includes('επίλυση προβλημάτων') || taskLower.includes('πρόβλημα') || taskLower.includes('σενάριο')) {
     return 'constructivist';
   }
   if (taskLower.includes('ασκήσεις') || taskLower.includes('εξάσκηση')) {
     return 'scaffolding';
   }
+  if (taskLower.includes('δημιουργική γραφή') || taskLower.includes('προτροπών')) {
+    return 'constructivist';
+  }
+  if (taskLower.includes('συζήτηση') || taskLower.includes('επιχειρήματ')) {
+    return 'social_learning';
+  }
   
-  // Context-based suggestions - ΕΛΛΗΝΙΚΑ KEYWORDS
+  // ===== ΠΡΟΤΕΡΑΙΟΤΗΤΑ 2: METHODOLOGY-BASED (fallback) =====
+  if (methodologyLower.includes('διερευνητική') || methodologyLower.includes('εξερεύνηση') || methodologyLower.includes('ανακάλυψη')) {
+    return 'constructivist';
+  }
+  if (methodologyLower.includes('συνεργατική') || methodologyLower.includes('ομάδα') || methodologyLower.includes('ομαδική') || methodologyLower.includes('συνεργασία')) {
+    return 'social_learning';
+  }
+  if (methodologyLower.includes('τεχνολογία') || methodologyLower.includes('ψηφιακή') || methodologyLower.includes('ai')) {
+    return 'tpack';
+  }
+  if (methodologyLower.includes('διαφοροποιημένη') || methodologyLower.includes('προσαρμοστική')) {
+    return 'udl';
+  }
+  if (methodologyLower.includes('υποστήριξη') || methodologyLower.includes('καθοδήγηση')) {
+    return 'scaffolding';
+  }
+  
+  // ===== ΠΡΟΤΕΡΑΙΟΤΗΤΑ 3: CONTEXT-BASED (fallback) =====
   if (contextLower.includes('μικτό επίπεδο') || contextLower.includes('ειδικές ανάγκες') || contextLower.includes('μαθησιακές δυσκολίες')) {
     return 'udl';
   }
@@ -1913,7 +1919,6 @@ function suggestRelevantTheory(methodology, task, context) {
   // Default
   return 'blooms';
 }
-
 // Update theory recommendation when methodology/task changes - ΕΛΛΗΝΙΚΑ
 function updateTheoryRecommendation() {
   const methodology = document.getElementById('methodology').value;
