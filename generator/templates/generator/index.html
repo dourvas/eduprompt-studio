@@ -2006,13 +2006,30 @@ document.addEventListener('DOMContentLoaded', function() {
     radio.addEventListener('change', toggleTheorySelection);
   });
   
-  // Form field changes for recommendations
-  document.getElementById('methodology').addEventListener('change', updateTheoryRecommendation);
-  document.getElementById('task').addEventListener('change', updateTheoryRecommendation);
-  document.getElementById('context').addEventListener('change', updateTheoryRecommendation);
+  // Form field changes for recommendations - ΜΕ RESET του userSelected flag
+  document.getElementById('methodology').addEventListener('change', function() {
+    // Καθάρισε το user-selected flag όταν αλλάζει η methodology
+    delete document.getElementById('theory_enhancement').dataset.userSelected;
+    updateTheoryRecommendation();
+  });
   
-  // IMPORTANT: Also listen to template changes (this was missing!)
+  document.getElementById('task').addEventListener('change', function() {
+    // Καθάρισε το user-selected flag όταν αλλάζει το task
+    delete document.getElementById('theory_enhancement').dataset.userSelected;
+    updateTheoryRecommendation();
+  });
+  
+  document.getElementById('context').addEventListener('change', function() {
+    // Καθάρισε το user-selected flag όταν αλλάζει το context
+    delete document.getElementById('theory_enhancement').dataset.userSelected;
+    updateTheoryRecommendation();
+  });
+  
+  // IMPORTANT: Also listen to template changes
   document.getElementById('template').addEventListener('change', function() {
+    // Καθάρισε το user-selected flag όταν αλλάζει το template
+    delete document.getElementById('theory_enhancement').dataset.userSelected;
+    
     // Template changes trigger methodology changes programmatically
     // We need to manually trigger the recommendation update
     setTimeout(() => {
