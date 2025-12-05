@@ -1485,7 +1485,7 @@ const userInput = `
 
     // Show prompt improvements modal
 
-    async function showPromptImprovements() {
+async function showPromptImprovements() {
       //alert("Function called!");
   const modal = document.getElementById('promptImprovementsModal');
   const loadingIndicator = document.getElementById('theoryLoadingIndicator');
@@ -1504,35 +1504,34 @@ const userInput = `
   const configDiv = document.getElementById('promptConfiguration');
   configDiv.innerHTML = `
     <div class="grid grid-cols-2 gap-2 text-sm">
-      <div><strong>Role:</strong> ${currentFormData.role || 'Not specified'}</div>
-      <div><strong>Subject:</strong> ${currentFormData.subject || 'Not specified'}</div>
-      <div><strong>Task:</strong> ${currentFormData.task || 'Not specified'}</div>
-      <div><strong>Context:</strong> ${currentFormData.context || 'Not specified'}</div>
-      <div><strong>Methodology:</strong> ${currentFormData.methodology || 'Not specified'}</div>
-      <div><strong>Tone:</strong> ${currentFormData.tone || 'Not specified'}</div>
+      <div><strong>Ρόλος:</strong> ${currentFormData.role || 'Not specified'}</div>
+      <div><strong>Θέμα:</strong> ${currentFormData.subject || 'Not specified'}</div>
+      <div><strong>Δραστηριότητα:</strong> ${currentFormData.task || 'Not specified'}</div>
+      <div><strong>Πλαίσιο:</strong> ${currentFormData.context || 'Not specified'}</div>
+      <div><strong>Μεθοδολογία:</strong> ${currentFormData.methodology || 'Not specified'}</div>
+      <div><strong>Τόνος:</strong> ${currentFormData.tone || 'Not specified'}</div>
     </div>
   `;
   
-  // Create prompt improvement analysis prompt
-  const improvementPrompt = `
-You are a prompt engineering expert for educational AI prompts. Based on this prompt configuration:
+  // Create prompt improvement analysis prompt - ΕΛΛΗΝΙΚΑ
+const improvementPrompt = `
+Είσαι ειδικός στη δημιουργία εκπαιδευτικών προτροπών AI. Με βάση αυτήν τη διαμόρφωση προτροπής:
+- Ρόλος: ${currentFormData.role}
+- Θέμα: ${currentFormData.subject}
+- Δραστηριότητα: ${currentFormData.task}
+- Πλαίσιο: ${currentFormData.context}
+- Μεθοδολογία: ${currentFormData.methodology}
+- Τόνος: ${currentFormData.tone}
 
-- Role: ${currentFormData.role}
-- Subject: ${currentFormData.subject}
-- Task: ${currentFormData.task}
-- Context: ${currentFormData.context}
-- Methodology: ${currentFormData.methodology}
-- Tone: ${currentFormData.tone}
+Παρέχε 3 συγκεκριμένες βελτιώσεις που θα μπορούσε να προσθέσει ο χρήστης στην προτροπή του για να την κάνει πιο αποτελεσματική.
 
-Please provide 3 specific improvements the user could add to their prompt to make it more effective.
-
-Format your response as JSON:
+Μορφοποίησε την απάντησή σου ως JSON:
 {
-  "prompt_improvements": "1. First improvement\n2. Second improvement\n3. Third improvement"
+  "prompt_improvements": "1. Πρώτη βελτίωση\n2. Δεύτερη βελτίωση\n3. Τρίτη βελτίωση"
 }
 
-Focus on practical additions like: asking for specific formats, requesting differentiation levels, adding assessment criteria, including time constraints, etc.
-  `;
+Εστίασε σε πρακτικές προσθήκες όπως: ζήτημα συγκεκριμένων μορφών, αίτημα επιπέδων διαφοροποίησης, προσθήκη κριτηρίων αξιολόγησης, συμπερίληψη χρονικών περιορισμών, κ.λπ.
+`;
   
   try {
     // Make request to Django backend for improvement analysis
@@ -1596,24 +1595,24 @@ Focus on practical additions like: asking for specific formats, requesting diffe
             }
           });
         } else {
-          improvementsList.innerHTML = '<p class="text-gray-600">No improvements available at this time.</p>';
+          improvementsList.innerHTML = '<p class="text-gray-600">Δεν υπάρχουν διαθέσιμες βελτιώσεις αυτή τη στιγμή.</p>';
         }
         
       } catch (jsonError) {
         console.error("JSON parsing error:", jsonError);
         const improvementsList = document.getElementById('improvementsList');
-        improvementsList.innerHTML = '<p class="text-gray-600">Error parsing improvements. Please try again.</p>';
+        improvementsList.innerHTML = '<p class="text-gray-600">Σφάλμα ανάλυσης βελτιώσεων. Παρακαλώ δοκιμάστε ξανά.</p>';
       }
     } else {
       const improvementsList = document.getElementById('improvementsList');
-      improvementsList.innerHTML = '<p class="text-gray-600">No response received. Please try again.</p>';
+      improvementsList.innerHTML = '<p class="text-gray-600">Δεν λήφθηκε απάντηση. Παρακαλώ δοκιμάστε ξανά.</p>';
     }
     
   } catch (error) {
     console.error("Improvement analysis error:", error);
     const improvementsList = document.getElementById('improvementsList');
     if (improvementsList) {
-      improvementsList.innerHTML = '<p class="text-gray-600">Unable to analyze prompt improvements at this time.</p>';
+      improvementsList.innerHTML = '<p class="text-gray-600">Αδυναμία ανάλυσης βελτιώσεων αυτή τη στιγμή.</p>';
     }
   } finally {
     loadingIndicator.classList.add('hidden');
@@ -1630,7 +1629,7 @@ async function applySelectedImprovements() {
 
   if (checkboxes.length === 0) {
 
-    alert('Please select at least one improvement to apply.');
+    alert('Παρακαλώ επιλέξτε τουλάχιστον μία βελτίωση για εφαρμογή.');
 
     return;
 
