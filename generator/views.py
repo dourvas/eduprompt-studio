@@ -306,6 +306,9 @@ Do not include ```json, markdown, or any other formatting. Just pure JSON.
         #print(f"DEBUG: Final prompt being sent to Gemini:")
         #print(f"DEBUG: {prompt}")
         #print("="*80)
+        
+        # Detect large prompts (improvements applied)
+        is_large_prompt = len(prompt) > 3000
         payload = {
             "contents": [
                 {
@@ -318,7 +321,7 @@ Do not include ```json, markdown, or any other formatting. Just pure JSON.
                 "temperature": 0.7,
                 "topK": 40,
                 "topP": 0.95,
-                "maxOutputTokens": 2000,
+                "maxOutputTokens": 8192 if is_large_prompt else 4096,
                 "stopSequences": []
             }
         }
