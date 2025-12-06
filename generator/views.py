@@ -308,7 +308,7 @@ Do not include ```json, markdown, or any other formatting. Just pure JSON.
         #print("="*80)
         
         # Detect large prompts (improvements applied)
-        is_large_prompt = len(prompt) > 3000
+        is_large_prompt = len(prompt) > 3000 or is_improvement_request
         payload = {
             "contents": [
                 {
