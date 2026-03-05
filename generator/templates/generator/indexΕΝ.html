@@ -1,0 +1,2710 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+  <title>AI Prompt Generator for Educators</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://unpkg.com/daisyui@4.4.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="{% static 'generator/onboarding.css' %}">
+
+  <script>
+
+    tailwind.config = {
+
+      daisyui: {
+
+        themes: ["dark"]
+
+      }
+
+    }
+
+  </script>
+
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+
+  
+
+  <div class="max-w-4xl mx-auto px-4 py-8">
+
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+
+      <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-8 mb-8 rounded-xl shadow-lg">
+
+  <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-lg px-6 py-10 sm:px-12 sm:py-12 max-w-5xl mx-auto">
+
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-6">
+    <img src="{% static 'generator/eduPromptStudio_logo.png' %}" 
+        alt="EduPrompt Studio Logo"
+        class="h-16 w-16 object-contain rounded-md shadow-md bg-white p-1" />
+    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-center sm:text-left">
+        EduPrompt Studio
+    </h1>
+    </div>
+
+
+
+  <p class="text-lg sm:text-xl font-medium text-center mb-2">
+
+    Design better prompts with AI – in seconds
+
+  </p>
+
+  <p class="text-sm sm:text-base text-center opacity-90">
+
+    Craft research-based, classroom-ready prompts effortlessly
+
+  </p>
+
+</div>
+
+
+
+</div>
+
+<div class="mb-6 text-center">
+  <a href="/help/" class="btn btn-outline btn-info">
+    📚 User Guide & Help
+  </a>
+  <p class="text-sm text-gray-500 mt-2">
+    New to EduPrompt Studio? Check out our comprehensive guide!
+  </p>
+</div>
+
+      <form id="promptForm" onsubmit="handleSubmit(event)">
+
+        
+
+        <!-- QUICK START TEMPLATES -->
+
+        <div class="mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-200">
+
+          <label for="template" class="block text-lg font-semibold mb-3 text-purple-800">
+
+            ⚡ Quick Start - Choose a template (optional)
+
+          </label>
+
+          <select id="template" name="template" class="select select-bordered w-full max-w-md bg-white">
+
+            <option value="">Create from scratch</option>
+
+            <optgroup label="📚 Lesson Planning">
+
+              <option value="lesson_plan">Complete Lesson Plan</option>
+
+              <option value="warm_up">Warm-up Activities</option>
+
+              <option value="lesson_intro">Introduction to New Topic</option>
+
+            </optgroup>
+
+            <optgroup label="🤔 Critical Thinking">
+
+              <option value="critical_questions">Critical Thinking Questions</option>
+
+              <option value="problem_solving">Problem-Solving Activities</option>
+
+              <option value="debates">Discussions & Debates</option>
+
+            </optgroup>
+
+            <optgroup label="📝 Practice & Activities">
+
+              <option value="practice_exercises">Practice Exercises</option>
+
+              <option value="group_activities">Group Activities</option>
+
+              <option value="creative_writing">Creative Writing Prompts</option>
+
+            </optgroup>
+
+            <optgroup label="🎯 Assessment">
+
+              <option value="quiz_assessment">Quiz & Assessment</option>
+
+              <option value="rubrics">Create Rubrics</option>
+
+              <option value="feedback">Provide Feedback</option>
+
+            </optgroup>
+
+            <optgroup label="🌟 Differentiation">
+
+              <option value="differentiated">Differentiated Activities</option>
+
+              <option value="special_needs">Special Educational Needs</option>
+
+              <option value="revision">Revision Activities</option>
+
+            </optgroup>
+
+          </select>
+
+          <p class="text-sm text-purple-600 mt-2">💡 Select a template to auto-fill the form fields</p>
+
+        </div>
+
+
+
+        <!-- ROLE -->
+
+        <div class="mb-6">
+
+          <label for="role" class="block text-lg font-semibold mb-3 text-gray-700">
+
+            🤖 What's your teaching role?
+
+          </label>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+
+            <select id="role" name="role" class="select select-bordered flex-1">
+
+              <option value="">Select a role</option>
+
+              <optgroup label="Education Levels">
+
+                <option>Kindergarten teacher</option>
+
+                <option>Elementary school teacher</option>
+
+                <option>Middle school teacher</option>
+
+                <option>High school teacher</option>
+
+                <option>Special education teacher</option>
+
+                <option>Language instructor</option>
+
+              </optgroup>
+
+              <optgroup label="Subject Specialists">
+
+                <option>Math teacher</option>
+
+                <option>Science teacher</option>
+
+                <option>History teacher</option>
+
+                <option>Literature teacher</option>
+
+                <option>Art teacher</option>
+
+                <option>PE teacher</option>
+
+              </optgroup>
+
+              <optgroup label="Other Roles">
+
+                <option>Tutor</option>
+
+                <option>Parent explaining to child</option>
+
+                <option>Educational consultant</option>
+
+                <option>Other</option>
+
+              </optgroup>
+
+            </select>
+
+            <input id="roleOther" name="roleOther" type="text"
+
+              placeholder="Please specify..."
+
+              class="input input-bordered flex-1 hidden" />
+
+          </div>
+
+        </div>
+
+
+
+        <!-- SUBJECT/TOPIC -->
+
+        <div class="mb-6">
+
+          <label for="subject" class="block text-lg font-semibold mb-3 text-gray-700">
+
+            📖 What subject content and learning objectives?
+
+          </label>
+
+          <input id="subject" name="subject" type="text"
+
+            placeholder="e.g., Fractions - understanding equivalence and operations, World War II - analyzing causes and effects"
+
+            class="input input-bordered w-full"
+
+            required />
+
+            <p class="text-sm text-gray-500 mt-1">Include both the subject area and specific learning goals</p>
+
+        </div>
+
+
+
+        <!-- TASK -->
+
+        <div class="mb-6">
+
+          <label for="task" class="block text-lg font-semibold mb-3 text-gray-700">
+
+            🎯 What learning experience do you want to create?
+
+          </label>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+
+            <select id="task" name="task" class="select select-bordered flex-1">
+
+              <option value="">Select a task</option>
+
+              <optgroup label="Technology-Enhanced Content Creation">
+
+                <option>Create a complete lesson plan with objectives</option>
+
+                <option>Generate practice exercises with answers</option>
+
+                <option>Design a quiz or assessment</option>
+
+                <option>Create a project rubric</option>
+
+                <option>Create vocabulary activities</option>
+
+                <option>Provide feedback on student work</option>
+
+              </optgroup>
+
+              <optgroup label="Technology-Enhanced Pedagogy">
+
+                <option>Design a warm-up activity</option>
+
+                <option>Create an introduction to new topic</option>
+
+                <option>Create gamified learning activities</option>
+
+                <option>Design hands-on experiments</option>
+
+                <option>Create storytelling activities</option>
+
+                <option>Design real-world applications</option>
+
+              </optgroup>
+
+              <optgroup label="Comprehensive Learning Design">
+
+                <option>Create critical thinking questions</option>
+
+                <option>Design problem-solving scenarios</option>
+
+                <option>Generate debate topics and arguments</option>
+
+                <option>Create case studies for analysis</option>
+
+                <option>Design differentiated activities</option>
+
+                <option>Create activities for multiple intelligences</option>
+
+                <option>Adapt content for special needs</option>
+
+                <option>Generate extension activities</option>
+
+                <option>Create revision activities</option>
+
+                <option>Generate creative writing prompts</option>
+
+              </optgroup>
+
+              <optgroup label="Other">
+
+                <option>Other</option>
+
+              </optgroup>
+
+            </select>
+
+            <input id="taskOther" name="taskOther" type="text"
+
+              placeholder="Please specify..."
+
+              class="input input-bordered flex-1 hidden" />
+
+          </div>
+
+        </div>
+
+
+
+        <!-- CONTEXT -->
+
+        <div class="mb-6">
+
+          <label for="context" class="block text-lg font-semibold mb-3 text-gray-700">
+
+            🎓 Who is this for? What's the context?
+
+          </label>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+
+            <select id="context" name="context" class="select select-bordered flex-1" required>
+
+              <option value="">Select context</option>
+
+              <optgroup label="Age Groups">
+
+                <option>Preschool (ages 3-5)</option>
+
+                <option>Primary students (ages 6-11)</option>
+
+                <option>Lower secondary (ages 12-14)</option>
+
+                <option>Upper secondary (ages 15-18)</option>
+
+                <option>Adult learners</option>
+
+              </optgroup>
+
+              <optgroup label="Learning Environments">
+
+                <option>Traditional classroom</option>
+
+                <option>Online/remote learning</option>
+
+                <option>Hybrid classroom</option>
+
+                <option>Homeschool setting</option>
+
+                <option>After-school program</option>
+
+              </optgroup>
+
+              <optgroup label="Special Considerations">
+
+                <option>Mixed-ability classroom</option>
+
+                <option>ESL/EFL learners</option>
+
+                <option>Students with learning difficulties</option>
+
+                <option>Gifted students</option>
+
+                <option>Students preparing for exams</option>
+
+              </optgroup>
+
+              <optgroup label="Other">
+
+                <option>Other</option>
+
+              </optgroup>
+
+            </select>
+
+            <input id="contextOther" name="contextOther" type="text"
+
+              placeholder="Please specify..."
+
+              class="input input-bordered flex-1 hidden" />
+
+          </div>
+
+        </div>
+
+
+
+      <!-- METHODOLOGY - Enhanced version με research-based suggestions -->
+<div class="mb-6">
+  <label for="methodology" class="block text-lg font-semibold mb-3 text-gray-700">
+    🧠 What teaching approach supports your learning goals?
+  </label>
+  
+  <div class="flex flex-col sm:flex-row gap-3">
+    <select id="methodology" name="methodology" class="select select-bordered flex-1">
+      <option value="">Select methodology</option>
+      
+      <optgroup label="Traditional Pedagogical Methods">
+        <option>Direct Instruction</option>
+        <option>Inquiry-based Learning</option>
+        <option>Problem-based Learning</option>
+        <option>Collaborative Learning</option>
+        <option>Project-based Learning</option>
+        <option>Differentiated Instruction</option>
+        <option>Assessment-focused approaches</option>
+      </optgroup>
+      
+      <optgroup label="Technology-Enhanced Methods">
+        <option>Technology-supported Direct Instruction</option>
+        <option>Digital Inquiry Learning</option>
+        <option>Technology-enhanced Problem Solving</option>
+        <option>Digital Collaborative Learning</option>
+        <option>Tech-integrated Project Work</option>
+        <option>Adaptive Learning with digital tools</option>
+        <option>Technology-enhanced Assessment</option>
+      </optgroup>
+      
+      <optgroup label="Other">
+        <option>Other</option>
+      </optgroup>
+    </select>
+    
+    <input id="methodologyOther" name="methodologyOther" type="text"
+      placeholder="Please specify..."
+      class="input input-bordered flex-1 hidden" />
+  </div>
+  
+  <!-- Research-Based Suggestion Display -->
+  <div id="methodology_suggestion" class="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200 hidden">
+    <div class="flex items-start space-x-2">
+      <div class="text-blue-600 mt-0.5 flex-shrink-0">💡</div>
+      <div class="min-w-0 flex-1">
+        <div class="text-sm font-medium text-blue-800 mb-1">Research-Based Suggestion:</div>
+        <div id="suggestion_content" class="text-sm text-blue-700 leading-relaxed mb-2"></div>
+        <div class="text-xs text-blue-600 italic" id="suggestion_citation"></div>
+        
+        <!-- Alternative Options -->
+        <div class="mt-3 pt-2 border-t border-blue-200">
+          <div class="text-xs font-medium text-blue-800 mb-2">Alternative approaches you might consider:</div>
+          <div id="alternative_options" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <!-- TONE -->
+
+        <div class="mb-6">
+
+          <label for="tone" class="block text-lg font-semibold mb-3 text-gray-700">
+
+            🎭 What tone should the AI adopt?
+
+          </label>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+
+            <select id="tone" name="tone" class="select select-bordered flex-1">
+
+              <option value="">Select tone</option>
+
+              <optgroup label="Supportive">
+
+                <option>Encouraging and supportive</option>
+
+                <option>Patient and gentle</option>
+
+                <option>Motivational and inspiring</option>
+
+                <option>Nurturing and caring</option>
+
+              </optgroup>
+
+              <optgroup label="Engaging">
+
+                <option>Friendly and conversational</option>
+
+                <option>Humorous and playful</option>
+
+                <option>Enthusiastic and energetic</option>
+
+                <option>Curious and exploratory</option>
+
+              </optgroup>
+
+              <optgroup label="Professional">
+
+                <option>Academic and precise</option>
+
+                <option>Neutral and objective</option>
+
+                <option>Formal and structured</option>
+
+                <option>Clear and direct</option>
+
+              </optgroup>
+
+              <optgroup label="Casual">
+
+                <option>Informal and casual</option>
+
+                <option>Relaxed and approachable</option>
+
+                <option>Other</option>
+
+              </optgroup>
+
+            </select>
+
+            <input id="toneOther" name="toneOther" type="text"
+
+              placeholder="Please specify..."
+
+              class="input input-bordered flex-1 hidden" />
+
+          </div>
+
+        </div>
+
+
+
+        <!-- EXAMPLES / EXCLUSIONS -->
+
+        <div class="mb-8">
+
+          <label for="examples" class="block text-lg font-semibold mb-3 text-gray-700">
+
+            📋 Additional Guidelines (Optional)
+
+          </label>
+
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <div>
+
+              <label class="block text-sm font-medium mb-2 text-green-700">✅ Include:</label>
+
+              <textarea id="include" name="include"
+
+                placeholder="e.g., Real-life examples, visual aids, step-by-step instructions"
+
+                class="textarea textarea-bordered w-full h-24 border-green-300 focus:border-green-500"></textarea>
+
+            </div>
+
+            <div>
+
+              <label class="block text-sm font-medium mb-2 text-red-700">❌ Avoid:</label>
+
+              <textarea id="exclude" name="exclude"
+
+                placeholder="e.g., Complex terminology, abstract concepts, lengthy explanations"
+
+                class="textarea textarea-bordered w-full h-24 border-red-300 focus:border-red-500"></textarea>
+
+            </div>
+
+          </div>
+
+          <p class="text-sm text-gray-500 mt-2">💡 These fields are optional but help create more targeted prompts</p>
+
+        </div>
+
+        <!-- ENHANCEMENT OPTIONS - Αντικαταστήστε το υπάρχον section -->
+<div class="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+  <h4 class="font-semibold text-yellow-800 mb-3">🎓 Prompt Enhancement Options:</h4>
+  <div class="space-y-3">
+    <label class="flex items-center">
+      <input type="radio" name="enhancement" value="enhanced" class="mr-2" checked>
+      <span class="text-sm">
+        <strong>Generate with learning theory enhancements</strong> (recommended)
+        <br><em class="text-gray-600">Includes educational frameworks to improve pedagogical effectiveness</em>
+      </span>
+    </label>
+    
+    <!-- Theory Selection - Shows when Enhanced is selected -->
+    <div id="theory_selection_section" class="ml-6 mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+      <label class="block text-sm font-medium text-blue-800 mb-2">Select Educational Theory:</label>
+      
+      <div class="space-y-3">
+        <!-- Theory Dropdown -->
+        <select id="theory_enhancement" name="theory_enhancement" class="select select-bordered w-full bg-white text-sm">
+          <option value="">Auto-select best theory for this task</option>
+          <option value="blooms">Bloom's Taxonomy - Cognitive Progression</option>
+          <option value="udl">UDL Principles - Inclusive Design</option>
+          <option value="tpack">TPACK Framework - Technology Integration</option>
+          <option value="constructivist">Constructivist Learning - Active Discovery</option>
+          <option value="social_learning">Social Learning Theory - Peer Collaboration</option>
+          <option value="scaffolding">Scaffolding - Gradual Support</option>
+          <option value="differentiation">Differentiated Instruction - Individual Pathways</option>
+        </select>
+        
+        <!-- Smart Recommendation Display -->
+        <div id="theory_recommendation" class="bg-green-50 p-3 rounded-lg border border-green-300 hidden">
+          <div class="flex items-start space-x-2">
+            <div class="text-green-600 mt-0.5 flex-shrink-0">💡</div>
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium text-green-800 mb-1">System Recommendation:</div>
+              <div id="recommendation_text" class="text-sm text-green-700 leading-relaxed"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Theory Information Display -->
+        <div id="theory_info" class="bg-gray-50 p-3 rounded-lg border border-gray-200 hidden">
+          <div class="text-sm">
+            <div class="font-medium text-gray-800 mb-1" id="theory_title"></div>
+            <div class="text-gray-600 leading-relaxed" id="theory_description"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <label class="flex items-center">
+      <input type="radio" name="enhancement" value="basic" class="mr-2">
+      <span class="text-sm">
+        <strong>Generate exact prompt as specified</strong>
+        <br><em class="text-gray-600">No additional theoretical enhancements</em>
+      </span>
+    </label>
+  </div>
+</div>
+
+        <!-- SUBMIT BUTTON -->
+
+        <div class="text-center">
+
+          <button type="button" id="generateBtn" onclick="generateWithGemini()" 
+
+                  class="btn btn-primary text-white px-8 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+
+            🚀 Generate Prompt
+
+          </button>
+
+        </div>
+
+        
+
+        <!-- LOADING INDICATOR -->
+
+        <div id="loadingIndicator" class="text-center mt-8 hidden">
+
+          <div class="flex flex-col items-center justify-center">
+
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+
+            <p class="text-gray-600 font-medium">Generating your prompt… Please wait.</p>
+
+            <p class="text-sm text-gray-500 mt-1">This may take up to 15 seconds</p>
+
+          </div>
+
+        </div>
+
+        
+
+        <!-- PROMPT OUTPUT -->
+
+        <div id="promptContainer" class="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg shadow-md border border-green-200" style="display: none;">
+
+          <h2 class="text-xl font-semibold mb-4 text-green-800">✨ Your Generated Prompt:</h2>
+
+          <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+
+            <textarea id="outputPrompt" class="w-full h-48 p-3 text-gray-800 font-mono text-sm border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+          </div>
+
+          <div class="mt-4 flex items-center justify-center gap-4">
+
+            <button type="button" onclick="copyToClipboard()" class="btn btn-sm btn-outline btn-success">
+
+              📋 Copy to Clipboard
+
+            </button>
+
+            <button type="button" onclick="showPromptImprovements()" class="btn btn-sm btn-outline btn-info">
+
+              ⚡ Improve This Prompt
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Prompt Improvements Modal -->
+
+  <div id="promptImprovementsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+
+    <div class="bg-white rounded-lg p-6 max-w-2xl mx-4 shadow-2xl transform transition-all duration-300 scale-95 max-h-[90vh] overflow-y-auto">
+
+      <div class="flex justify-between items-center mb-4">
+
+        <h3 class="text-xl font-semibold text-gray-800">⚡ How to Improve This Prompt</h3>
+
+        <button onclick="closePromptImprovementsModal()" class="text-gray-500 hover:text-gray-700">
+
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+
+          </svg>
+
+        </button>
+
+      </div>
+
+      
+
+      <div id="theoryLoadingIndicator" class="text-center py-8">
+
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+
+        <p class="text-gray-600">Analyzing prompt improvements...</p>
+
+      </div>
+
+      
+
+      <div id="theoryContent" class="hidden">
+
+                
+
+        <div class="bg-green-50 p-4 rounded-lg border border-green-200 mb-4">
+
+          <h4 class="font-semibold text-green-800 mb-2">🎯 Your Prompt Configuration:</h4>
+
+          <div id="promptConfiguration" class="text-sm text-gray-600"></div>
+
+        </div>
+
+        
+
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
+
+          <h4 class="font-semibold text-blue-800 mb-2">⚡ Choose Improvements to Apply:</h4>
+
+          <div id="improvementsList" class="space-y-3">
+
+            <!-- Checkboxes will be dynamically added here -->
+
+          </div>
+
+          <div class="mt-4 text-center">
+
+            <button type="button" onclick="applySelectedImprovements()" class="btn btn-sm btn-primary">
+
+              🚀 Apply Selected Improvements
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      
+
+      <div class="mt-6 text-center">
+
+        <button onclick="closePromptImprovementsModal()" class="btn btn-sm btn-primary">
+
+          Got it!
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Confirmation Modal -->
+
+  <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+
+    <div class="bg-white rounded-lg p-6 max-w-sm mx-4 shadow-2xl transform transition-all duration-300 scale-95">
+
+      <div class="text-center">
+
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+
+          </svg>
+
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Prompt Copied!</h3>
+
+        <p class="text-gray-600 mb-4">Your AI prompt has been successfully copied to the clipboard.</p>
+
+        <button onclick="closeConfirmationModal()" class="btn btn-sm btn-primary">
+
+          Got it!
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <script>
+
+    // Template definitions
+
+    const templates = {
+
+          lesson_plan: {
+
+            role: "High school teacher",
+
+            task: "Create a complete lesson plan with objectives",
+
+            context: "Upper secondary (ages 15-18)",
+
+            methodology: "Teacher explains, AI provides examples and practice (Direct Instruction)",
+
+            tone: "Academic and precise",
+
+            include: "Learning objectives, assessment methods, differentiation strategies, timing for each activity",
+
+            exclude: "Overly complex activities, unrealistic time expectations"
+
+          },
+
+          warm_up: {
+
+            role: "Elementary school teacher",
+
+            task: "Design a warm-up activity",
+
+            context: "Primary students (ages 6-11)",
+
+            methodology: "Students work in groups with AI facilitation (Collaborative Learning)",
+
+            tone: "Enthusiastic and energetic",
+
+            include: "Interactive elements, 5-10 minute duration, connection to previous learning",
+
+            exclude: "Lengthy explanations, sedentary activities"
+
+          },
+
+          lesson_intro: {
+
+            role: "Middle school teacher",
+
+            task: "Create an introduction to new topic",
+
+            context: "Lower secondary (ages 12-14)",
+
+            methodology: "Students explore with AI as research assistant (Inquiry-based Learning)",
+
+            tone: "Curious and exploratory",
+
+            include: "Hook activity, prior knowledge activation, learning objectives preview",
+
+            exclude: "Information overload, lengthy explanations at the start"
+
+          },
+
+          critical_questions: {
+
+            role: "Middle school teacher",
+
+            task: "Create critical thinking questions",
+
+            context: "Lower secondary (ages 12-14)",
+
+            methodology: "Students explore with AI as research assistant (Inquiry-based Learning)",
+
+            tone: "Curious and exploratory",
+
+            include: "Questions from different cognitive levels, open-ended questions",
+
+            exclude: "Yes/no questions, factual recall only"
+
+          },
+
+          problem_solving: {
+
+            role: "High school teacher",
+
+            task: "Design problem-solving scenarios",
+
+            context: "Upper secondary (ages 15-18)",
+
+            methodology: "Students solve problems with AI hints and scaffolding (Problem-based Learning)",
+
+            tone: "Encouraging and supportive",
+
+            include: "Real-world scenarios, step-by-step thinking process, collaborative elements",
+
+            exclude: "Abstract problems without context, overwhelming complexity"
+
+          },
+
+          debates: {
+
+            role: "High school teacher",
+
+            task: "Generate debate topics and arguments",
+
+            context: "Upper secondary (ages 15-18)",
+
+            methodology: "Students work in groups with AI facilitation (Collaborative Learning)",
+
+            tone: "Neutral and objective",
+
+            include: "Balanced perspectives, evidence-based arguments, structured format",
+
+            exclude: "Controversial personal topics, one-sided arguments"
+
+          },
+
+          practice_exercises: {
+
+            role: "Math teacher",
+
+            task: "Generate practice exercises with answers",
+
+            context: "Mixed-ability classroom",
+
+            methodology: "AI gives personalized support and encouragement (Scaffolding)",
+
+            tone: "Encouraging and supportive",
+
+            include: "Varying difficulty levels, step-by-step solutions, real-world applications",
+
+            exclude: "Repetitive drill exercises, abstract examples only"
+
+          },
+
+          group_activities: {
+
+            role: "High school teacher",
+
+            task: "Students work in groups with AI facilitation (Collaborative Learning)",
+
+            context: "Upper secondary (ages 15-18)",
+
+            methodology: "Students work in groups with AI facilitation (Collaborative Learning)",
+
+            tone: "Friendly and conversational",
+
+            include: "Clear roles for each member, specific objectives, time management",
+
+            exclude: "Vague instructions, unequal participation opportunities"
+
+          },
+
+          creative_writing: {
+
+            role: "Literature teacher",
+
+            task: "Generate creative writing prompts",
+
+            context: "Lower secondary (ages 12-14)",
+
+            methodology: "Students create projects with AI collaboration tools (Project-based Learning)",
+
+            tone: "Motivational and inspiring",
+
+            include: "Diverse themes, sensory details, character development prompts",
+
+            exclude: "Overly complex themes, adult topics"
+
+          },
+
+          quiz_assessment: {
+
+            role: "Science teacher",
+
+            task: "Design a quiz or assessment",
+
+            context: "Upper secondary (ages 15-18)",
+
+            methodology: "AI provides ongoing feedback during learning (Formative Assessment)",
+
+            tone: "Clear and direct",
+
+            include: "Multiple question types, clear rubrics, immediate feedback",
+
+            exclude: "Trick questions, ambiguous wording"
+
+          },
+
+          rubrics: {
+
+            role: "Elementary school teacher",
+
+            task: "Create a project rubric",
+
+            context: "Primary students (ages 6-11)",
+
+            methodology: "AI helps students reflect on their progress (Self-assessment & Reflection)",
+
+            tone: "Clear and direct",
+
+            include: "Age-appropriate criteria, visual elements, student-friendly language",
+
+            exclude: "Complex terminology, too many criteria"
+
+          },
+
+          feedback: {
+
+            role: "Elementary school teacher",
+
+            task: "Provide feedback on student work",
+
+            context: "Primary students (ages 6-11)",
+
+            methodology: "AI provides ongoing feedback during learning (Formative Assessment)",
+
+            tone: "Encouraging and supportive",
+
+            include: "Specific examples, growth-focused language, actionable next steps",
+
+            exclude: "Harsh criticism, vague comments, comparison to other students"
+
+          },
+
+          differentiated: {
+
+            role: "Special education teacher",
+
+            task: "Design differentiated activities",
+
+            context: "Students with learning difficulties",
+
+            methodology: "AI provides different paths for different learners (Differentiated Instruction)",
+
+            tone: "Patient and gentle",
+
+            include: "Multiple learning styles, scaffolding options, assistive technology",
+
+            exclude: "One-size-fits-all approaches, overwhelming complexity"
+
+          },
+
+          special_needs: {
+
+            role: "Special education teacher",
+
+            task: "Adapt content for special needs",
+
+            context: "Students with learning difficulties",
+
+            methodology: "AI offers multiple ways to show understanding (Multiple Intelligences)",
+
+            tone: "Patient and gentle",
+
+            include: "Visual supports, sensory breaks, simplified instructions, assistive technology",
+
+            exclude: "Complex multi-step tasks, time pressure, abstract concepts without support"
+
+          },
+
+          revision: {
+
+            role: "High school teacher",
+
+            task: "Create revision activities",
+
+            context: "Students preparing for exams",
+
+            methodology: "AI adjusts difficulty based on student progress (Adaptive Learning)",
+
+            tone: "Motivational and inspiring",
+
+            include: "Variety of review methods, self-testing opportunities, key concept summaries",
+
+            exclude: "Passive reading only, information overload"
+
+          }
+
+        };
+
+    // Handle template selection
+
+    document.getElementById('template').addEventListener('change', function() {
+
+      const selectedTemplate = this.value;
+
+      if (selectedTemplate && templates[selectedTemplate]) {
+
+        const template = templates[selectedTemplate];
+
+        
+
+        // Fill form fields
+
+        document.getElementById('role').value = template.role;
+
+        document.getElementById('task').value = template.task;
+
+        document.getElementById('context').value = template.context;
+
+        document.getElementById('methodology').value = template.methodology;
+
+        document.getElementById('tone').value = template.tone;
+
+        document.getElementById('include').value = template.include;
+
+        document.getElementById('exclude').value = template.exclude;
+
+        
+
+        // Show visual feedback
+
+        this.classList.add('bg-green-50', 'border-green-300');
+
+        setTimeout(() => {
+
+          this.classList.remove('bg-green-50', 'border-green-300');
+
+        }, 2000);
+
+      } else {
+
+        // Clear form if "Create from scratch" is selected
+
+        document.getElementById('role').value = '';
+
+        document.getElementById('task').value = '';
+
+        document.getElementById('context').value = '';
+
+        document.getElementById('methodology').value = '';
+
+        document.getElementById('tone').value = '';
+
+        document.getElementById('include').value = '';
+
+        document.getElementById('exclude').value = '';
+
+      }
+
+    });
+
+
+
+    // Toggle "Other" fields
+
+    function toggleOther(selectId, inputId) {
+
+      const select = document.getElementById(selectId);
+
+      const input = document.getElementById(inputId);
+
+      select.addEventListener("change", () => {
+
+        input.classList.toggle("hidden", !select.value.includes("Other"));
+
+      });
+
+    }
+
+
+
+    toggleOther("role", "roleOther");
+
+    toggleOther("task", "taskOther");
+
+    toggleOther("context", "contextOther");
+
+    toggleOther("methodology", "methodologyOther");
+
+    toggleOther("tone", "toneOther");
+
+
+
+    // Show confirmation modal
+
+    function showConfirmationModal() {
+
+      const modal = document.getElementById('confirmationModal');
+
+      modal.classList.remove('hidden');
+
+      // Add animation class
+
+      setTimeout(() => {
+
+        modal.querySelector('.transform').classList.remove('scale-95');
+
+        modal.querySelector('.transform').classList.add('scale-100');
+
+      }, 10);
+
+    }
+
+
+
+    // Close confirmation modal
+
+    function closeConfirmationModal() {
+
+      const modal = document.getElementById('confirmationModal');
+
+      modal.querySelector('.transform').classList.remove('scale-100');
+
+      modal.querySelector('.transform').classList.add('scale-95');
+
+      setTimeout(() => {
+
+        modal.classList.add('hidden');
+
+      }, 300);
+
+    }
+
+
+
+    // Copy to clipboard function with confirmation
+
+    function copyToClipboard() {
+  const promptText = document.getElementById('outputPrompt').textContent;
+  navigator.clipboard.writeText(promptText).then(() => {
+    // Track copy success
+    trackCopySuccess();
+    showConfirmationModal();
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+    alert('Prompt copied to clipboard!');
+  });
+}
+
+// Add this new function
+async function trackCopySuccess() {
+  try {
+    await fetch("/track-copy/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCSRFToken(),
+      },
+      credentials: "same-origin"
+    });
+    
+    // Check if we should show training needs survey
+    checkAndShowTrainingNeeds();
+    
+  } catch (error) {
+    console.log('Copy tracking failed:', error);
+  }
+}
+
+function checkAndShowTrainingNeeds() {
+  if (typeof SURVEYS_ENABLED !== 'undefined' && !SURVEYS_ENABLED) {
+    console.log('Surveys are disabled - training needs will not show');
+    return;
+  }
+  console.log('checkAndShowTrainingNeeds called');
+  console.log('trainingNeedsShown:', trainingNeedsShown);
+  console.log('hasCompletedOnboarding:', hasCompletedOnboarding());
+  console.log('hasCompletedTrainingNeeds:', hasCompletedTrainingNeeds());
+  
+  // Only show once per session, and only if onboarding was completed
+  if (!trainingNeedsShown && hasCompletedOnboarding() && !hasCompletedTrainingNeeds()) {
+    console.log('All conditions met - showing modal in 2 seconds');
+    // 2-second delay after copy confirmation modal
+    setTimeout(() => {
+      showTrainingNeedsModal();
+    }, 2000);
+  } else {
+    console.log('Conditions not met - modal will not show');
+  }
+}
+
+function hasCompletedOnboarding() {
+  // Check session storage or could check via backend
+  return sessionStorage.getItem('onboarding_completed') === 'true' ||
+         sessionStorage.getItem('onboarding_shown') === 'true';
+}
+
+function hasCompletedTrainingNeeds() {
+  // Prevent showing multiple times
+  return sessionStorage.getItem('training_needs_completed') === 'true';
+}
+
+function showTrainingNeedsModal() {
+  if (typeof SURVEYS_ENABLED !== 'undefined' && !SURVEYS_ENABLED) {
+    console.log('Surveys are disabled - training modal will not show');
+    return;
+  }
+  console.log('showTrainingNeedsModal called');
+  
+  const modal = document.getElementById('trainingNeedsModal');
+  const modalContent = document.getElementById('trainingModalContent');
+  
+  console.log('modal element:', modal);
+  console.log('modalContent element:', modalContent);
+  
+  if (!modal) {
+    console.log('ERROR: trainingNeedsModal not found!');
+    return;
+  }
+  
+  modal.classList.remove('hidden');
+  trainingNeedsShown = true;
+  
+  console.log('Modal should be visible now');
+  
+  // Animation
+  setTimeout(() => {
+    if (modalContent) {
+      modalContent.classList.remove('scale-95');
+      modalContent.classList.add('scale-100');
+    }
+  }, 10);
+  
+  // Setup dynamic form behavior
+  //setupTrainingFormInteractions(); //old
+}
+function setupTrainingFormInteractions() {
+  const checkboxes = document.querySelectorAll('.training-checkbox');
+  const priorityDropdowns = document.querySelectorAll('.priority-dropdown');
+  const priorityMessage = document.getElementById('priorityMessage');
+  const priorityCount = document.getElementById('priorityCount');
+  const otherCheckbox = document.querySelector('input[name="training_interests"][value="other"]');
+  const otherTextInput = document.getElementById('trainingOtherText');
+  
+  // Show/hide priority dropdowns based on checkbox selection
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const parentOption = this.closest('.training-option');
+      const dropdown = parentOption.querySelector('.priority-dropdown');
+      
+      if (this.checked) {
+        dropdown.classList.remove('hidden');
+        if (this.value === 'other') {
+          otherTextInput.classList.remove('hidden');
+        }
+      } else {
+        dropdown.classList.add('hidden');
+        dropdown.value = '';
+        if (this.value === 'other') {
+          otherTextInput.classList.add('hidden');
+          otherTextInput.value = '';
+        }
+      }
+      
+      updatePriorityCount();
+    });
+  });
+  
+  // Handle priority selection and validation
+  priorityDropdowns.forEach(dropdown => {
+    dropdown.addEventListener('change', function() {
+      if (this.value) {
+        // Clear any other dropdown with the same priority
+        priorityDropdowns.forEach(otherDropdown => {
+          if (otherDropdown !== this && otherDropdown.value === this.value) {
+            otherDropdown.value = '';
+          }
+        });
+      }
+      updatePriorityCount();
+    });
+  });
+  
+  function updatePriorityCount() {
+    const selectedPriorities = Array.from(priorityDropdowns)
+      .filter(dropdown => dropdown.value && !dropdown.classList.contains('hidden'))
+      .length;
+    
+    priorityCount.textContent = selectedPriorities;
+    
+    if (selectedPriorities > 0) {
+      priorityMessage.classList.remove('hidden');
+      
+      if (selectedPriorities > 3) {
+        priorityMessage.classList.add('text-red-600');
+        priorityMessage.classList.remove('text-gray-600', 'text-green-600');
+      } else if (selectedPriorities === 3) {
+        priorityMessage.classList.add('text-green-600');
+        priorityMessage.classList.remove('text-gray-600', 'text-red-600');
+      } else {
+        priorityMessage.classList.add('text-gray-600');
+        priorityMessage.classList.remove('text-red-600', 'text-green-600');
+      }
+    } else {
+      priorityMessage.classList.add('hidden');
+    }
+  }
+}
+
+// MOVED OUTSIDE - NOW STANDALONE
+async function submitTrainingNeeds() {
+  const submitBtn = document.querySelector('.btn-submit');
+  
+  // Get selected interests from step 1
+  const selectedInterests = Array.from(document.querySelectorAll('input[name="training_interests"]:checked'))
+    .map(checkbox => checkbox.value);
+  
+  if (selectedInterests.length === 0) {
+    alert('Please select at least one area of interest.');
+    goToStep1(); // Go back to step 1
+    return;
+  }
+  
+  // Get priorities from step 2
+  const priorities = {};
+  const priorityDropdowns = document.querySelectorAll('.priority-dropdown-step2');
+  
+  priorityDropdowns.forEach(dropdown => {
+    if (dropdown.value) {
+      const interest = dropdown.dataset.interest;
+      priorities[interest] = parseInt(dropdown.value);
+    }
+  });
+  
+  // Validate: should have 0-3 priorities
+  const priorityCount = Object.keys(priorities).length;
+  if (priorityCount > 3) {
+    alert('Please select no more than 3 priorities.');
+    return;
+  }
+  
+  // Get other training needs
+  const otherText = document.querySelector('input[name="training_other"]').value || null;
+  
+  // Get email and interview interest
+  const followUpEmail = document.querySelector('input[name="follow_up_email"]').value || null;
+  const researchInterview = document.querySelector('input[name="research_interview"]').checked;
+  
+  const requestData = {
+    training_interests: selectedInterests,
+    training_priorities: priorities,
+    training_other_needs: otherText,
+    follow_up_email: followUpEmail,
+    research_interview_interest: researchInterview
+  };
+  
+  // Show loading state
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
+  
+  try {
+    const response = await fetch('/training-needs/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCSRFToken(),
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(requestData)
+    });
+    
+    if (response.ok) {
+      sessionStorage.setItem('training_needs_completed', 'true');
+      
+      // Show success message
+      showTrainingSuccessMessage();
+      closeTrainingNeedsModal();
+      
+      console.log('Training needs data saved successfully');
+    } else {
+      const errorData = await response.json();
+      console.error('Training needs submission error:', errorData);
+      alert('Error saving your preferences. Please try again.');
+    }
+    
+  } catch (error) {
+    console.error('Network error:', error);
+    alert('Network error. Please try again later.');
+  } finally {
+    submitBtn.textContent = 'Submit';
+    submitBtn.disabled = false;
+  }
+}
+
+
+function showTrainingSuccessMessage() {
+  // Simple success notification
+  const notification = document.createElement('div');
+  notification.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50';
+  notification.innerHTML = '✅ Thank you! Your training preferences have been saved.';
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 4000);
+}
+
+function closeTrainingNeedsModal() {
+  const modal = document.getElementById('trainingNeedsModal');
+  const modalContent = document.getElementById('trainingModalContent');
+  
+  modalContent.classList.remove('scale-100');
+  modalContent.classList.add('scale-95');
+  
+  setTimeout(() => {
+    modal.classList.add('hidden');
+  }, 300);
+  
+  // Mark as shown to prevent re-showing
+  sessionStorage.setItem('training_needs_shown', 'true');
+}
+  function updatePriorityCount() {
+    const selectedPriorities = Array.from(priorityDropdowns)
+      .filter(dropdown => dropdown.value && !dropdown.classList.contains('hidden'))
+      .length;
+    
+    priorityCount.textContent = selectedPriorities;
+    
+    if (selectedPriorities > 0) {
+      priorityMessage.classList.remove('hidden');
+      
+      if (selectedPriorities > 3) {
+        priorityMessage.classList.add('text-red-600');
+        priorityMessage.classList.remove('text-gray-600', 'text-green-600');
+      } else if (selectedPriorities === 3) {
+        priorityMessage.classList.add('text-green-600');
+        priorityMessage.classList.remove('text-gray-600', 'text-red-600');
+      } else {
+        priorityMessage.classList.add('text-gray-600');
+        priorityMessage.classList.remove('text-red-600', 'text-green-600');
+      }
+    } else {
+      priorityMessage.classList.add('hidden');
+    }
+  }
+
+
+    // Close modal when clicking outside
+
+    document.getElementById('confirmationModal').addEventListener('click', function(e) {
+
+      if (e.target === this) {
+
+        closeConfirmationModal();
+
+      }
+
+    });
+
+
+
+    // Store current form data for improvements analysis
+
+    let currentFormData = {};
+    let trainingNeedsShown = false;
+
+
+
+    // Generate prompt function
+
+    async function generateWithGemini() {
+
+      const loadingIndicator = document.getElementById("loadingIndicator");
+
+      const promptContainer = document.getElementById("promptContainer");
+
+      const generateBtn = document.getElementById("generateBtn");
+
+      
+
+      loadingIndicator.classList.remove("hidden");
+
+      promptContainer.style.display = "none";
+
+      generateBtn.disabled = true;
+
+      generateBtn.textContent = "Generating...";
+
+      generateBtn.classList.add("opacity-50", "cursor-not-allowed");
+
+
+
+      // Get form values
+      const template = document.getElementById("template").value;
+      const role = document.getElementById("role").value;
+      const roleOther = document.getElementById("roleOther").value;
+      const subject = document.getElementById("subject").value;
+      const task = document.getElementById("task").value;
+      const taskOther = document.getElementById("taskOther").value;
+      const context = document.getElementById("context").value;
+      const contextOther = document.getElementById("contextOther").value;
+      const methodology = document.getElementById("methodology").value;
+      const methodologyOther = document.getElementById("methodologyOther").value;
+      const tone = document.getElementById("tone").value;
+      const toneOther = document.getElementById("toneOther").value;
+      const include = document.getElementById("include").value;
+      const exclude = document.getElementById("exclude").value;
+      // NEW: Get theory selection
+      const theoryEnhancement = document.getElementById("theory_enhancement").value;
+
+      // Determine final values
+
+      const finalRole = role === "Other" ? roleOther : role;
+
+      const finalTask = task === "Other" ? taskOther : task;
+
+      const finalContext = context === "Other" ? contextOther : context;
+
+      const finalMethodology = methodology === "Other" ? methodologyOther : methodology;
+
+      const finalTone = tone.includes("Other") ? toneOther : tone;
+
+
+
+      // Store form data for improvements analysis
+
+      currentFormData = {
+
+        role: finalRole,
+
+        subject: subject,
+
+        task: finalTask,
+
+        context: finalContext,
+
+        methodology: finalMethodology,
+
+        tone: finalTone,
+
+        include: include,
+
+        exclude: exclude
+
+      };
+
+
+
+      // Build examples section
+
+      let examplesSection = '';
+
+      if (include || exclude) {
+
+        examplesSection = '\n\nAdditional Guidelines:';
+
+        if (include) examplesSection += `\n- Include: ${include}`;
+
+        if (exclude) examplesSection += `\n- Avoid: ${exclude}`;
+
+      }
+
+
+
+      // Create user input for Gemini
+
+      const userInput = `
+
+Create a clear, professional AI prompt using EXACTLY these components. Do not add extra elements or creative flourishes.
+
+
+
+Components to connect:
+
+- Role: ${finalRole}
+
+- Subject: ${subject}
+
+- Task: ${finalTask}
+
+- Context: ${finalContext}
+
+- Methodology: ${finalMethodology}
+
+- Tone: ${finalTone}${examplesSection}
+
+
+
+Instructions:
+
+1. Create a single, coherent prompt that combines these elements naturally
+
+2. Use proper English grammar and clear sentence structure
+
+3. Do NOT add elements not specified above
+
+4. Make it ready to copy-paste into any AI chatbot
+
+5. Start with "You are..." and include all the specified components
+
+6. Keep it professional and focused on the educational task
+
+      `;
+
+
+
+      try {
+
+        // Make request to Django backend
+
+        const response = await fetch("/generate/", {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type": "application/json",
+
+            "X-CSRFToken": getCSRFToken(),
+
+          },
+
+          credentials: "same-origin", 
+
+          // Get enhancement preference
+
+          body: JSON.stringify({ 
+
+            prompt: userInput,
+            template: template,
+            enhancement: (function() {
+
+              const el = document.querySelector('input[name="enhancement"]:checked');
+
+              return el ? el.value : 'enhanced';
+
+            })(),
+
+            role: finalRole,
+            theory_enhancement: theoryEnhancement,
+            task: finalTask,
+            context: finalContext,
+            methodology: finalMethodology,
+            subject: subject,
+            tone: finalTone
+
+          })
+
+        });
+
+
+
+        const data = await response.json();
+        //alert(`Frontend received: ${data.response.length} chars\nFirst 100: "${data.response.substring(0, 100)}"`);
+
+        const outputDiv = document.getElementById("outputPrompt");
+
+
+
+        if (data.response) {
+
+          outputDiv.textContent = data.response;
+
+          promptContainer.style.display = "block";
+
+        } else {
+
+          outputDiv.textContent = "❌ Sorry, no prompt was generated.";
+
+          promptContainer.style.display = "block";
+
+        }
+
+        
+
+      } catch (error) {
+
+        console.error("❌ Network or unexpected error:", error);
+
+        const outputDiv = document.getElementById("outputPrompt");
+
+        outputDiv.textContent = "❌ Network or unexpected error: " + error.message;
+
+        promptContainer.style.display = "block";
+
+      } finally {
+
+        loadingIndicator.classList.add("hidden");
+
+        generateBtn.disabled = false;
+
+        generateBtn.textContent = "🚀 Generate Prompt";
+
+        generateBtn.classList.remove("opacity-50", "cursor-not-allowed");
+
+      }
+
+    }
+
+
+
+    // Show prompt improvements modal
+
+    async function showPromptImprovements() {
+      //alert("Function called!");
+  const modal = document.getElementById('promptImprovementsModal');
+  const loadingIndicator = document.getElementById('theoryLoadingIndicator');
+  const theoryContent = document.getElementById('theoryContent');
+  
+  modal.classList.remove('hidden');
+  setTimeout(() => {
+    modal.querySelector('.transform').classList.remove('scale-95');
+    modal.querySelector('.transform').classList.add('scale-100');
+  }, 10);
+  
+  loadingIndicator.classList.remove('hidden');
+  theoryContent.classList.add('hidden');
+  
+  // Display current configuration
+  const configDiv = document.getElementById('promptConfiguration');
+  configDiv.innerHTML = `
+    <div class="grid grid-cols-2 gap-2 text-sm">
+      <div><strong>Role:</strong> ${currentFormData.role || 'Not specified'}</div>
+      <div><strong>Subject:</strong> ${currentFormData.subject || 'Not specified'}</div>
+      <div><strong>Task:</strong> ${currentFormData.task || 'Not specified'}</div>
+      <div><strong>Context:</strong> ${currentFormData.context || 'Not specified'}</div>
+      <div><strong>Methodology:</strong> ${currentFormData.methodology || 'Not specified'}</div>
+      <div><strong>Tone:</strong> ${currentFormData.tone || 'Not specified'}</div>
+    </div>
+  `;
+  
+  // Create prompt improvement analysis prompt
+  const improvementPrompt = `
+You are a prompt engineering expert for educational AI prompts. Based on this prompt configuration:
+
+- Role: ${currentFormData.role}
+- Subject: ${currentFormData.subject}
+- Task: ${currentFormData.task}
+- Context: ${currentFormData.context}
+- Methodology: ${currentFormData.methodology}
+- Tone: ${currentFormData.tone}
+
+Please provide 3 specific improvements the user could add to their prompt to make it more effective.
+
+Format your response as JSON:
+{
+  "prompt_improvements": "1. First improvement\n2. Second improvement\n3. Third improvement"
+}
+
+Focus on practical additions like: asking for specific formats, requesting differentiation levels, adding assessment criteria, including time constraints, etc.
+  `;
+  
+  try {
+    // Make request to Django backend for improvement analysis
+    const response = await fetch("/generate/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCSRFToken(),
+      },
+      credentials: "same-origin",
+      body: JSON.stringify({ prompt: improvementPrompt }),
+      signal: AbortSignal.timeout(45000)  // 45 second timeout
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.response) {
+      try {
+        // Remove markdown formatting if present
+        let cleanResponse = data.response;
+        if (cleanResponse.includes('```json')) {
+          cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/\n?```/g, '');
+        }
+
+        const mainData = JSON.parse(cleanResponse);
+        
+        // Get improvements text and clean it up
+        let improvementsText = mainData.prompt_improvements || "";
+        
+        // Clean up JSON formatting
+        improvementsText = improvementsText.replace(/^["\s]*/, '').replace(/["\s}]*$/, '');
+        improvementsText = improvementsText.replace(/\\n/g, '\n').replace(/\\"/g, '"');
+        
+        // Split improvements by numbered list (1., 2., 3.)
+        //const improvementItems = improvementsText.split(/(?=\d+\.\s+)/).filter(item => item.trim());
+        // Split improvements by numbered list (1., 2., 3.) and remove first empty/invalid item
+        const improvementItems = improvementsText.split(/(?=\d+\.\s+)/)
+          .filter(item => item.trim())
+          .filter(item => /^\d+\./.test(item.trim())); // Only keep items that start with "1.", "2.", etc.
+        
+        // Create checkboxes for each improvement
+        const improvementsList = document.getElementById('improvementsList');
+        improvementsList.innerHTML = '';
+        
+        if (improvementItems.length > 0) {
+          improvementItems.slice(0, 3).forEach((improvement, index) => {
+            if (improvement.trim()) {
+              const checkboxHtml = `
+                  <div class="flex items-start space-x-3 mb-3">
+                    <input type="checkbox" id="improvement${index}" class="mt-1 flex-shrink-0" data-improvement="${improvement.trim().replace(/"/g, '&quot;')}">
+                    <label for="improvement${index}" class="text-sm text-gray-700 cursor-pointer leading-relaxed break-words">
+                      ${improvement.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}
+                    </label>
+                  </div>
+                `;
+              improvementsList.innerHTML += checkboxHtml;
+            }
+          });
+        } else {
+          improvementsList.innerHTML = '<p class="text-gray-600">No improvements available at this time.</p>';
+        }
+        
+      } catch (jsonError) {
+        console.error("JSON parsing error:", jsonError);
+        const improvementsList = document.getElementById('improvementsList');
+        improvementsList.innerHTML = '<p class="text-gray-600">Error parsing improvements. Please try again.</p>';
+      }
+    } else {
+      const improvementsList = document.getElementById('improvementsList');
+      improvementsList.innerHTML = '<p class="text-gray-600">No response received. Please try again.</p>';
+    }
+    
+  } catch (error) {
+    console.error("Improvement analysis error:", error);
+    const improvementsList = document.getElementById('improvementsList');
+    if (improvementsList) {
+      improvementsList.innerHTML = '<p class="text-gray-600">Unable to analyze prompt improvements at this time.</p>';
+    }
+  } finally {
+    loadingIndicator.classList.add('hidden');
+    theoryContent.classList.remove('hidden');
+  }
+}
+    // Apply selected improvements to the original prompt
+
+async function applySelectedImprovements() {
+
+  const checkboxes = document.querySelectorAll('#improvementsList input[type="checkbox"]:checked');
+
+  
+
+  if (checkboxes.length === 0) {
+
+    alert('Please select at least one improvement to apply.');
+
+    return;
+
+  }
+
+  
+
+  // Get selected improvements
+
+  //const selectedImprovements = Array.from(checkboxes).map(cb => cb.value);
+  const selectedImprovements = Array.from(checkboxes).map(cb => cb.dataset.improvement);
+
+  const originalPrompt = document.getElementById('outputPrompt').textContent;
+
+  
+
+  // Create enhancement prompt for Gemini
+
+  const enhancementPrompt = `
+
+Take this original prompt and enhance it by incorporating these specific improvements:
+
+
+
+Original prompt:
+
+${originalPrompt}
+
+
+
+Improvements to incorporate:
+
+${selectedImprovements.map((imp, index) => `- ${imp}`).join('\n')}
+
+
+
+Return only the improved prompt, ready to use. Do not include explanations or additional text.
+
+  `;
+
+  
+
+  try {
+
+    // Show loading in the modal
+
+    const improvementsList = document.getElementById('improvementsList');
+
+    improvementsList.innerHTML = '<div class="text-center py-4"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div><p class="mt-2 text-gray-600">Applying improvements...</p></div>';
+
+    
+
+    // Call Gemini API
+
+    const response = await fetch("/generate/", {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type": "application/json",
+
+        "X-CSRFToken": getCSRFToken(),
+
+      },
+
+      credentials: "same-origin", 
+
+      body: JSON.stringify({ prompt: enhancementPrompt })
+
+    });
+
+
+
+    const data = await response.json();
+
+    // TEMPORARY DEBUG - θα το αφαιρέσουμε μετά
+    //alert("Raw response: " + JSON.stringify(data.response, null, 2));
+
+    if (data.response) {
+
+      // Update the main prompt textarea with improved version
+
+      document.getElementById('outputPrompt').textContent = data.response;
+
+      
+
+      // Close the improvements modal
+
+      closePromptImprovementsModal();
+
+      
+
+      // Show success message
+
+      alert('Prompt improved successfully! You can now edit it further if needed.');
+
+    } else {
+
+      throw new Error('No response received');
+
+    }
+
+    
+
+  } catch (error) {
+
+    console.error('Error applying improvements:', error);
+
+    alert('Error applying improvements. Please try again.');
+
+    
+
+    // Restore the improvements list on error
+
+    showPromptImprovements();
+
+  }
+
+}
+
+    // Close prompt improvements modal
+
+    function closePromptImprovementsModal() {
+
+      const modal = document.getElementById('promptImprovementsModal');
+
+      modal.querySelector('.transform').classList.remove('scale-100');
+
+      modal.querySelector('.transform').classList.add('scale-95');
+
+      setTimeout(() => {
+
+        modal.classList.add('hidden');
+
+      }, 300);
+
+    }
+
+
+
+    // Close modal when clicking outside
+
+    document.getElementById('promptImprovementsModal').addEventListener('click', function(e) {
+
+      if (e.target === this) {
+
+        closePromptImprovementsModal();
+
+      }
+
+    });
+
+
+
+    // CSRF token function
+
+    function getCSRFToken() {
+
+      const name = "csrftoken";
+
+      const cookies = document.cookie.split(';');
+
+      for (let cookie of cookies) {
+
+        const trimmed = cookie.trim();
+
+        if (trimmed.startsWith(name + '=')) {
+
+          return decodeURIComponent(trimmed.substring(name.length + 1));
+
+        }
+
+      }
+
+      return '';
+
+    }
+
+  </script>
+<script>
+// Educational Theory Information Database
+const theoryInfo = {
+  blooms: {
+    title: "Bloom's Taxonomy",
+    description: "Structures learning from basic recall to creative thinking, helping students progress systematically through cognitive levels. Perfect for building comprehensive learning experiences.",
+    educational_value: "Helps structure questions from basic recall to creative thinking, making learning more systematic and progressive for students.",
+    suitable_for: ["critical thinking", "questions", "assessment", "lesson plan", "analysis", "evaluation"]
+  },
+  udl: {
+    title: "Universal Design for Learning (UDL)",
+    description: "Provides multiple ways for students to access, engage with, and demonstrate learning. Essential for inclusive classrooms with diverse learners.",
+    educational_value: "Ensures all learners can access content through multiple pathways - essential when teaching diverse student groups with different needs.",
+    suitable_for: ["mixed-ability", "special needs", "differentiated", "inclusive", "diverse", "learning difficulties"]
+  },
+  tpack: {
+    title: "TPACK Framework",
+    description: "Integrates Technology, Pedagogy, and Content Knowledge for meaningful technology use in education, ensuring tech enhances rather than replaces good teaching.",
+    educational_value: "Helps you meaningfully integrate technology with your teaching methods, rather than just adding tech for tech's sake.",
+    suitable_for: ["technology", "digital", "gamified", "online", "interactive", "ai"]
+  },
+  constructivist: {
+    title: "Constructivist Learning",
+    description: "Students actively build knowledge through hands-on discovery and meaningful connections. Perfect for inquiry-based and problem-solving approaches.",
+    educational_value: "Supports active knowledge construction where students build understanding through discovery rather than passive listening.",
+    suitable_for: ["inquiry", "discovery", "problem", "explore", "investigate", "hands-on"]
+  },
+  social_learning: {
+    title: "Social Learning Theory",
+    description: "Leverages peer interaction and collaboration for deeper learning. Students learn through observation, discussion, and shared knowledge construction.",
+    educational_value: "Harnesses the power of peer interaction and collaboration, as students often learn effectively from each other.",
+    suitable_for: ["collaborative", "group", "peer", "discussion", "teamwork", "social"]
+  },
+  scaffolding: {
+    title: "Scaffolding",
+    description: "Provides temporary support structures that gradually decrease as learners develop independence. Like training wheels for learning new skills.",
+    educational_value: "Provides temporary support that gradually decreases as students develop independence - like training wheels for learning.",
+    suitable_for: ["support", "guidance", "step-by-step", "gradual", "coaching", "beginner"]
+  },
+  differentiation: {
+    title: "Differentiated Instruction",
+    description: "Adapts teaching to meet diverse learner needs, abilities, and interests. Recognizes that one size does not fit all in education.",
+    educational_value: "Recognizes that students learn differently and provides multiple pathways to success based on individual needs and strengths.",
+    suitable_for: ["multiple intelligences", "adaptive", "personalized", "flexible", "individual", "varied"]
+  }
+};
+
+// Smart Theory Recommendation Logic
+function suggestRelevantTheory(methodology, task, context) {
+  const methodologyLower = methodology.toLowerCase();
+  const taskLower = task.toLowerCase();
+  const contextLower = context.toLowerCase();
+  
+  // Priority mapping based on educational context
+  if (methodologyLower.includes('inquiry') || methodologyLower.includes('explore') || methodologyLower.includes('discovery')) {
+    return 'constructivist';
+  }
+  if (methodologyLower.includes('collaborative') || methodologyLower.includes('group') || methodologyLower.includes('peer')) {
+    return 'social_learning';
+  }
+  if (methodologyLower.includes('technology') || methodologyLower.includes('ai') || methodologyLower.includes('digital')) {
+    return 'tpack';
+  }
+  if (methodologyLower.includes('differentiated') || methodologyLower.includes('adaptive')) {
+    return 'udl';
+  }
+  if (methodologyLower.includes('scaffolding') || methodologyLower.includes('support')) {
+    return 'scaffolding';
+  }
+  
+  // Task-based suggestions
+  if (taskLower.includes('critical thinking') || taskLower.includes('questions') || taskLower.includes('analysis')) {
+    return 'blooms';
+  }
+  if (taskLower.includes('assessment') || taskLower.includes('quiz') || taskLower.includes('rubric')) {
+    return 'blooms';
+  }
+  if (taskLower.includes('lesson plan') || taskLower.includes('curriculum')) {
+    return 'blooms';
+  }
+  if (taskLower.includes('differentiated') || taskLower.includes('multiple intelligences')) {
+    return 'differentiation';
+  }
+  
+  // Context-based suggestions
+  if (contextLower.includes('mixed-ability') || contextLower.includes('special needs') || contextLower.includes('learning difficulties')) {
+    return 'udl';
+  }
+  if (contextLower.includes('ages 3-5') || contextLower.includes('preschool')) {
+    return 'scaffolding';
+  }
+  
+  // Default
+  return 'blooms';
+}
+
+// Update theory recommendation when methodology/task changes
+function updateTheoryRecommendation() {
+  const methodology = document.getElementById('methodology').value;
+  const task = document.getElementById('task').value;
+  const context = document.getElementById('context').value;
+  const recommendationDiv = document.getElementById('theory_recommendation');
+  const recommendationText = document.getElementById('recommendation_text');
+  const theoryDropdown = document.getElementById('theory_enhancement');
+  
+  if (methodology || task) {
+    const suggestedTheory = suggestRelevantTheory(methodology, task, context);
+    const theoryData = theoryInfo[suggestedTheory];
+    
+    // Fixed logic: Only respect user selection if they MANUALLY clicked the dropdown
+    const isUserSelected = theoryDropdown.dataset.userSelected === 'true';
+    
+    if (!isUserSelected) {
+      // Auto-select the suggested theory (whether dropdown is empty or has auto-selected value)
+      theoryDropdown.value = suggestedTheory;
+      
+      recommendationText.innerHTML = `
+        <strong>${theoryData.title}</strong> was auto-selected.<br>
+        ${theoryData.educational_value}
+      `;
+      
+      // Also show the theory info
+      showTheoryInfo(suggestedTheory);
+    } else {
+      // User has manually selected a theory, just show recommendation
+      const currentValue = theoryDropdown.value;
+      const currentTheoryData = theoryInfo[currentValue];
+      
+      if (suggestedTheory !== currentValue) {
+        recommendationText.innerHTML = `
+          You're using <strong>${currentTheoryData?.title || 'a selected theory'}</strong>.<br>
+          💡 New recommendation: <strong>${theoryData.title}</strong> - ${theoryData.educational_value}
+        `;
+      } else {
+        recommendationText.innerHTML = `
+          <strong>${theoryData.title}</strong> matches your selection - great choice!<br>
+          ${theoryData.educational_value}
+        `;
+      }
+    }
+    
+    recommendationDiv.classList.remove('hidden');
+  } else {
+    recommendationDiv.classList.add('hidden');
+  }
+}
+
+// Show theory information when selected
+function showTheoryInfo(theoryKey) {
+  const infoDiv = document.getElementById('theory_info');
+  const titleDiv = document.getElementById('theory_title');
+  const descDiv = document.getElementById('theory_description');
+  
+  if (theoryKey && theoryInfo[theoryKey]) {
+    const theory = theoryInfo[theoryKey];
+    titleDiv.textContent = theory.title;
+    descDiv.textContent = theory.description;
+    infoDiv.classList.remove('hidden');
+  } else {
+    infoDiv.classList.add('hidden');
+  }
+}
+
+// Toggle theory selection visibility based on enhancement choice
+function toggleTheorySelection() {
+  const enhancementRadio = document.querySelector('input[name="enhancement"]:checked');
+  const theorySection = document.getElementById('theory_selection_section');
+  
+  if (enhancementRadio && enhancementRadio.value === 'enhanced') {
+    theorySection.classList.remove('hidden');
+    updateTheoryRecommendation(); // Show recommendation when enhanced is selected
+  } else {
+    theorySection.classList.add('hidden');
+    document.getElementById('theory_recommendation').classList.add('hidden');
+    document.getElementById('theory_info').classList.add('hidden');
+  }
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  // Initial setup
+  toggleTheorySelection();
+  
+  // Enhancement radio change
+  document.querySelectorAll('input[name="enhancement"]').forEach(radio => {
+    radio.addEventListener('change', toggleTheorySelection);
+  });
+  
+  // Form field changes for recommendations
+  document.getElementById('methodology').addEventListener('change', updateTheoryRecommendation);
+  document.getElementById('task').addEventListener('change', updateTheoryRecommendation);
+  document.getElementById('context').addEventListener('change', updateTheoryRecommendation);
+  
+  // IMPORTANT: Also listen to template changes (this was missing!)
+  document.getElementById('template').addEventListener('change', function() {
+    // Template changes trigger methodology changes programmatically
+    // We need to manually trigger the recommendation update
+    setTimeout(() => {
+      updateTheoryRecommendation();
+    }, 100); // Small delay to ensure template has updated the fields
+  });
+  
+  // Theory selection change
+  document.getElementById('theory_enhancement').addEventListener('change', function() {
+    showTheoryInfo(this.value);
+    
+    if (this.value !== '') {
+      // Mark as user-selected when they manually choose a theory
+      this.dataset.userSelected = 'true';
+      document.getElementById('theory_recommendation').classList.add('hidden');
+    } else {
+      // If they go back to auto-select, remove the user-selected flag
+      delete this.dataset.userSelected;
+      updateTheoryRecommendation();
+    }
+  });
+});
+</script>
+<script>
+// Research-backed methodology suggestions for templates
+const methodologyResearch = {
+  // BULLETPROOF (Research-backed) connections
+  critical_questions: {
+    suggested: "Inquiry-based Learning",
+    rationale: "Research shows that inquiry-based learning effectively develops critical thinking through Socratic questioning and student-led discovery.",
+    citation: "Lazonder & Harmsen (2016): Meta-analysis of 72 studies, d=0.50 for learning outcomes",
+    alternatives: ["Problem-based Learning", "Collaborative Learning", "Direct Instruction"]
+  },
+  
+  problem_solving: {
+    suggested: "Problem-based Learning", 
+    rationale: "Problem-based learning is highly effective for developing problem-solving skills through authentic, real-world challenges.",
+    citation: "Hattie (2009): 31 meta-analyses, 1,064 studies, weighted effect size: 0.53",
+    alternatives: ["Inquiry-based Learning", "Collaborative Learning", "Technology-enhanced Problem Solving"]
+  },
+  
+  group_activities: {
+    suggested: "Collaborative Learning",
+    rationale: "Collaborative learning structures effectively promote peer interaction, shared knowledge construction, and social learning.",
+    citation: "Chen et al. (2018): Meta-analysis of 356 CSCL studies showing positive effects on all learning outcomes",
+    alternatives: ["Digital Collaborative Learning", "Problem-based Learning", "Project-based Learning"]
+  },
+  
+  lesson_plan: {
+    suggested: "Direct Instruction",
+    rationale: "Direct instruction provides systematic, explicit teaching that is highly effective for structured lesson delivery and knowledge acquisition.",
+    citation: "Stockard et al. (2018): Meta-analysis of 328 studies, 4,000+ effects, all positive and statistically significant",
+    alternatives: ["Technology-supported Direct Instruction", "Differentiated Instruction", "Assessment-focused approaches"]
+  },
+  
+  // MODERATE EVIDENCE - Good pedagogical fit but less research
+  warm_up: {
+    suggested: "Collaborative Learning",
+    rationale: "Warm-up activities benefit from peer interaction and social engagement to activate prior knowledge and build classroom community.",
+    citation: "Pedagogical best practice - social activation of prior knowledge",
+    alternatives: ["Digital Collaborative Learning", "Inquiry-based Learning", "Direct Instruction"]
+  },
+  
+  lesson_intro: {
+    suggested: "Inquiry-based Learning", 
+    rationale: "New topic introductions are most engaging when they spark curiosity and encourage student questions and exploration.",
+    citation: "Constructivist learning principles - curiosity-driven engagement",
+    alternatives: ["Problem-based Learning", "Direct Instruction", "Digital Inquiry Learning"]
+  },
+  
+  debates: {
+    suggested: "Collaborative Learning",
+    rationale: "Debate activities inherently require structured peer interaction, argumentation skills, and social learning processes.",
+    citation: "Social learning theory - argumentation develops through peer interaction",
+    alternatives: ["Digital Collaborative Learning", "Inquiry-based Learning", "Assessment-focused approaches"]
+  },
+  
+  // PRACTICAL EVIDENCE - Clear pedagogical logic
+  practice_exercises: {
+    suggested: "Technology-enhanced Problem Solving",
+    rationale: "Practice exercises benefit from adaptive feedback, personalized difficulty adjustment, and immediate response available through digital tools.",
+    citation: "Educational technology research - adaptive practice optimizes learning",
+    alternatives: ["Direct Instruction", "Differentiated Instruction", "Adaptive Learning with digital tools"]
+  },
+  
+  creative_writing: {
+    suggested: "Project-based Learning",
+    rationale: "Creative writing involves extended, self-directed creation processes that align with project-based learning principles.",
+    citation: "Constructivist learning - creative expression requires active knowledge construction", 
+    alternatives: ["Inquiry-based Learning", "Tech-integrated Project Work", "Differentiated Instruction"]
+  },
+  
+  quiz_assessment: {
+    suggested: "Technology-enhanced Assessment",
+    rationale: "Digital assessment tools provide immediate feedback, data analytics, and adaptive questioning that enhance learning outcomes.",
+    citation: "Assessment theory - immediate feedback improves learning (Black & Wiliam)",
+    alternatives: ["Assessment-focused approaches", "Direct Instruction", "Adaptive Learning with digital tools"]
+  },
+  
+  rubrics: {
+    suggested: "Direct Instruction",
+    rationale: "Rubric creation requires systematic, explicit explanation of criteria and standards, aligning with direct instruction principles.",
+    citation: "Assessment theory - clear criteria require structured explanation",
+    alternatives: ["Assessment-focused approaches", "Technology-enhanced Assessment", "Differentiated Instruction"]
+  },
+  
+  feedback: {
+    suggested: "Technology-enhanced Assessment",
+    rationale: "Effective feedback requires personalization, timeliness, and scalability - strengths of digital feedback systems.",
+    citation: "Feedback research (Hattie) - personalized, timely feedback maximizes learning",
+    alternatives: ["Assessment-focused approaches", "Adaptive Learning with digital tools", "Differentiated Instruction"]
+  },
+  
+  differentiated: {
+    suggested: "Adaptive Learning with digital tools",
+    rationale: "True differentiation requires personalized pathways and flexible content delivery, best achieved through adaptive digital systems.",
+    citation: "UDL research - multiple pathways require technological flexibility",
+    alternatives: ["Differentiated Instruction", "Technology-supported Direct Instruction", "Digital Collaborative Learning"]
+  },
+  
+  special_needs: {
+    suggested: "Adaptive Learning with digital tools",
+    rationale: "Students with special needs benefit significantly from assistive technologies, personalized accommodations, and flexible digital supports.",
+    citation: "Special education research - technology enables accessibility and accommodation",
+    alternatives: ["Differentiated Instruction", "Technology-enhanced Assessment", "Direct Instruction"]
+  },
+  
+  revision: {
+    suggested: "Adaptive Learning with digital tools",
+    rationale: "Effective revision requires spaced repetition, adaptive questioning, and personalized review timing - optimized by algorithmic systems.",
+    citation: "Cognitive science - spaced repetition and retrieval practice research",
+    alternatives: ["Technology-enhanced Assessment", "Direct Instruction", "Assessment-focused approaches"]
+  }
+};
+
+// Function to show methodology suggestion based on template
+function showMethodologySuggestion(templateId) {
+  const suggestionDiv = document.getElementById('methodology_suggestion');
+  const contentDiv = document.getElementById('suggestion_content');
+  const citationDiv = document.getElementById('suggestion_citation');
+  const alternativesDiv = document.getElementById('alternative_options');
+  const methodologySelect = document.getElementById('methodology');
+  
+  if (templateId && methodologyResearch[templateId]) {
+    const research = methodologyResearch[templateId];
+    
+    // Auto-select the suggested methodology
+    methodologySelect.value = research.suggested;
+    
+    // Show the suggestion content
+    contentDiv.innerHTML = `<strong>${research.suggested}</strong> is recommended. ${research.rationale}`;
+    citationDiv.textContent = research.citation;
+    
+    // Create alternative option buttons
+    alternativesDiv.innerHTML = '';
+    research.alternatives.forEach(alt => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'text-xs bg-blue-100 hover:bg-blue-200 text-blue-800 px-2 py-1 rounded transition-colors';
+      button.textContent = alt;
+      button.onclick = () => {
+        methodologySelect.value = alt;
+        suggestionDiv.classList.add('hidden');
+        updateTheoryRecommendation(); // Update theory suggestion
+      };
+      alternativesDiv.appendChild(button);
+    });
+    
+    suggestionDiv.classList.remove('hidden');
+  } else {
+    suggestionDiv.classList.add('hidden');
+  }
+}
+
+// Update the existing template change listener
+document.getElementById('template').addEventListener('change', function() {
+  const selectedTemplate = this.value;
+  
+  if (selectedTemplate && templates[selectedTemplate]) {
+    const template = templates[selectedTemplate];
+    
+    // Fill form fields (keeping existing logic)
+    document.getElementById('role').value = template.role;
+    document.getElementById('task').value = template.task;
+    document.getElementById('context').value = template.context;
+    document.getElementById('tone').value = template.tone;
+    document.getElementById('include').value = template.include;
+    document.getElementById('exclude').value = template.exclude;
+    
+    // Show methodology suggestion (NEW)
+    showMethodologySuggestion(selectedTemplate);
+    
+    // Visual feedback
+    this.classList.add('bg-green-50', 'border-green-300');
+    setTimeout(() => {
+      this.classList.remove('bg-green-50', 'border-green-300');
+    }, 2000);
+  } else {
+    // Clear form if "Create from scratch" is selected
+    document.getElementById('role').value = '';
+    document.getElementById('task').value = '';
+    document.getElementById('context').value = '';
+    document.getElementById('methodology').value = '';
+    document.getElementById('tone').value = '';
+    document.getElementById('include').value = '';
+    document.getElementById('exclude').value = '';
+    
+    // Hide suggestion
+    document.getElementById('methodology_suggestion').classList.add('hidden');
+  }
+});
+
+// Also trigger theory recommendation when methodology changes manually
+document.getElementById('methodology').addEventListener('change', function() {
+  // Hide suggestion when user manually changes methodology
+  if (this.value !== '') {
+    document.getElementById('methodology_suggestion').classList.add('hidden');
+  }
+  updateTheoryRecommendation(); // Update theory suggestion
+});
+
+function goToStep2() {
+  // Validate: at least one interest selected
+  const selectedInterests = document.querySelectorAll('input[name="training_interests"]:checked');
+  
+  if (selectedInterests.length === 0) {
+    alert('Please select at least one area of interest.');
+    return;
+  }
+  
+  // Update progress indicators
+  document.getElementById('step1Indicator').classList.remove('bg-blue-600', 'text-white');
+  document.getElementById('step1Indicator').classList.add('bg-green-500', 'text-white');
+  document.getElementById('progressBar').classList.remove('bg-gray-200');
+  document.getElementById('progressBar').classList.add('bg-blue-600');
+  document.getElementById('step2Indicator').classList.remove('bg-gray-200', 'text-gray-500');
+  document.getElementById('step2Indicator').classList.add('bg-blue-600', 'text-white');
+  
+  // Hide step 1, show step 2
+  document.getElementById('step1Content').classList.add('hidden');
+  document.getElementById('step2Content').classList.remove('hidden');
+  
+  // Populate selected interests in step 2
+  populateSelectedInterests();
+}
+
+function goToStep1() {
+  // Reset progress indicators
+  document.getElementById('step1Indicator').classList.remove('bg-green-500');
+  document.getElementById('step1Indicator').classList.add('bg-blue-600', 'text-white');
+  document.getElementById('progressBar').classList.remove('bg-blue-600');
+  document.getElementById('progressBar').classList.add('bg-gray-200');
+  document.getElementById('step2Indicator').classList.remove('bg-blue-600', 'text-white');
+  document.getElementById('step2Indicator').classList.add('bg-gray-200', 'text-gray-500');
+  
+  // Hide step 2, show step 1
+  document.getElementById('step2Content').classList.add('hidden');
+  document.getElementById('step1Content').classList.remove('hidden');
+}
+
+function populateSelectedInterests() {
+  const selectedInterests = document.querySelectorAll('input[name="training_interests"]:checked');
+  const listContainer = document.getElementById('selectedInterestsList');
+  
+  listContainer.innerHTML = '';
+  
+  selectedInterests.forEach((checkbox, index) => {
+    const label = checkbox.closest('label').textContent.trim();
+    const value = checkbox.value;
+    
+    const interestDiv = document.createElement('div');
+    interestDiv.className = 'flex items-center justify-between p-2 bg-blue-50 rounded-lg border border-blue-200';
+    interestDiv.innerHTML = `
+      <span class="text-sm font-medium text-blue-800">${label}</span>
+      <select class="priority-dropdown-step2 text-xs border border-blue-300 rounded px-2 py-1" data-interest="${value}">
+        <option value="">Priority</option>
+        <option value="1">1st</option>
+        <option value="2">2nd</option>
+        <option value="3">3rd</option>
+      </select>
+    `;
+    
+    listContainer.appendChild(interestDiv);
+  });
+  
+  // Add event listeners to new dropdowns
+  setupStep2PriorityListeners();
+}
+
+function setupStep2PriorityListeners() {
+  const priorityDropdowns = document.querySelectorAll('.priority-dropdown-step2');
+  const priorityCount = document.getElementById('priorityCount');
+  
+  priorityDropdowns.forEach(dropdown => {
+    dropdown.addEventListener('change', function() {
+      if (this.value) {
+        // Clear any other dropdown with the same priority
+        priorityDropdowns.forEach(otherDropdown => {
+          if (otherDropdown !== this && otherDropdown.value === this.value) {
+            otherDropdown.value = '';
+          }
+        });
+      }
+      
+      // Update priority count
+      const selectedPriorities = Array.from(priorityDropdowns)
+        .filter(dropdown => dropdown.value).length;
+      
+      priorityCount.textContent = selectedPriorities;
+      
+      const priorityMessage = document.getElementById('priorityMessage');
+      if (selectedPriorities > 3) {
+        priorityMessage.classList.add('text-red-600');
+        priorityMessage.classList.remove('text-gray-600', 'text-green-600');
+      } else if (selectedPriorities === 3) {
+        priorityMessage.classList.add('text-green-600');
+        priorityMessage.classList.remove('text-gray-600', 'text-red-600');
+      } else {
+        priorityMessage.classList.add('text-gray-600');
+        priorityMessage.classList.remove('text-red-600', 'text-green-600');
+      }
+    });
+  });
+}
+</script>
+
+<!-- Survey System Control -->
+<script>
+    const SURVEYS_ENABLED = {{ settings.ENABLE_SURVEYS|lower }};
+    console.log('SURVEYS_ENABLED:', SURVEYS_ENABLED);
+</script>
+
+<script src="{% static 'generator/onboarding.js' %}"></script>
+{% include 'generator/modals/training_needs_modal.html' %}
+</body>
+
+</html>
