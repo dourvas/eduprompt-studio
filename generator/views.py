@@ -254,11 +254,8 @@ def generate_prompt(request):
 
         api_key = settings.GEMINI_API_KEY
         
-        # Model selection based on request type
-        if is_improvement_request:
-            url = "https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=" + api_key
-        else:
-            url = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=" + api_key
+        # Model selection - use gemini-2.5-flash for all requests
+        url = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=" + api_key
         
         # Handle special requests
         if is_theory_request or is_improvement_request:
