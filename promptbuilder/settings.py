@@ -22,6 +22,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-0(fm1s!z%-ci^q$^*ih37
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 # Survey System Control
 ENABLE_SURVEYS = config('ENABLE_SURVEYS', default='true', cast=bool)
