@@ -24,6 +24,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-0(fm1s!z%-ci^q$^*ih37
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 X_FRAME_OPTIONS = 'ALLOWALL'
 
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
+
 # Survey System Control
 ENABLE_SURVEYS = config('ENABLE_SURVEYS', default='true', cast=bool)
 
