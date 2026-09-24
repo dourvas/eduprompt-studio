@@ -10,8 +10,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="csrf-token" content="{{ csrf_token }}">
-
   <title>AI Prompt Generator for Educators</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -1088,7 +1086,6 @@ const userInput = `
 
             "Content-Type": "application/json",
 
-            "X-CSRFToken": getCSRFToken(),
 
           },
 
@@ -1231,7 +1228,6 @@ async function showPromptImprovements() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": getCSRFToken(),
       },
       credentials: "same-origin",
       body: JSON.stringify({ prompt: improvementPrompt }),
@@ -1434,7 +1430,6 @@ Return only the improved prompt, ready to use. Do not include explanations or ad
 
         "Content-Type": "application/json",
 
-        "X-CSRFToken": getCSRFToken(),
 
       },
 
@@ -1524,33 +1519,6 @@ Return only the improved prompt, ready to use. Do not include explanations or ad
       }
 
     });
-
-
-
-    // CSRF token function
-
-    function getCSRFToken() {
-
-      const name = "csrftoken";
-
-      const cookies = document.cookie.split(';');
-
-      for (let cookie of cookies) {
-
-        const trimmed = cookie.trim();
-
-        if (trimmed.startsWith(name + '=')) {
-
-          return decodeURIComponent(trimmed.substring(name.length + 1));
-
-        }
-
-      }
-
-      return '';
-
-    }
-
   </script>
 <script>
 // Educational Theory Information Database

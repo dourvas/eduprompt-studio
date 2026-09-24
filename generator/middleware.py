@@ -1,4 +1,7 @@
+from urllib.parse import urlsplit
+
 from django.conf import settings
+from django.http import JsonResponse
 
 
 class FrameAncestorsMiddleware:
@@ -27,3 +30,37 @@ class FrameAncestorsMiddleware:
         if 'X-Frame-Options' in response:
             del response['X-Frame-Options']
         return response
+
+
+class SameOriginPostMiddleware:
+    """
+    Cross-site guard that needs no cookie (replaces CSRF protection).
+
+    For any request that is not GET/HEAD/OPTIONS/TRACE: if the browser sent an
+    Origin header, its host (and port) must equal the host this request was
+    addressed to, as computed by request.get_host(). The scheme is not compared:
+    TLS is terminated by the hosting proxy, so the app may see http while the
+    browser used https. A request without an Origin header (non-browser caller)
+    is allowed. Origin "null" is rejected.
+    """
+
+    SAFE_METHODS = ('GET', 'HEAD', 'OPTIONS', 'TRACE')
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.method not in self.SAFE_METHODS:
+            origin = request.headers.get('Origin')
+            if origin is not None and not self._same_host(origin, request):
+                return JsonResponse(
+                    {"error": "Cross-site request rejected"}, status=403
+                )
+        return self.get_response(request)
+
+    @staticmethod
+    def _same_host(origin, request):
+        parts = urlsplit(origin)
+        if parts.scheme not in ('http', 'https') or not parts.netloc:
+            return False
+        return parts.netloc.lower() == request.get_host().lower()
