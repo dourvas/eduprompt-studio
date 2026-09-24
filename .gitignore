@@ -7,3 +7,8 @@ db.sqlite3
 .env
 staticfiles/
 .DS_Store
+
+# Secrets and local data must never be committed
+SECRET KEY.txt
+db.sqlite3
+.env
