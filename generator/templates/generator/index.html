@@ -17,7 +17,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <link href="https://unpkg.com/daisyui@4.4.2/dist/full.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="{% static 'generator/onboarding.css' %}">
 
   <script>
 
@@ -84,6 +83,8 @@
     New to EduPrompt Studio? Check out our comprehensive guide!
   </p>
 </div>
+
+      <div id="data-notice" role="note" class="mb-6 p-4 rounded-lg border border-amber-300 bg-amber-50 text-sm text-amber-900">{{ notice }}</div>
 
       <form id="promptForm" onsubmit="handleSubmit(event)">
 
@@ -936,313 +937,12 @@ const templates = {
     function copyToClipboard() {
   const promptText = document.getElementById('outputPrompt').textContent;
   navigator.clipboard.writeText(promptText).then(() => {
-    // Track copy success
-    trackCopySuccess();
     showConfirmationModal();
   }).catch(err => {
     console.error('Failed to copy text: ', err);
     alert('Prompt copied to clipboard!');
   });
 }
-
-// Add this new function
-async function trackCopySuccess() {
-  try {
-    await fetch("/track-copy/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": getCSRFToken(),
-      },
-      credentials: "same-origin"
-    });
-    
-    // Check if we should show training needs survey
-    checkAndShowTrainingNeeds();
-    
-  } catch (error) {
-    console.log('Copy tracking failed:', error);
-  }
-}
-
-function checkAndShowTrainingNeeds() {
-  if (typeof SURVEYS_ENABLED !== 'undefined' && !SURVEYS_ENABLED) {
-    console.log('Surveys are disabled - training needs will not show');
-    return;
-  }
-  console.log('checkAndShowTrainingNeeds called');
-  console.log('trainingNeedsShown:', trainingNeedsShown);
-  console.log('hasCompletedOnboarding:', hasCompletedOnboarding());
-  console.log('hasCompletedTrainingNeeds:', hasCompletedTrainingNeeds());
-  
-  // Only show once per session, and only if onboarding was completed
-  if (!trainingNeedsShown && hasCompletedOnboarding() && !hasCompletedTrainingNeeds()) {
-    console.log('All conditions met - showing modal in 2 seconds');
-    // 2-second delay after copy confirmation modal
-    setTimeout(() => {
-      showTrainingNeedsModal();
-    }, 2000);
-  } else {
-    console.log('Conditions not met - modal will not show');
-  }
-}
-
-function hasCompletedOnboarding() {
-  // Check session storage or could check via backend
-  return sessionStorage.getItem('onboarding_completed') === 'true' ||
-         sessionStorage.getItem('onboarding_shown') === 'true';
-}
-
-function hasCompletedTrainingNeeds() {
-  // Prevent showing multiple times
-  return sessionStorage.getItem('training_needs_completed') === 'true';
-}
-
-function showTrainingNeedsModal() {
-  if (typeof SURVEYS_ENABLED !== 'undefined' && !SURVEYS_ENABLED) {
-    console.log('Surveys are disabled - training modal will not show');
-    return;
-  }
-  console.log('showTrainingNeedsModal called');
-  
-  const modal = document.getElementById('trainingNeedsModal');
-  const modalContent = document.getElementById('trainingModalContent');
-  
-  console.log('modal element:', modal);
-  console.log('modalContent element:', modalContent);
-  
-  if (!modal) {
-    console.log('ERROR: trainingNeedsModal not found!');
-    return;
-  }
-  
-  modal.classList.remove('hidden');
-  trainingNeedsShown = true;
-  
-  console.log('Modal should be visible now');
-  
-  // Animation
-  setTimeout(() => {
-    if (modalContent) {
-      modalContent.classList.remove('scale-95');
-      modalContent.classList.add('scale-100');
-    }
-  }, 10);
-  
-  // Setup dynamic form behavior
-  //setupTrainingFormInteractions(); //old
-}
-function setupTrainingFormInteractions() {
-  const checkboxes = document.querySelectorAll('.training-checkbox');
-  const priorityDropdowns = document.querySelectorAll('.priority-dropdown');
-  const priorityMessage = document.getElementById('priorityMessage');
-  const priorityCount = document.getElementById('priorityCount');
-  const otherCheckbox = document.querySelector('input[name="training_interests"][value="other"]');
-  const otherTextInput = document.getElementById('trainingOtherText');
-  
-  // Show/hide priority dropdowns based on checkbox selection
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-      const parentOption = this.closest('.training-option');
-      const dropdown = parentOption.querySelector('.priority-dropdown');
-      
-      if (this.checked) {
-        dropdown.classList.remove('hidden');
-        if (this.value === 'other') {
-          otherTextInput.classList.remove('hidden');
-        }
-      } else {
-        dropdown.classList.add('hidden');
-        dropdown.value = '';
-        if (this.value === 'other') {
-          otherTextInput.classList.add('hidden');
-          otherTextInput.value = '';
-        }
-      }
-      
-      updatePriorityCount();
-    });
-  });
-  
-  // Handle priority selection and validation
-  priorityDropdowns.forEach(dropdown => {
-    dropdown.addEventListener('change', function() {
-      if (this.value) {
-        // Clear any other dropdown with the same priority
-        priorityDropdowns.forEach(otherDropdown => {
-          if (otherDropdown !== this && otherDropdown.value === this.value) {
-            otherDropdown.value = '';
-          }
-        });
-      }
-      updatePriorityCount();
-    });
-  });
-  
-  function updatePriorityCount() {
-    const selectedPriorities = Array.from(priorityDropdowns)
-      .filter(dropdown => dropdown.value && !dropdown.classList.contains('hidden'))
-      .length;
-    
-    priorityCount.textContent = selectedPriorities;
-    
-    if (selectedPriorities > 0) {
-      priorityMessage.classList.remove('hidden');
-      
-      if (selectedPriorities > 3) {
-        priorityMessage.classList.add('text-red-600');
-        priorityMessage.classList.remove('text-gray-600', 'text-green-600');
-      } else if (selectedPriorities === 3) {
-        priorityMessage.classList.add('text-green-600');
-        priorityMessage.classList.remove('text-gray-600', 'text-red-600');
-      } else {
-        priorityMessage.classList.add('text-gray-600');
-        priorityMessage.classList.remove('text-red-600', 'text-green-600');
-      }
-    } else {
-      priorityMessage.classList.add('hidden');
-    }
-  }
-}
-
-// MOVED OUTSIDE - NOW STANDALONE
-async function submitTrainingNeeds() {
-  const submitBtn = document.querySelector('.btn-submit');
-  
-  // Get selected interests from step 1
-  const selectedInterests = Array.from(document.querySelectorAll('input[name="training_interests"]:checked'))
-    .map(checkbox => checkbox.value);
-  
-  if (selectedInterests.length === 0) {
-    alert('Please select at least one area of interest.');
-    goToStep1(); // Go back to step 1
-    return;
-  }
-  
-  // Get priorities from step 2
-  const priorities = {};
-  const priorityDropdowns = document.querySelectorAll('.priority-dropdown-step2');
-  
-  priorityDropdowns.forEach(dropdown => {
-    if (dropdown.value) {
-      const interest = dropdown.dataset.interest;
-      priorities[interest] = parseInt(dropdown.value);
-    }
-  });
-  
-  // Validate: should have 0-3 priorities
-  const priorityCount = Object.keys(priorities).length;
-  if (priorityCount > 3) {
-    alert('Please select no more than 3 priorities.');
-    return;
-  }
-  
-  // Get other training needs
-  const otherText = document.querySelector('input[name="training_other"]').value || null;
-  
-  // Get email and interview interest
-  const followUpEmail = document.querySelector('input[name="follow_up_email"]').value || null;
-  const researchInterview = document.querySelector('input[name="research_interview"]').checked;
-  
-  const requestData = {
-    training_interests: selectedInterests,
-    training_priorities: priorities,
-    training_other_needs: otherText,
-    follow_up_email: followUpEmail,
-    research_interview_interest: researchInterview
-  };
-  
-  // Show loading state
-  submitBtn.textContent = 'Submitting...';
-  submitBtn.disabled = true;
-  
-  try {
-    const response = await fetch('/training-needs/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCSRFToken(),
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify(requestData)
-    });
-    
-    if (response.ok) {
-      sessionStorage.setItem('training_needs_completed', 'true');
-      
-      // Show success message
-      showTrainingSuccessMessage();
-      closeTrainingNeedsModal();
-      
-      console.log('Training needs data saved successfully');
-    } else {
-      const errorData = await response.json();
-      console.error('Training needs submission error:', errorData);
-      alert('Error saving your preferences. Please try again.');
-    }
-    
-  } catch (error) {
-    console.error('Network error:', error);
-    alert('Network error. Please try again later.');
-  } finally {
-    submitBtn.textContent = 'Submit';
-    submitBtn.disabled = false;
-  }
-}
-
-
-function showTrainingSuccessMessage() {
-  // Simple success notification
-  const notification = document.createElement('div');
-  notification.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50';
-  notification.innerHTML = '✅ Thank you! Your training preferences have been saved.';
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.remove();
-  }, 4000);
-}
-
-function closeTrainingNeedsModal() {
-  const modal = document.getElementById('trainingNeedsModal');
-  const modalContent = document.getElementById('trainingModalContent');
-  
-  modalContent.classList.remove('scale-100');
-  modalContent.classList.add('scale-95');
-  
-  setTimeout(() => {
-    modal.classList.add('hidden');
-  }, 300);
-  
-  // Mark as shown to prevent re-showing
-  sessionStorage.setItem('training_needs_shown', 'true');
-}
-  function updatePriorityCount() {
-    const selectedPriorities = Array.from(priorityDropdowns)
-      .filter(dropdown => dropdown.value && !dropdown.classList.contains('hidden'))
-      .length;
-    
-    priorityCount.textContent = selectedPriorities;
-    
-    if (selectedPriorities > 0) {
-      priorityMessage.classList.remove('hidden');
-      
-      if (selectedPriorities > 3) {
-        priorityMessage.classList.add('text-red-600');
-        priorityMessage.classList.remove('text-gray-600', 'text-green-600');
-      } else if (selectedPriorities === 3) {
-        priorityMessage.classList.add('text-green-600');
-        priorityMessage.classList.remove('text-gray-600', 'text-red-600');
-      } else {
-        priorityMessage.classList.add('text-gray-600');
-        priorityMessage.classList.remove('text-red-600', 'text-green-600');
-      }
-    } else {
-      priorityMessage.classList.add('hidden');
-    }
-  }
-
 
     // Close modal when clicking outside
 
@@ -1261,7 +961,6 @@ function closeTrainingNeedsModal() {
     // Store current form data for improvements analysis
 
     let currentFormData = {};
-    let trainingNeedsShown = false;
 
 
 
@@ -1550,11 +1249,6 @@ async function showPromptImprovements() {
         // ============= ENHANCED CLEANING =============
         
         // Log raw response for debugging
-        console.log('=== RAW GEMINI RESPONSE ===');
-        console.log('Type:', typeof data.response);
-        console.log('Length:', data.response.length);
-        console.log('First 200 chars:', data.response.substring(0, 200));
-        console.log('Last 200 chars:', data.response.substring(Math.max(0, data.response.length - 200)));
         
         let cleanResponse = data.response.trim();
         
@@ -1567,7 +1261,6 @@ async function showPromptImprovements() {
           // Remove closing ```
           cleanResponse = cleanResponse.replace(/\s*```\s*$/i, '');
           cleanResponse = cleanResponse.trim();
-          console.log('After markdown removal:', cleanResponse.substring(0, 100));
         }
         
         // Remove any remaining backticks
@@ -1576,13 +1269,10 @@ async function showPromptImprovements() {
         // Final trim
         cleanResponse = cleanResponse.trim();
         
-        console.log('=== CLEANED RESPONSE FOR PARSING ===');
-        console.log('First 300 chars:', cleanResponse.substring(0, 300));
         
         // Parse JSON
         const mainData = JSON.parse(cleanResponse);
         
-        console.log('✅ JSON parsed successfully:', mainData);
         
         // Get improvements text and clean it up
         let improvementsText = mainData.prompt_improvements || "";
@@ -1595,7 +1285,6 @@ async function showPromptImprovements() {
         improvementsText = improvementsText.replace(/^["\s]*/, '').replace(/["\s}]*$/, '');
         improvementsText = improvementsText.replace(/\\n/g, '\n').replace(/\\"/g, '"');
         
-        console.log('Improvements text:', improvementsText);
         
         // Split improvements by numbered list (1., 2., 3.) and remove first empty/invalid item
         const improvementItems = improvementsText.split(/(?=\d+\.\s+)/)
@@ -1634,7 +1323,6 @@ async function showPromptImprovements() {
         console.error('Error name:', jsonError.name);
         console.error('Error message:', jsonError.message);
         console.error('Error stack:', jsonError.stack);
-        console.error('Response that failed to parse:', data.response);
         
         const improvementsList = document.getElementById('improvementsList');
         improvementsList.innerHTML = `
@@ -2401,120 +2089,7 @@ document.getElementById('methodology').addEventListener('change', function() {
   }
   updateTheoryRecommendation(); // Update theory suggestion
 });
-
-function goToStep2() {
-  // Validate: at least one interest selected
-  const selectedInterests = document.querySelectorAll('input[name="training_interests"]:checked');
-  
-  if (selectedInterests.length === 0) {
-    alert('Please select at least one area of interest.');
-    return;
-  }
-  
-  // Update progress indicators
-  document.getElementById('step1Indicator').classList.remove('bg-blue-600', 'text-white');
-  document.getElementById('step1Indicator').classList.add('bg-green-500', 'text-white');
-  document.getElementById('progressBar').classList.remove('bg-gray-200');
-  document.getElementById('progressBar').classList.add('bg-blue-600');
-  document.getElementById('step2Indicator').classList.remove('bg-gray-200', 'text-gray-500');
-  document.getElementById('step2Indicator').classList.add('bg-blue-600', 'text-white');
-  
-  // Hide step 1, show step 2
-  document.getElementById('step1Content').classList.add('hidden');
-  document.getElementById('step2Content').classList.remove('hidden');
-  
-  // Populate selected interests in step 2
-  populateSelectedInterests();
-}
-
-function goToStep1() {
-  // Reset progress indicators
-  document.getElementById('step1Indicator').classList.remove('bg-green-500');
-  document.getElementById('step1Indicator').classList.add('bg-blue-600', 'text-white');
-  document.getElementById('progressBar').classList.remove('bg-blue-600');
-  document.getElementById('progressBar').classList.add('bg-gray-200');
-  document.getElementById('step2Indicator').classList.remove('bg-blue-600', 'text-white');
-  document.getElementById('step2Indicator').classList.add('bg-gray-200', 'text-gray-500');
-  
-  // Hide step 2, show step 1
-  document.getElementById('step2Content').classList.add('hidden');
-  document.getElementById('step1Content').classList.remove('hidden');
-}
-
-function populateSelectedInterests() {
-  const selectedInterests = document.querySelectorAll('input[name="training_interests"]:checked');
-  const listContainer = document.getElementById('selectedInterestsList');
-  
-  listContainer.innerHTML = '';
-  
-  selectedInterests.forEach((checkbox, index) => {
-    const label = checkbox.closest('label').textContent.trim();
-    const value = checkbox.value;
-    
-    const interestDiv = document.createElement('div');
-    interestDiv.className = 'flex items-center justify-between p-2 bg-blue-50 rounded-lg border border-blue-200';
-    interestDiv.innerHTML = `
-      <span class="text-sm font-medium text-blue-800">${label}</span>
-      <select class="priority-dropdown-step2 text-xs border border-blue-300 rounded px-2 py-1" data-interest="${value}">
-        <option value="">Priority</option>
-        <option value="1">1st</option>
-        <option value="2">2nd</option>
-        <option value="3">3rd</option>
-      </select>
-    `;
-    
-    listContainer.appendChild(interestDiv);
-  });
-  
-  // Add event listeners to new dropdowns
-  setupStep2PriorityListeners();
-}
-
-function setupStep2PriorityListeners() {
-  const priorityDropdowns = document.querySelectorAll('.priority-dropdown-step2');
-  const priorityCount = document.getElementById('priorityCount');
-  
-  priorityDropdowns.forEach(dropdown => {
-    dropdown.addEventListener('change', function() {
-      if (this.value) {
-        // Clear any other dropdown with the same priority
-        priorityDropdowns.forEach(otherDropdown => {
-          if (otherDropdown !== this && otherDropdown.value === this.value) {
-            otherDropdown.value = '';
-          }
-        });
-      }
-      
-      // Update priority count
-      const selectedPriorities = Array.from(priorityDropdowns)
-        .filter(dropdown => dropdown.value).length;
-      
-      priorityCount.textContent = selectedPriorities;
-      
-      const priorityMessage = document.getElementById('priorityMessage');
-      if (selectedPriorities > 3) {
-        priorityMessage.classList.add('text-red-600');
-        priorityMessage.classList.remove('text-gray-600', 'text-green-600');
-      } else if (selectedPriorities === 3) {
-        priorityMessage.classList.add('text-green-600');
-        priorityMessage.classList.remove('text-gray-600', 'text-red-600');
-      } else {
-        priorityMessage.classList.add('text-gray-600');
-        priorityMessage.classList.remove('text-red-600', 'text-green-600');
-      }
-    });
-  });
-}
 </script>
-
-<!-- Survey System Control -->
-<script>
-    const SURVEYS_ENABLED = {{ settings.ENABLE_SURVEYS|lower }};
-    console.log('SURVEYS_ENABLED:', SURVEYS_ENABLED);
-</script>
-
-<script src="{% static 'generator/onboarding.js' %}"></script>
-{% include 'generator/modals/training_needs_modal.html' %}
 </body>
 
 </html>
