@@ -19,6 +19,13 @@ EXPECTED_CSP = (
     "frame-ancestors 'self' https://proodoseduai.com "
     "https://www.proodoseduai.com"
 )
+EXPECTED_EL_NOTICE = (
+    "Αυτό το εργαλείο είναι μια ξεχωριστή εφαρμογή που χρησιμοποιείται εντός του PROODOS. "
+    "Μην καταχωρίζετε προσωπικά δεδομένα μαθητών ή συναδέλφων. "
+    "Ό,τι πληκτρολογείτε αποστέλλεται στο Google Gemini για τη δημιουργία της προτροπής (prompt). "
+    "Το εργαλείο αυτό δεν αποθηκεύει όσα πληκτρολογείτε."
+)
+
 EXPECTED_EN_NOTICE = (
     "This tool is a separate application used inside PROODOS. "
     "Do not enter personal data of students or colleagues. "
@@ -83,10 +90,22 @@ class IndexPageTests(TestCase):
     def test_english_notice_text_is_exact(self):
         self.assertEqual(NOTICES["en"], EXPECTED_EN_NOTICE)
 
-    def test_notice_falls_back_to_english_when_greek_is_missing(self):
-        self.assertIsNone(NOTICES["el"])
-        self.assertEqual(get_notice("el"), EXPECTED_EN_NOTICE)
+    def test_greek_notice_text_is_exact(self):
+        self.assertEqual(NOTICES["el"], EXPECTED_EL_NOTICE)
+        self.assertEqual(get_notice("el"), EXPECTED_EL_NOTICE)
+
+    def test_greek_notice_has_no_dashes_and_no_stray_latin(self):
+        text = NOTICES["el"]
+        self.assertNotIn("\u2014", text)
+        self.assertNotIn("--", text)
+        import re
+        latin = set(re.findall(r"[A-Za-z]+", text))
+        self.assertEqual(latin, {"PROODOS", "Google", "Gemini", "prompt"})
+
+    def test_notice_falls_back_to_english_for_unknown_language_or_missing_text(self):
         self.assertEqual(get_notice("unknown"), EXPECTED_EN_NOTICE)
+        with mock.patch.dict(NOTICES, {"el": None}):
+            self.assertEqual(get_notice("el"), EXPECTED_EN_NOTICE)
 
     def test_help_page_returns_200(self):
         self.assertEqual(self.client.get("/help/").status_code, 200)

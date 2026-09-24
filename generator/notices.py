@@ -12,7 +12,12 @@ NOTICES = {
         "What you type is sent to Google Gemini to generate the prompt. "
         "This tool does not store what you type."
     ),
-    'el': None,
+    'el': (
+        "Αυτό το εργαλείο είναι μια ξεχωριστή εφαρμογή που χρησιμοποιείται εντός του PROODOS. "
+        "Μην καταχωρίζετε προσωπικά δεδομένα μαθητών ή συναδέλφων. "
+        "Ό,τι πληκτρολογείτε αποστέλλεται στο Google Gemini για τη δημιουργία της προτροπής (prompt). "
+        "Το εργαλείο αυτό δεν αποθηκεύει όσα πληκτρολογείτε."
+    ),
 }
 
 
