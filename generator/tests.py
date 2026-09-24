@@ -3,7 +3,7 @@ from unittest import mock
 
 from django.conf import settings
 from django.http import HttpResponse
-from django.test import RequestFactory, TestCase, override_settings
+from django.test import Client, RequestFactory, TestCase, override_settings
 
 from generator.middleware import FrameAncestorsMiddleware
 from generator.models import (
@@ -91,12 +91,10 @@ class IndexPageTests(TestCase):
     def test_help_page_returns_200(self):
         self.assertEqual(self.client.get("/help/").status_code, 200)
 
-    def test_first_get_sets_only_the_csrf_cookie(self):
+    def test_get_sets_no_cookie_at_all(self):
         response = self.client.get("/")
-        self.assertEqual(sorted(response.cookies.keys()), ["csrftoken"])
-        cookie = response.cookies["csrftoken"]
-        self.assertEqual(cookie["samesite"], "None")
-        self.assertTrue(cookie["secure"])
+        self.assertEqual(len(response.cookies), 0)
+        self.assertNotIn("Set-Cookie", response.headers)
 
 
 @mock.patch("generator.views.requests.post")
@@ -159,6 +157,59 @@ class GenerateTests(TestCase):
         with self.assertNoLogs("generator.views", level="DEBUG"):
             self.post(body)
 
+    def test_post_works_with_csrf_checks_enforced_and_no_token(self, post):
+        post.return_value = gemini_reply("ok")
+        client = Client(enforce_csrf_checks=True)
+        response = client.post(
+            "/generate/", data=json.dumps(FORM_FIELDS),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_post_sets_no_cookie_at_all(self, post):
+        post.return_value = gemini_reply("ok")
+        response = self.post(FORM_FIELDS)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.cookies), 0)
+        self.assertNotIn("Set-Cookie", response.headers)
+
+    def test_foreign_origin_gets_403(self, post):
+        for origin in ("https://evil.example", "http://evil.example",
+                       "https://testserver.evil.example", "null"):
+            response = self.client.post(
+                "/generate/", data=json.dumps(FORM_FIELDS),
+                content_type="application/json", HTTP_ORIGIN=origin,
+            )
+            self.assertEqual(response.status_code, 403, origin)
+            self.assertIn("error", response.json())
+            self.assertEqual(len(response.cookies), 0)
+        post.assert_not_called()
+        assert_nothing_stored(self)
+
+    def test_same_origin_gets_through_over_http_and_https(self, post):
+        post.return_value = gemini_reply("ok")
+        for origin in ("http://testserver", "https://testserver",
+                       "HTTPS://TESTSERVER"):
+            response = self.client.post(
+                "/generate/", data=json.dumps(FORM_FIELDS),
+                content_type="application/json", HTTP_ORIGIN=origin,
+            )
+            self.assertEqual(response.status_code, 200, origin)
+
+    def test_same_origin_behind_a_tls_terminating_proxy(self, post):
+        post.return_value = gemini_reply("ok")
+        response = self.client.post(
+            "/generate/", data=json.dumps(FORM_FIELDS),
+            content_type="application/json", HTTP_HOST="localhost:8000",
+            HTTP_ORIGIN="https://localhost:8000",
+            HTTP_X_FORWARDED_PROTO="https",
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_missing_origin_gets_through(self, post):
+        post.return_value = gemini_reply("ok")
+        self.assertEqual(self.post(FORM_FIELDS).status_code, 200)
+
     def test_get_is_rejected(self, post):
         self.assertEqual(self.client.get("/generate/").status_code, 400)
         post.assert_not_called()
@@ -219,5 +270,6 @@ class RemovedRoutesTests(TestCase):
     def test_index_has_no_survey_or_onboarding_code(self):
         html = self.client.get("/").content.decode()
         for needle in ("onboarding", "trainingNeeds", "SURVEYS_ENABLED",
-                       "track-copy", "follow_up_email", "contact_email"):
+                       "track-copy", "follow_up_email", "contact_email",
+                       "csrf", "CSRF", "document.cookie"):
             self.assertNotIn(needle, html)

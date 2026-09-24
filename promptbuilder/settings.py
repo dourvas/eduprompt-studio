@@ -43,10 +43,9 @@ FRAME_ANCESTORS = os.environ.get(
     'https://proodoseduai.com https://www.proodoseduai.com',
 ).split()
 
-# The app is loaded in a cross-site iframe, so the remaining cookie (the CSRF
-# cookie) must be SameSite=None and Secure.
-CSRF_COOKIE_SAMESITE = 'None'
-CSRF_COOKIE_SECURE = True
+# The app sets no cookies at all (no sessions, no CSRF cookie): the iframe loses
+# third-party cookies in some browsers. POST requests are protected by a
+# same-origin check instead (generator.middleware.SameOriginPostMiddleware).
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -54,13 +53,8 @@ ALLOWED_HOSTS = [
     '.railway.app',
     '.up.railway.app',
 ]
-CSRF_TRUSTED_ORIGINS = [
-    'https://eduprompt-studio-production.up.railway.app',
-    'https://*.railway.app',
-    'https://*.up.railway.app',
-]
 
-# Application definition. No admin, no sessions, no messages: nothing is
+# Application definition. No admin, no sessions, no messages, no CSRF cookie: nothing is
 # stored per visitor.
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -76,7 +70,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'generator.middleware.SameOriginPostMiddleware',
 ]
 
 ROOT_URLCONF = 'promptbuilder.urls'
